@@ -3,7 +3,8 @@
  *　作者：諸岡勇樹
  *　目的：インプットの名前を見た目上わかりやすくする
  *　　　　スペルミスのエラー回避
- *　2019/09/30：ドッキングゲームのオリジナル入力名で設定できる関数群
+ *　2019/09/30：ドッキングゲームのオリジナル入力名で設定できるプロパティ群
+ *　2019/09/30：XInput適応
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -14,67 +15,36 @@ namespace DockingGame_Input
 {
 	public class Original_Input : MonoBehaviour
 	{
-		private string[] Bottom_Name = new string[24]
-{
-		"GamePad_1_0",
-		"GamePad_1_1",
-		"GamePad_1_2",
-		"GamePad_1_3",
-		"GamePad_1_4",
-		"GamePad_1_5",
-		"GamePad_1_6",
-		"GamePad_1_7",
-		"GamePad_1_8",
-		"GamePad_1_9",
-		"GamePad_1_10",
-		"GamePad_1_11",
-		"GamePad_2_0",
-		"GamePad_2_1",
-		"GamePad_2_2",
-		"GamePad_2_3",
-		"GamePad_2_4",
-		"GamePad_2_5",
-		"GamePad_2_6",
-		"GamePad_2_7",
-		"GamePad_2_8",
-		"GamePad_2_9",
-		"GamePad_2_10",
-		"GamePad_2_11",
-};
 
 		// GamePad1の入力群----------------------------------------------
-		public bool  Pad1_ButtomA
-		{
-			get { return Input.GetButton("GamePad_1_1"); }
-		}
-		public bool  Pad1_ButtomB
-		{
-			get { return Input.GetButton("GamePad_1_2"); }
-		}
-		public bool  Pad1_ButtomX
-		{
-			get { return Input.GetButton("GamePad_1_0"); }
-		}
-		public bool  Pad1_ButtomY
-		{
-			get { return Input.GetButton("GamePad_1_3"); }
-		}
-		public bool  Pad1_ButtomL1
-		{
-			get { return Input.GetButton("GamePad_1_4"); }
-		}
-		public bool  Pad1_ButtomR1
-		{
-			get { return Input.GetButton("GamePad_1_5"); }
-		}
-		public bool  Pad1_ButtomL2
-		{
-			get { return Input.GetButton("GamePad_1_6"); }
-		}
-		public bool  Pad1_ButtomR2
-		{
-			get { return Input.GetButton("GamePad_1_7"); }
-		}
+		#region ABXY
+		public bool ButtomA { get { return Input.GetButton("GamePad_1_0"); } }
+		public bool ButtomB { get { return Input.GetButton("GamePad_1_1"); } }
+		public bool ButtomX { get { return Input.GetButton("GamePad_1_2"); } }
+		public bool ButtomY { get { return Input.GetButton("GamePad_1_3"); } }
+		#endregion
+		#region トリガー
+		public bool ButtomLeft1		{ get { return Input.GetButton("GamePad_1_4"); } }
+		public bool ButtomRight1	{ get { return Input.GetButton("GamePad_1_5"); } }
+		public bool ButtomLeft2		{ get { return Input.GetAxis("GamePad_1_Axis_3") < 0.0f; } }
+		public bool ButtomRight2	{ get { return Input.GetAxis("GamePad_1_Axis_3") > 0.0f; } }
+		#endregion
+		#region LRボタン
+		public bool ButtomL3 { get { return Input.GetButton("GamePad_1_8"); } }
+		public bool ButtomR3 { get { return Input.GetButton("GamePad_1_9"); } }
+		#endregion
+		#region その他
+		public bool Buttom6	{ get { return Input.GetButton("GamePad_1_6"); } }
+		public bool Buttom7	{ get { return Input.GetButton("GamePad_1_7"); } }
+		#endregion
+		#region 軸系
+		public float StickLeft_X	{ get { return Input.GetAxis("GamePad_1_Axis_1"); } }
+		public float StickLeft_Y	{ get { return Input.GetAxis("GamePad_1_Axis_2"); } }
+		public float StickRight_X	{ get { return Input.GetAxis("GamePad_1_Axis_4"); } }
+		public float StickRight_Y	{ get { return Input.GetAxis("GamePad_1_Axis_5"); } }
+		public float Cross_X		{ get { return Input.GetAxis("GamePad_1_Axis_6"); } }
+		public float Cross_Y		{ get { return Input.GetAxis("GamePad_1_Axis_7"); } }
+		#endregion
 		// GamePad1の入力群----------------------------------------------
 	}
 }

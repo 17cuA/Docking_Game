@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Test_Input : MonoBehaviour
 {
-	private string[] Bottom_Name = new string[24]
+	private string[] Bottom_Name = new string[12]
 	{
 		"GamePad_1_0",
 		"GamePad_1_1",
@@ -18,34 +18,17 @@ public class Test_Input : MonoBehaviour
 		"GamePad_1_9",
 		"GamePad_1_10",
 		"GamePad_1_11",
-		"GamePad_2_0",
-		"GamePad_2_1",
-		"GamePad_2_2",
-		"GamePad_2_3",
-		"GamePad_2_4",
-		"GamePad_2_5",
-		"GamePad_2_6",
-		"GamePad_2_7",
-		"GamePad_2_8",
-		"GamePad_2_9",
-		"GamePad_2_10",
-		"GamePad_2_11",
 	};
 
-	private string[] Axis_Name = new string[12]
+	private string[] Axis_Name = new string[7]
 	{
-		"GamePad_1_AxisL_X",
-		"GamePad_1_AxisL_Y",
-		"GamePad_1_AxisR_X",
-		"GamePad_1_AxisR_Y",
-		"GamePad_1_POV_X",
-		"GamePad_1_POV_Y",
-		"GamePad_2_AxisL_X",
-		"GamePad_2_AxisL_Y",
-		"GamePad_2_AxisR_X",
-		"GamePad_2_AxisR_Y",
-		"GamePad_2_POV_X",
-		"GamePad_2_POV_Y",
+		"GamePad_1_Axis_1",
+		"GamePad_1_Axis_2",
+		"GamePad_1_Axis_3",
+		"GamePad_1_Axis_4",
+		"GamePad_1_Axis_5",
+		"GamePad_1_Axis_6",
+		"GamePad_1_Axis_7",
 	};
 
     void Start()
