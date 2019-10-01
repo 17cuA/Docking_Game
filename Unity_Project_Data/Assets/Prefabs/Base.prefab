@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7579247189504974411}
   - component: {fileID: 7579247189504974410}
+  - component: {fileID: 246585292}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -53,6 +54,33 @@ MonoBehaviour:
   addBoostPower: 0
   maxAddBoostPower: 0.05
   addOil: 0.00125
+  prevPosPrefab: {fileID: 8653141539821390236, guid: 2dd115275a054e344a01fdcde3407ffa,
+    type: 3}
+  distanceInterval: 0
+--- !u!114 &246585292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579247189504974409}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b817485c5a5fdb449c4e188d187a389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decreaseRate: 0.01
+  addZAngle: 0
+  maxAddZAngle: 0.5
+  addNum: 0.08
+  boostPower: 0
+  addBoostPower: 0
+  maxAddBoostPower: 0.05
+  addOil: 0.00125
+  prevPosPrefab: {fileID: 8653141539821390236, guid: 2dd115275a054e344a01fdcde3407ffa,
+    type: 3}
+  aaa: []
+  distanceInterval: 0.1
 --- !u!1 &7579247189633089212
 GameObject:
   m_ObjectHideFlags: 0
