@@ -29,7 +29,7 @@ public class Test_Input_2 : MonoBehaviour
 		public GameObject prevPosObj;
 	}
 
-	public PrevInfo[] prevInfos = new PrevInfo[500];
+	public PrevInfo[] prevInfos = new PrevInfo[1500];
 
 	// 距離間隔
 	public float distanceInterval;

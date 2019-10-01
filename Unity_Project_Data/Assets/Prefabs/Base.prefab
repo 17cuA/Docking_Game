@@ -53,6 +53,9 @@ MonoBehaviour:
   addBoostPower: 0
   maxAddBoostPower: 0.05
   addOil: 0.00125
+  prevPosPrefab: {fileID: 8653141539821390236, guid: 2dd115275a054e344a01fdcde3407ffa,
+    type: 3}
+  distanceInterval: 0
 --- !u!1 &7579247189633089212
 GameObject:
   m_ObjectHideFlags: 0
