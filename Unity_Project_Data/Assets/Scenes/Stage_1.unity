@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7260348
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
@@ -254,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.687658
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 93.11
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
@@ -279,17 +279,17 @@ PrefabInstance:
     - target: {fileID: 6551179740369012839, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6551179740369012839, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6551179740369012839, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6551179740369012839, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
@@ -440,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1092199963
 Transform:
   m_ObjectHideFlags: 0
@@ -758,5 +758,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8642796531240628956, guid: 8e03d16205cda5945829e9a4ed885af2,
         type: 3}
+    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
+        type: 3}
+      propertyPath: decreaseRate
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
+        type: 3}
+      propertyPath: maxAddYAngle
+      value: 2.94
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
