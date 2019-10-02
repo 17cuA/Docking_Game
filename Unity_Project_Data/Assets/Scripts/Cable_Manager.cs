@@ -6,8 +6,10 @@ public class Cable_Manager : MonoBehaviour
 {
 	// 速度低下率 0 ~ 1
 	public float decreaseRate;
-	public float addZAngle;
+	public float addXAngle;
+	public float addYAngle;
 	public float maxAddZAngle;
+	public float maxAddYAngle;
 	public float addNum;
 
 	public float boostPower;
@@ -40,14 +42,14 @@ public class Cable_Manager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		for (int i = 0; i < 500; i++)
-		{
-			GameObject game = Instantiate(prevPosPrefab,new Vector3(10,0,0),transform.rotation);
-			aaa.Add(game);
-			//prevInfos[i].prevPosObj= Instantiate(prevPosPrefab);
-			//prevInfos[i].prevPosObj.transform.position = prevInfos[i].prevPos = transform.position;
-			//prevInfos[i].prevPosObj.transform.rotation = prevInfos[i].prevRot = transform.rotation;
-		}
+		//for (int i = 0; i < 500; i++)
+		//{
+		//GameObject game = Instantiate(prevPosPrefab,new Vector3(10,0,0),transform.rotation);
+		//aaa.Add(game);
+		//prevInfos[i].prevPosObj= Instantiate(prevPosPrefab);
+		//prevInfos[i].prevPosObj.transform.position = prevInfos[i].prevPos = transform.position;
+		//prevInfos[i].prevPosObj.transform.rotation = prevInfos[i].prevRot = transform.rotation;
+		//}
 	}
 
 	void Update()
@@ -67,55 +69,50 @@ public class Cable_Manager : MonoBehaviour
 		//}
 	}
 
-	/// <summary>
-	/// ストラクトの情報の
-	/// </summary>
-	/// <param name="i">要素数番号</param>
-	/// <param name="Is_NotFirst">最初かどうか</param>
-	/// <returns></returns>
-	private PrevInfo Pos_Update(int i , bool Is_NotFirst)
-	{
-		PrevInfo obj = new PrevInfo();
-		obj.prevPosObj = prevInfos[i - 1].prevPosObj;
-		if (Is_NotFirst)
-		{
-			obj.prevPosObj.transform.position = obj.prevPos = prevInfos[i - 1].prevPos;
-			obj.prevPosObj.transform.rotation = obj.prevRot = prevInfos[i - 1].prevRot;
-		}
-		else
-		{
-			obj.prevPosObj.transform.position = obj.prevPos = transform.position;
-			obj.prevPosObj.transform.rotation = obj.prevRot = transform.rotation;
-		}
-		return obj;
-
-	}
-
 	private void AngleUpdate()
 	{
+		if(Input.GetKey(KeyCode.W))
+		{
+			Debug.Log("上");
+			addYAngle += addNum;
+		}
 		if (Input.GetKey(KeyCode.A))
 		{
-			Debug.Log("した");
-			addZAngle -= addNum;
+			Debug.Log("左");
+			addXAngle -= addNum;
 		}
-
+		if(Input.GetKey(KeyCode.S))
+		{
+			Debug.Log("下");
+			addYAngle -= addNum;
+		}
 		if (Input.GetKey(KeyCode.D))
 		{
-			Debug.Log("うえ");
-			addZAngle += addNum;
+			Debug.Log("右");
+			addXAngle += addNum;
 		}
 
-		if (addZAngle > maxAddZAngle)
+		//回転系の制限--------------------------------------
+		if (addXAngle > maxAddZAngle)
 		{
-			addZAngle = maxAddZAngle;
+			addXAngle = maxAddZAngle;
 		}
-		else if (addZAngle < -maxAddZAngle)
+		else if (addXAngle < -maxAddZAngle)
 		{
-			addZAngle = -maxAddZAngle;
+			addXAngle = -maxAddYAngle;
 		}
-
-		transform.Rotate(0.0f, 0.0f, addZAngle);
-		addZAngle *= 1.0f - decreaseRate;
+		if (addYAngle > maxAddZAngle)
+		{
+			addYAngle = maxAddYAngle;
+		}
+		else if (addYAngle < -maxAddYAngle)
+		{
+			addYAngle = -maxAddYAngle;
+		}
+		//------------------------------------------
+		transform.Rotate(addYAngle,addXAngle ,0.0f);
+		addXAngle *= 1.0f - decreaseRate;
+		addYAngle *= 1.0f - decreaseRate;
 	}
 
 	private void BoostUpdate()
@@ -135,7 +132,7 @@ public class Cable_Manager : MonoBehaviour
 			addBoostPower = -maxAddBoostPower;
 		}
 
-		transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * addBoostPower);
+		transform.Translate(new Vector3(0.0f, 0.0f, 1.0f) * addBoostPower);
 		addBoostPower *= 1.0f - decreaseRate;
 	}
 }
