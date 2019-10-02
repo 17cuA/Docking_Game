@@ -104,7 +104,7 @@ public class GameMaster : MonoBehaviour
 
 			case StageState.CLEARNEXT:
 				// スペースキーかマウス左クリックかenter
-				if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter))
+				if(IsOkeyKeyDown())
 				{
 					SetStageState(StageState.JUMPTITLE);
 				}
@@ -124,7 +124,7 @@ public class GameMaster : MonoBehaviour
 				break;
 
 			case StageState.FAILURENEXT:
-				if (Input.anyKeyDown)
+				if (IsOkeyKeyDown())
 				{
 					SetStageState(StageState.JUMPTITLE);
 				}
@@ -141,6 +141,11 @@ public class GameMaster : MonoBehaviour
 				stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 				break;
 		}
+	}
+
+	private bool IsOkeyKeyDown()
+	{
+		return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter);
 	}
 
 	// ステージステータス変更専用関数

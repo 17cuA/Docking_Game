@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 563253500}
   - component: {fileID: 563253501}
   - component: {fileID: 563253502}
+  - component: {fileID: 563253503}
   m_Layer: 0
   m_Name: TitleManager
   m_TagString: Untagged
@@ -439,12 +440,7 @@ MonoBehaviour:
   subText: {fileID: 1348309036}
   selectNum: 0
   stageSceneName: Stage_1
-  unavailableTime: 0
-  unavailableTimeMax: 3
-  displayPlaneFadeOut: {fileID: 1514048028}
-  fadeOutTime: 0
-  fadeOutTimeMax: 2.98
-  blackTimeMax: 0.02
+  fadeTimeScript: {fileID: 563253503}
 --- !u!320 &563253502
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -468,6 +464,25 @@ PlayableDirector:
     value: {fileID: 1551397448}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &563253503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563253499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85db9ea305739744bb4065122343d060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayFadeInPlane: {fileID: 0}
+  fadeInTime: 0
+  fadeInTimeMax: 2
+  displayFadeOutPlane: {fileID: 1514048028}
+  fadeOutTime: 0
+  fadeOutTimeMax: 2.98
+  blackTimeMax: 0.02
 --- !u!1 &727005132
 GameObject:
   m_ObjectHideFlags: 0

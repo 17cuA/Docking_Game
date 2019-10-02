@@ -27,18 +27,11 @@ public class TitleManager : MonoBehaviour
 	// ステージシーン名
 	public string stageSceneName;
 
-	// 入力待機時間
-	[SerializeField, NonEditable]
-	private float unavailableTime;		// 経過時間
-	public float unavailableTimeMax;    // 最大待機時間
+	// 入力受付の有無
+	private bool isActive = false;
 
-	// フェードアウト情報
-	public Image displayPlaneFadeOut;
-	// フェードアウト時間
-	[SerializeField, NonEditable]
-	private float fadeOutTime;      // 経過時間
-	public float fadeOutTimeMax;    // 最大時間
-	public float blackTimeMax;		// 黒時間
+	// フェードスクリプトをいれよう
+	public FadeTime fadeTimeScript;
 
 	// Start is called before the first frame update
 	void Start()
@@ -50,18 +43,31 @@ public class TitleManager : MonoBehaviour
 
 		selectNum = 0;
 
-		unavailableTime = 0.0f;
-		displayPlaneFadeOut.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+		isActive = false;
+
+		if (fadeTimeScript) fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
 	}
 
     // Update is called once per frame
     void Update()
 	{
-		// 待機時間経過するまで入力を受け付けない
-		if (unavailableTime < unavailableTimeMax) unavailableTime += Time.deltaTime;
-		if (unavailableTime < unavailableTimeMax) return;
+		if(!isActive)
+		{
+			if (fadeTimeScript)
+			{
+				if (fadeTimeScript.IsFadeInFinished())
+				{
+					isActive = true;
+				}
+				else return;
+			}
+			else
+			{
+				isActive = true;
+			}
+		}
 
-		switch(gameState)
+		switch (gameState)
 		{
 			case GameState.TITLE:
 				if (Input.anyKeyDown)
@@ -86,22 +92,17 @@ public class TitleManager : MonoBehaviour
 				break;
 
 			case GameState.GAMESTART:
-				// フェードアウト時間経過
-				fadeOutTime += Time.deltaTime;
-				// 最大時間経過した時
-				if (fadeOutTime >= fadeOutTimeMax)
+				// ゲームステージに移動
+				if (fadeTimeScript)
 				{
-					displayPlaneFadeOut.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-
-					if(fadeOutTime >= fadeOutTimeMax + blackTimeMax)
+					if(fadeTimeScript.IsFadeOutFinished())
 					{
-						// ゲームステージに移動
 						SceneManager.LoadScene(stageSceneName);
 					}
 				}
 				else
 				{
-					displayPlaneFadeOut.color = new Color(0.0f, 0.0f, 0.0f, fadeOutTime / fadeOutTimeMax);
+					SceneManager.LoadScene(stageSceneName);
 				}
 				break;
 
@@ -153,6 +154,7 @@ public class TitleManager : MonoBehaviour
 				break;
 
 			case GameState.GAMESTART:
+				fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
 				break;
 
 			default:
