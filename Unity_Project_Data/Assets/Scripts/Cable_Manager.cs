@@ -5,22 +5,22 @@ using DockingGame_Input;
 public class Cable_Manager : MonoBehaviour
 {
 	// 速度低下率 0 ~ 1
-	public float decreaseRate;
-	public float addYAngle;
-	public float addXAngle;
-	public float maxAddZAngle;
-	public float maxAddYAngle;
-	public float addNum;
+	//public float decreaseRate;
+	//public float addYAngle;
+	//public float addXAngle;
+	//public float maxAddZAngle;
+	//public float maxAddYAngle;
+	//public float addNum;
 
 	//回転系の変数
-	//private float addXAngle;			//Xの加算の値
-	//private float addYAngle;			//Yの加算の値
-	//public float XAngle_Max;	//最大の値X
-	//public float YAngle_Max;	//最大の値Y
-	//[Range(0,1)]
-	//public float addNun;                //加算する値の上昇率
-	//[Range(0, 1)]
-	//public float decreaseRate;		//減少する値
+	private float addXAngle;            //Xの加算の値
+	private float addYAngle;            //Yの加算の値
+	public float XAngle_Max;    //最大の値X
+	public float YAngle_Max;    //最大の値Y
+	[Range(0, 1)]
+	public float addNun;                //加算する値の上昇率
+	[Range(0, 1)]
+	public float decreaseRate;      //減少する値
 
 	//移動系の変数
 	public float boostPower;
@@ -79,75 +79,100 @@ public class Cable_Manager : MonoBehaviour
 		//	aaa[0].transform.rotation = transform.rotation;
 		//}
 	}
-	//void AngleUpdate()
-	//{
-	//	float x = Original_Input.StickLeft_X;
-	//	float y = Original_Input.StickRight_Y;
-
-	//}
-
-	private void AngleUpdate()
+	void AngleUpdate()
 	{
-		if (Input.GetKey(KeyCode.W))
-		{
-			//Debug.Log(transform.rotation.x);
-			addXAngle += addNum;
-			//if (transform.eulerAngles.x > 90 || transform.eulerAngles.x < 0) addXAngle = 0;
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			Debug.Log("左");
-			addYAngle -= addNum;
+		float x = Original_Input.StickLeft_X;
+		float y = Original_Input.StickRight_Y;
 
-		}
-		if (Input.GetKey(KeyCode.S))
+		if(x > 0)
 		{
-			Debug.Log("下");
-			addXAngle -= addNum;
-
+			addXAngle += addNun;
 		}
-		if (Input.GetKey(KeyCode.D))
+		else if(x < 0)
 		{
-			Debug.Log("右");
-			addYAngle += addNum;
-
+			addYAngle -= addNun;
+		}
+		if(y > 0)
+		{
+			addYAngle += addNun;
+		}
+		else if(y < 0)
+		{
+			addYAngle -= addNun;
 		}
 
+		if (addXAngle > XAngle_Max) addXAngle = XAngle_Max;
+		else if (addXAngle < -XAngle_Max) addXAngle = -XAngle_Max;
+		if (addYAngle > YAngle_Max) addYAngle = YAngle_Max;
+		else if (addYAngle < -YAngle_Max) addYAngle = -YAngle_Max;
 
-		//回転系の制限--------------------------------------
-		if (addYAngle > maxAddZAngle) addYAngle = maxAddZAngle;
-		else if (addYAngle < -maxAddZAngle) addYAngle = -maxAddYAngle;
-		if (addXAngle > maxAddZAngle) addXAngle = maxAddYAngle;
-		if (addXAngle < -maxAddYAngle) addXAngle = -maxAddYAngle;
+		//if(transform.eulerAngles  new Vector3())
 
-		if (transform.eulerAngles.x > 45)
-		{
-			addXAngle = 0;
-			transform.eulerAngles = new Vector3(44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
-		}
-		if (transform.eulerAngles.x < -45)
-		{
-			addXAngle = 0;
-			transform.eulerAngles = new Vector3(-44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
-		}
-		if (transform.eulerAngles.y > 45)
-		{
-			addYAngle = 0;
-			transform.eulerAngles = new Vector3(transform.eulerAngles.x, 44.0f, transform.eulerAngles.z);
-		}
-		if (transform.eulerAngles.y < -45)
-		{
-			addYAngle = 0;
-			transform.eulerAngles = new Vector3(transform.eulerAngles.x, -44.0f, transform.eulerAngles.z);
-		}
-
-		Debug.Log("だれだてめ" + transform.eulerAngles);
-		//------------------------------------------
-		transform.Rotate(addXAngle, addYAngle, 0.0f);
-		//transform.eulerAngles = new Vector3(addYAngle, addXAngle, 0.0f);
-		addYAngle *= 1.0f - decreaseRate;
-		addXAngle *= 1.0f - decreaseRate;
+		//transform.Rotate(addXAngle, addYAngle, 0,Space.World);		//オブジェクトの回転
 	}
+
+	//private void AngleUpdate()
+	//{
+	//	if (Input.GetKey(KeyCode.W))
+	//	{
+	//		//Debug.Log(transform.rotation.x);
+	//		addXAngle += addNum;
+	//		//if (transform.eulerAngles.x > 90 || transform.eulerAngles.x < 0) addXAngle = 0;
+	//	}
+	//	if (Input.GetKey(KeyCode.A))
+	//	{
+	//		Debug.Log("左");
+	//		addYAngle -= addNum;
+
+	//	}
+	//	if (Input.GetKey(KeyCode.S))
+	//	{
+	//		Debug.Log("下");
+	//		addXAngle -= addNum;
+
+	//	}
+	//	if (Input.GetKey(KeyCode.D))
+	//	{
+	//		Debug.Log("右");
+	//		addYAngle += addNum;
+
+	//	}
+
+
+	//	//回転系の制限--------------------------------------
+	//	if (addYAngle > maxAddZAngle) addYAngle = maxAddZAngle;
+	//	else if (addYAngle < -maxAddZAngle) addYAngle = -maxAddYAngle;
+	//	if (addXAngle > maxAddZAngle) addXAngle = maxAddYAngle;
+	//	if (addXAngle < -maxAddYAngle) addXAngle = -maxAddYAngle;
+
+	//	if (transform.eulerAngles.x > 45)
+	//	{
+	//		addXAngle = 0;
+	//		transform.eulerAngles = new Vector3(44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
+	//	}
+	//	if (transform.eulerAngles.x < -45)
+	//	{
+	//		addXAngle = 0;
+	//		transform.eulerAngles = new Vector3(-44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
+	//	}
+	//	if (transform.eulerAngles.y > 45)
+	//	{
+	//		addYAngle = 0;
+	//		transform.eulerAngles = new Vector3(transform.eulerAngles.x, 44.0f, transform.eulerAngles.z);
+	//	}
+	//	if (transform.eulerAngles.y < -45)
+	//	{
+	//		addYAngle = 0;
+	//		transform.eulerAngles = new Vector3(transform.eulerAngles.x, -44.0f, transform.eulerAngles.z);
+	//	}
+
+	//	Debug.Log("だれだてめ" + transform.eulerAngles);
+	//	//------------------------------------------
+	//	transform.Rotate(addXAngle, addYAngle, 0.0f);
+	//	//transform.eulerAngles = new Vector3(addYAngle, addXAngle, 0.0f);
+	//	addYAngle *= 1.0f - decreaseRate;
+	//	addXAngle *= 1.0f - decreaseRate;
+	//}
 
 	private void BoostUpdate()
 	{
