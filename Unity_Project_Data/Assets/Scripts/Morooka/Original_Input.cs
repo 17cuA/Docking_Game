@@ -5,13 +5,15 @@
  *　　　　スペルミスのエラー回避
  *　2019/09/30：ドッキングゲームのオリジナル入力名で設定できるプロパティ群
  *　2019/09/30：XInput適応
- *　2019/10/02：ゲームに使うボタン取得させ
+ *　2019/10/02：ゲームに使うボタンを別途作成
+ *　2019/10/02：ボタンコンフィグ
  */
 using UnityEngine;
 
 // ドッキングゲームオリジナル入力返し
 namespace DockingGame_Input
 {
+	// 名無しボタン　Xインプット
 	[System.Serializable]
 	public class X_Input
 	{
@@ -145,6 +147,7 @@ namespace DockingGame_Input
 		// GamePad1の入力群----------------------------------------------
 	}
 
+	// ボタンに名前付けコンフィグ
 	[System.Serializable]
 	public class Original_Input : MonoBehaviour
 	{
