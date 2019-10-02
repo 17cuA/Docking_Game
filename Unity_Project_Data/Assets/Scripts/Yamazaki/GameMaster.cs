@@ -103,7 +103,8 @@ public class GameMaster : MonoBehaviour
 				break;
 
 			case StageState.CLEARNEXT:
-				if(Input.anyKeyDown)
+				// スペースキーかマウス左クリックかenter
+				if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter))
 				{
 					SetStageState(StageState.JUMPTITLE);
 				}
