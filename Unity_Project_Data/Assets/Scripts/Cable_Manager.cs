@@ -1,17 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DockingGame_Input;
 public class Cable_Manager : MonoBehaviour
 {
 	// 速度低下率 0 ~ 1
 	public float decreaseRate;
-	public float addXAngle;
 	public float addYAngle;
+	public float addXAngle;
 	public float maxAddZAngle;
 	public float maxAddYAngle;
 	public float addNum;
 
+	//回転系の変数
+	//private float addXAngle;			//Xの加算の値
+	//private float addYAngle;			//Yの加算の値
+	//public float XAngle_Max;	//最大の値X
+	//public float YAngle_Max;	//最大の値Y
+	//[Range(0,1)]
+	//public float addNun;                //加算する値の上昇率
+	//[Range(0, 1)]
+	//public float decreaseRate;		//減少する値
+
+	//移動系の変数
 	public float boostPower;
 	public float addBoostPower;
 	public float maxAddBoostPower;
@@ -21,20 +32,20 @@ public class Cable_Manager : MonoBehaviour
 	public GameObject prevPosPrefab;
 
 	// 前の情報
-	public struct PrevInfo
-	{
-		// 前の位置
-		public Vector3 prevPos;
-		// 前の角度
-		public Quaternion prevRot;
-		// 前の位置オブジェクト
-		public GameObject prevPosObj;
-	}
+	//public struct PrevInfo
+	//{
+	//	// 前の位置
+	//	public Vector3 prevPos;
+	//	// 前の角度
+	//	public Quaternion prevRot;
+	//	// 前の位置オブジェクト
+	//	public GameObject prevPosObj;
+	//}
 
 	//public PrevInfo[] prevInfos = new PrevInfo[1500];
-	public List<PrevInfo> prevInfos = new List<PrevInfo>();
+	//public List<PrevInfo> prevInfos = new List<PrevInfo>();
 
-	public List<GameObject> aaa = new List<GameObject>();
+	//public List<GameObject> aaa = new List<GameObject>();
 	// 距離間隔
 	public float distanceInterval;
 
@@ -68,51 +79,74 @@ public class Cable_Manager : MonoBehaviour
 		//	aaa[0].transform.rotation = transform.rotation;
 		//}
 	}
+	//void AngleUpdate()
+	//{
+	//	float x = Original_Input.StickLeft_X;
+	//	float y = Original_Input.StickRight_Y;
+
+	//}
 
 	private void AngleUpdate()
 	{
-		if(Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.W))
 		{
-			Debug.Log("上");
-			addYAngle += addNum;
+			//Debug.Log(transform.rotation.x);
+			addXAngle += addNum;
+			//if (transform.eulerAngles.x > 90 || transform.eulerAngles.x < 0) addXAngle = 0;
 		}
 		if (Input.GetKey(KeyCode.A))
 		{
 			Debug.Log("左");
-			addXAngle -= addNum;
+			addYAngle -= addNum;
+
 		}
-		if(Input.GetKey(KeyCode.S))
+		if (Input.GetKey(KeyCode.S))
 		{
 			Debug.Log("下");
-			addYAngle -= addNum;
+			addXAngle -= addNum;
+
 		}
 		if (Input.GetKey(KeyCode.D))
 		{
 			Debug.Log("右");
-			addXAngle += addNum;
+			addYAngle += addNum;
+
 		}
 
+
 		//回転系の制限--------------------------------------
-		if (addXAngle > maxAddZAngle)
+		if (addYAngle > maxAddZAngle) addYAngle = maxAddZAngle;
+		else if (addYAngle < -maxAddZAngle) addYAngle = -maxAddYAngle;
+		if (addXAngle > maxAddZAngle) addXAngle = maxAddYAngle;
+		if (addXAngle < -maxAddYAngle) addXAngle = -maxAddYAngle;
+
+		if (transform.eulerAngles.x > 45)
 		{
-			addXAngle = maxAddZAngle;
+			addXAngle = 0;
+			transform.eulerAngles = new Vector3(44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
 		}
-		else if (addXAngle < -maxAddZAngle)
+		if (transform.eulerAngles.x < -45)
 		{
-			addXAngle = -maxAddYAngle;
+			addXAngle = 0;
+			transform.eulerAngles = new Vector3(-44.0f, transform.eulerAngles.y, transform.eulerAngles.z);
 		}
-		if (addYAngle > maxAddZAngle)
+		if (transform.eulerAngles.y > 45)
 		{
-			addYAngle = maxAddYAngle;
+			addYAngle = 0;
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, 44.0f, transform.eulerAngles.z);
 		}
-		else if (addYAngle < -maxAddYAngle)
+		if (transform.eulerAngles.y < -45)
 		{
-			addYAngle = -maxAddYAngle;
+			addYAngle = 0;
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, -44.0f, transform.eulerAngles.z);
 		}
+
+		Debug.Log("だれだてめ" + transform.eulerAngles);
 		//------------------------------------------
-		transform.Rotate(addYAngle,addXAngle ,0.0f);
-		addXAngle *= 1.0f - decreaseRate;
+		transform.Rotate(addXAngle, addYAngle, 0.0f);
+		//transform.eulerAngles = new Vector3(addYAngle, addXAngle, 0.0f);
 		addYAngle *= 1.0f - decreaseRate;
+		addXAngle *= 1.0f - decreaseRate;
 	}
 
 	private void BoostUpdate()
