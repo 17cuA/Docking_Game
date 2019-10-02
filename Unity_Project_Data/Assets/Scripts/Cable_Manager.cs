@@ -55,22 +55,16 @@ public class Cable_Manager : MonoBehaviour
 		AngleUpdate();
 		BoostUpdate();
 
-		if (Vector2.Distance(transform.position, aaa[0].transform.position) >= distanceInterval)
-		{
-			for (int i = aaa.Count - 1; i > 0; i--)
-			{
-				aaa[i].transform.position = aaa[i -1].transform.position;
-				aaa[i].transform.rotation = aaa[i - 1].transform.rotation;
-
-				//prevInfos[i].prevPosObj.transform.position = prevInfos[i].prevPos = prevInfos[i - 1].prevPos;
-				//prevInfos[i].prevPosObj.transform.rotation = prevInfos[i].prevRot = prevInfos[i - 1].prevRot;
-			}
-			aaa[0].transform.position = transform.position;
-			aaa[0].transform.rotation = transform.rotation;
-
-			//prevInfos[0].prevPosObj.transform.position = prevInfos[0].prevPos = transform.position;
-			//prevInfos[0].prevPosObj.transform.rotation = prevInfos[0].prevRot = transform.rotation;
-		}
+		//if (Vector2.Distance(transform.position, aaa[0].transform.position) >= distanceInterval)
+		//{
+		//	for (int i = aaa.Count - 1; i > 0; i--)
+		//	{
+		//		aaa[i].transform.position = aaa[i -1].transform.position;
+		//		aaa[i].transform.rotation = aaa[i - 1].transform.rotation;
+		//	}
+		//	aaa[0].transform.position = transform.position;
+		//	aaa[0].transform.rotation = transform.rotation;
+		//}
 	}
 
 	/// <summary>
