@@ -8,6 +8,7 @@ public class TitleManager : MonoBehaviour
 {
 	public enum GameState
 	{
+		FADEIN,
 		TITLE,
 		MENU,
 		GAMESTART,
@@ -27,23 +28,30 @@ public class TitleManager : MonoBehaviour
 	// ステージシーン名
 	public string stageSceneName;
 
-	// 入力受付の有無
-	private bool isActive = false;
-
 	// フェードスクリプトをいれよう
 	public FadeTime fadeTimeScript;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		gameState = GameState.TITLE;
+		Debug.Log("かえたぞ1");
+		if (fadeTimeScript)
+		{
+			Debug.Log("かえたぞ2");
+			gameState = GameState.FADEIN;
+			fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+		}
+		else
+		{
+			Debug.Log("かえたぞ3");
+			gameState = GameState.TITLE;
+		}
+		Debug.Log("かえたぞ4");
 		titleText.enabled = true;
 		subText.enabled = true;
 		subText.text = "Please input anykey down";
 
 		selectNum = 0;
-
-		isActive = false;
 
 		if (fadeTimeScript) fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
 	}
@@ -51,24 +59,27 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if(!isActive)
-		{
-			if (fadeTimeScript)
-			{
-				if (fadeTimeScript.IsFadeInFinished())
-				{
-					isActive = true;
-				}
-				else return;
-			}
-			else
-			{
-				isActive = true;
-			}
-		}
-
 		switch (gameState)
 		{
+			case GameState.FADEIN:
+				if (fadeTimeScript)
+				{
+					if (fadeTimeScript.IsFadeInFinished())
+					{
+						SetGameState(GameState.TITLE);
+						break;
+					}
+					if (fadeTimeScript.GetFadeType() != FadeTime.FadeType.FADEIN)
+					{
+						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+					}
+				}
+				else
+				{
+					SetGameState(GameState.TITLE);
+				}
+				break;
+
 			case GameState.TITLE:
 				if (Input.anyKeyDown)
 				{

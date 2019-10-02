@@ -481,8 +481,11 @@ MonoBehaviour:
   fadeInTimeMax: 2
   displayFadeOutPlane: {fileID: 1514048028}
   fadeOutTime: 0
-  fadeOutTimeMax: 2.98
+  fadeOutTimeMax: 1.98
   blackTimeMax: 0.02
+  fadeType: 0
+  isFadeInFinished: 0
+  isFadeOutFinished: 0
 --- !u!1 &727005132
 GameObject:
   m_ObjectHideFlags: 0

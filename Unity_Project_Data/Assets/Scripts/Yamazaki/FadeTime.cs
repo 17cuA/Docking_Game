@@ -27,8 +27,12 @@ public class FadeTime : MonoBehaviour
 		FADEOUT,
 	}
 
-	private FadeType fadeType;
+	//[SerializeField, NonEditable]
+	//private FadeType fadeType;
+	public FadeType fadeType;
+	[SerializeField, NonEditable]
 	private bool isFadeInFinished = false;
+	[SerializeField, NonEditable]
 	private bool isFadeOutFinished = false;
 
 	// Start is called before the first frame update
@@ -93,6 +97,11 @@ public class FadeTime : MonoBehaviour
 		return isFadeOutFinished;
 	}
 
+	public FadeType GetFadeType()
+	{
+		return fadeType;
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -104,9 +113,9 @@ public class FadeTime : MonoBehaviour
 				// 最大時間経過した時
 				if (fadeInTime >= fadeInTimeMax)
 				{
-					SetDisplayFadeInPlane(new Color(0.0f, 0.0f, 0.0f, 1.0f));
+					SetDisplayFadeInPlane(new Color(0.0f, 0.0f, 0.0f, 0.0f));
 
-					if (fadeInTime >= fadeInTimeMax + blackTimeMax)
+					if (fadeInTime >= fadeInTimeMax)
 					{
 						SetFadeType(FadeType.NONE);
 						isFadeInFinished = true;
@@ -114,7 +123,7 @@ public class FadeTime : MonoBehaviour
 				}
 				else
 				{
-					SetDisplayFadeInPlane(new Color(0.0f, 0.0f, 0.0f, fadeInTime / fadeInTimeMax));
+					SetDisplayFadeInPlane(new Color(0.0f, 0.0f, 0.0f, 1.0f - (fadeInTime / fadeInTimeMax)));
 				}
 				break;
 
