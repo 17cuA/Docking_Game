@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +23,13 @@ public class TitleManager : MonoBehaviour
 		GameState.GAMESTART,
 		GameState.TITLE,
 	};
+
+	public string[] menuStr = new string[2]
+	{
+		"●　Game Start\n　　Back",
+		"　　Game Start\n●　Back",
+	};
+
 	// ステージシーン名
 	public string stageSceneName;
 
@@ -34,19 +39,15 @@ public class TitleManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		Debug.Log("かえたぞ1");
 		if (fadeTimeScript)
 		{
-			Debug.Log("かえたぞ2");
 			gameState = GameState.FADEIN;
 			fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
 		}
 		else
 		{
-			Debug.Log("かえたぞ3");
 			gameState = GameState.TITLE;
 		}
-		Debug.Log("かえたぞ4");
 		titleText.enabled = true;
 		subText.enabled = true;
 		subText.text = "Please input anykey down";
@@ -134,19 +135,7 @@ public class TitleManager : MonoBehaviour
 			selectNum = 0;
 		}
 
-		switch(selectNum)
-		{
-			case 0:
-				subText.text = "↑↓ゲームスタート";
-				break;
-
-			case 1:
-				subText.text = "↑↓もどる";
-				break;
-
-			default:
-				break;
-		}
+		subText.text = menuStr[selectNum];
 	}
 
 	private void SetGameState(GameState g)
@@ -161,7 +150,7 @@ public class TitleManager : MonoBehaviour
 
 			case GameState.MENU:
 				selectNum = 0;
-				subText.text = "↑↓ゲームスタート";
+				subText.text = menuStr[0];
 				break;
 
 			case GameState.GAMESTART:
