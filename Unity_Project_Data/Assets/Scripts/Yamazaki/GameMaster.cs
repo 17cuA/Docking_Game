@@ -117,11 +117,11 @@ public class GameMaster : MonoBehaviour
 				}
 				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
 				{
-					stageText.text = "GO!";
+					stageText.text = "コード「了解」\nCode「Roger」";
 				}
 				else if (stageReadyDelay >= 0)
 				{
-					stageText.text = "READY...?";
+					stageText.text = "コンロールセンター「ドッキングを開始せよ」\nControlCenter「Code,Start docking」";
 				}
 				else
 				{
