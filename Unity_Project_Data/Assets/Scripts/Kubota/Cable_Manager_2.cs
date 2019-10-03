@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Cable_Manager_2 : MonoBehaviour
 {
-	private float speed;
-	public float Speed_Max;
-	public float decreaseRate;
+	public float Speed;
 
-	private float addXNum;
-	private float addYNum;
-	private float addZNum;
+	[HideInInspector]public float addXNum;
+	[HideInInspector] public float addYNum;
+	[HideInInspector] public float addZNum;
 
+	[Header("加速時の最大の値")]
+	public float add_Max;
+	[Header("加速度")]
 	public float addNum;
 
 	// Start is called before the first frame update
@@ -26,7 +27,7 @@ public class Cable_Manager_2 : MonoBehaviour
 		Forward_Move();
 		Movement();
 		Charger_Move();
-
+		Num_Limit();
 	}
 
 	void Movement()
@@ -70,10 +71,20 @@ public class Cable_Manager_2 : MonoBehaviour
 
 	void Charger_Move()
 	{
-		transform.Translate(new Vector3(addXNum, addYNum, addZNum) * Speed_Max);
+		transform.Translate(new Vector3(addXNum, addYNum, addZNum) * Speed);
 		//addZNum *= 1.0f - decreaseRate;
 		//addXNum *= 1.0f - decreaseRate;
 		//addYNum *= 1.0f - decreaseRate;
+
+	}
+	void Num_Limit()
+	{
+		if (addZNum > add_Max) addZNum = add_Max;
+		else if (addZNum < -add_Max) addZNum = - add_Max;
+		if (addXNum > add_Max) addXNum = add_Max;
+		else if (addXNum < -add_Max) addXNum = -add_Max;
+		if (addYNum > add_Max) addYNum = add_Max;
+		else if (addYNum < -add_Max) addYNum = -add_Max;
 
 	}
 }
