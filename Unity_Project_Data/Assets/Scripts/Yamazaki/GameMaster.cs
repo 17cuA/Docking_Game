@@ -47,6 +47,13 @@ public class GameMaster : MonoBehaviour
 	// フェード用スクリプト
 	public FadeTime fadeTimeScript;
 
+	public static GameMaster instance;
+
+	private void Awake()
+	{
+		instance = gameObject.GetComponent<GameMaster>();
+	}
+
 	// 開幕
 	private void Start()
 	{
@@ -62,7 +69,7 @@ public class GameMaster : MonoBehaviour
 		}
 		stageText.text = "";
 		stagePlayDelay = stagePlayDelayMax;
-		stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+		stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 	}
 	
 	// 舞フレーム
@@ -199,7 +206,7 @@ public class GameMaster : MonoBehaviour
 					stagePlayDelay = 0.0f;
 					SetStageState(StageState.STAGEFAILURE);
 				}
-				stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+				stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 				break;
 		}
 	}
@@ -254,5 +261,10 @@ public class GameMaster : MonoBehaviour
 	public StageState GetStageState()
 	{
 		return stageState;
+	}
+
+	public void StageClear()
+	{
+		SetStageState(StageState.STAGECLEAR);
 	}
 }

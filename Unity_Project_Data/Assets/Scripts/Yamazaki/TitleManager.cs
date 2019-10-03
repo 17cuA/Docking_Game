@@ -24,10 +24,11 @@ public class TitleManager : MonoBehaviour
 		GameState.TITLE,
 	};
 
-	public string[] menuStr = new string[2]
+	[SerializeField, NonEditable]
+	private string[] menuStr = new string[2]
 	{
-		"●　Game Start\n　　Back",
-		"　　Game Start\n●　Back",
+		"△Game Start\nBack",
+		"Game Start\n△Back",
 	};
 
 	// ステージシーン名
@@ -50,7 +51,7 @@ public class TitleManager : MonoBehaviour
 		}
 		titleText.enabled = true;
 		subText.enabled = true;
-		subText.text = "Please input anykey down";
+		subText.text = "Please press a Key";
 
 		selectNum = 0;
 
@@ -145,7 +146,7 @@ public class TitleManager : MonoBehaviour
 		switch (g)
 		{
 			case GameState.TITLE:
-				subText.text = "Please input anykey down";
+				subText.text = "Please press a Key";
 				break;
 
 			case GameState.MENU:
