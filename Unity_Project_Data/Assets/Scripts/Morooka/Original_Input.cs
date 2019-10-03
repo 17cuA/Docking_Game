@@ -151,27 +151,40 @@ namespace DockingGame_Input
 	[System.Serializable]
 	public class Original_Input : MonoBehaviour
 	{
-		[SerializeField] InputManager manager;
+		[SerializeField] InputManager inputManager;
+		[SerializeField] AxisManager axisManager;
 		bool isSetUpButton = false;
+		bool isSetAxis = false;
+		bool isSetAxisReversal = false;
 		public static Original_Input instance;
-		static public bool ButtomTurbo_Down { get { return Input.GetButtonDown(instance.manager.Button["Turbo"]); } }
-		static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.manager.Button["LockOn"]); } }
+		static public bool ButtomTurbo_Down { get { return Input.GetButtonDown(instance.inputManager.Button["Turbo"]); } }
+		static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.inputManager.Button["LockOn"]); } }
+		static public float StickRight { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight"]; } }
+		static public float StickLeft { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft"]; } }
 
 		private void Start()
 		{
 			instance = FindObjectOfType<Original_Input>();
-			manager.Init();
+			inputManager.Init();
 			DontDestroyOnLoad(this);
 		}
 		private void Update()
 		{
-			if (isSetUpButton)
+			if (isSetUpButton && isSetAxis && isSetAxisReversal)
 			{
-				isSetUpButton = !manager.SettingButton();
+				isSetUpButton = !inputManager.SettingButton();
+			}
+			else if(!isSetUpButton && isSetAxis && isSetAxisReversal)
+			{
+				isSetAxis = !axisManager.SettingAxis();
+			}
+			else if(!isSetUpButton && !isSetAxis && isSetAxisReversal)
+			{
+				//isSetAxisReversal = ;
 			}
 			else
 			{
-				isSetUpButton = X_Input.Buttom6_Down;
+				isSetAxisReversal = isSetAxis = isSetUpButton = X_Input.Buttom6_Down;
 			}
 		}
 	}

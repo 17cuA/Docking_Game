@@ -63,7 +63,7 @@ public class AxisManager
 	/// 呼び出されている間、ボタンの再設定を行う
 	/// </summary>
 	/// <returns>再設定がすべて終わったかどうか</returns>
-	public bool SettingButton()
+	public bool SettingAxis()
 	{
 		// テキスト生成
 		if (!inputInfoText)
@@ -116,7 +116,7 @@ public class AxisManager
 		{
 			inputTime = 0f;
 		}
-		// 決定される時間になったら決定して次のボタンに移行する
+		// 決定される時間になったら決定して反転設定に映る
 		if (inputTime >= decisionTime)
 		{
 			settingAxisNameMap[useAxisNameList[settingAxisNum]] = inputButtonName;
@@ -163,4 +163,20 @@ public class AxisManager
 		}
 		return isComplete;
 	}
+
+	//public bool SettingAxisReversal()
+	//{
+	//	// テキスト生成
+	//	if (!inputInfoText)
+	//	{
+	//		Canvas anyCanvas = GameObject.FindObjectOfType<Canvas>();
+	//		inputInfoText = new GameObject("InputInfo").AddComponent<Text>();
+	//		inputInfoText.rectTransform.SetParent(anyCanvas.transform);
+	//		inputInfoText.rectTransform.localPosition = new Vector2(textPositionX, 0f);
+	//		inputInfoText.font = textFont;
+	//		inputInfoText.fontSize = 50;
+	//		inputInfoText.rectTransform.sizeDelta = new Vector2(3840f, 1080f);
+	//	}
+
+	//}
 }

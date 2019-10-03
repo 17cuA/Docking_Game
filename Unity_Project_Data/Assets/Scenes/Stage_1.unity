@@ -141,24 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881b02052f25c0a498d1eaf309985c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager:
-    defaultButtonNameList:
-    - GamePad_1_0
-    - GamePad_1_1
-    - GamePad_1_2
-    - GamePad_1_3
-    - GamePad_1_4
-    - GamePad_1_5
-    - GamePad_1_6
-    - GamePad_1_7
-    - GamePad_1_8
-    - GamePad_1_9
-    useButtonNameList:
-    - Turbo
-    - LockOn
+  inputManager:
+    defaultButtonNameList: []
+    useButtonNameList: []
     decisionTime: 5
-    textFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    textPositionX: 960
+    textFont: {fileID: 0}
+    textPositionX: 0
+  axisManager:
+    defaultAxisNameList: []
+    useAxisNameList: []
+    decisionTime: 5
+    textFont: {fileID: 0}
+    textPositionX: 0
 --- !u!4 &61916384
 Transform:
   m_ObjectHideFlags: 0
@@ -184,7 +178,6 @@ GameObject:
   - component: {fileID: 424504780}
   - component: {fileID: 424504779}
   - component: {fileID: 424504778}
-  - component: {fileID: 424504781}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,20 +249,6 @@ Transform:
   m_Father: {fileID: 1544786915}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
---- !u!114 &424504781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424504777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f73090679827a4aa8899f1ba3a6cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charger: {fileID: 968170300}
-  Hal9000: {fileID: 989232715}
 --- !u!1 &472823199
 GameObject:
   m_ObjectHideFlags: 0
