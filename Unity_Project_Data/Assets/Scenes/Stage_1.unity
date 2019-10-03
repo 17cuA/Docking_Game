@@ -745,7 +745,7 @@ MonoBehaviour:
   stageText: {fileID: 1864202661}
   stageState: 0
   nextStageDelay: 0
-  nextStageDelayMax: 2
+  nextStageDelayMax: 1.5
   stageReadyDelay: 0
   stageReadyDelayMax: 6
   stagePlayDelay: 0
