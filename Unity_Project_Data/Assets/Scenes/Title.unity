@@ -120,6 +120,83 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21583712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21583713}
+  - component: {fileID: 21583715}
+  - component: {fileID: 21583714}
+  m_Layer: 5
+  m_Name: ChoiceText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &21583713
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21583712}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1064623059}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 1728, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &21583714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21583712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 65
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Please input anykey down
+--- !u!222 &21583715
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21583712}
+  m_CullTransparentMesh: 0
 --- !u!1 &85179125
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +430,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 300}
+  m_SizeDelta: {x: 1728, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539111066
 MonoBehaviour:
@@ -374,11 +451,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 256
+    m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
+    m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 256
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -535,6 +612,11 @@ MonoBehaviour:
   titleText: {fileID: 539111066}
   subText: {fileID: 1348309036}
   selectNum: 0
+  menuStr:
+  - 'Game Start
+
+    Back'
+  - Game Start\nBack
   stageSceneName: Stage_1
   fadeTimeScript: {fileID: 563253503}
 --- !u!320 &563253502
@@ -558,6 +640,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 114564646002296992, guid: bf46212cf5f4f5a47ad2aef67e6b00e3, type: 2}
     value: {fileID: 1551397448}
+  - key: {fileID: 114269501684435776, guid: bf46212cf5f4f5a47ad2aef67e6b00e3, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &563253503
@@ -572,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85db9ea305739744bb4065122343d060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayFadeInPlane: {fileID: 0}
+  displayFadeInPlane: {fileID: 1551397448}
   fadeInTime: 0
   fadeInTimeMax: 2
   displayFadeOutPlane: {fileID: 1514048028}
@@ -932,6 +1016,7 @@ RectTransform:
   - {fileID: 1551397450}
   - {fileID: 539111065}
   - {fileID: 1348309035}
+  - {fileID: 21583713}
   - {fileID: 1514048027}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -976,7 +1061,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -256}
-  m_SizeDelta: {x: 1920, y: 100}
+  m_SizeDelta: {x: 1728, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348309036
 MonoBehaviour:
@@ -997,7 +1082,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
     m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
@@ -1009,7 +1094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please input anykey down
+  m_Text: Please press a key
 --- !u!222 &1348309037
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1048,7 +1133,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1064623059}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

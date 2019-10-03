@@ -88,13 +88,13 @@ public class AxisManager
 				continue;
 			}
 			// 入力を受けていたら名前を一時保存する
-			if (Input.GetAxis(defaultAxisNameList[i]) != 0.0f && !isInput)
+			if (Input.GetAxis(defaultAxisNameList[i]) > 0.7f || Input.GetAxis(defaultAxisNameList[i]) < -0.7f && !isInput)
 			{
 				inputButtonName = defaultAxisNameList[i];
 				isInput = true;
 			}
 			// 同時押しされていたら解除
-			else if (Input.GetAxis(defaultAxisNameList[i])!= 0.0f && isInput)
+			else if (Input.GetAxis(defaultAxisNameList[i]) > 0.7f || Input.GetAxis(defaultAxisNameList[i]) < -0.7f && isInput)
 			{
 				inputButtonName = "";
 				break;
@@ -163,20 +163,4 @@ public class AxisManager
 		}
 		return isComplete;
 	}
-
-	//public bool SettingAxisReversal()
-	//{
-	//	// テキスト生成
-	//	if (!inputInfoText)
-	//	{
-	//		Canvas anyCanvas = GameObject.FindObjectOfType<Canvas>();
-	//		inputInfoText = new GameObject("InputInfo").AddComponent<Text>();
-	//		inputInfoText.rectTransform.SetParent(anyCanvas.transform);
-	//		inputInfoText.rectTransform.localPosition = new Vector2(textPositionX, 0f);
-	//		inputInfoText.font = textFont;
-	//		inputInfoText.fontSize = 50;
-	//		inputInfoText.rectTransform.sizeDelta = new Vector2(3840f, 1080f);
-	//	}
-
-	//}
 }
