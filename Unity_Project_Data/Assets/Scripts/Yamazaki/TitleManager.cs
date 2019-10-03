@@ -26,8 +26,16 @@ public class TitleManager : MonoBehaviour
 	
 	private string[] menuStr = new string[2]
 	{
-		"▼ Game Start\nBack",
-		"Game Start\n▲ Back",
+		"Game Start\nBack",
+		"Game Start\nBack",
+	};
+
+	public Image rightArrowImg;
+
+	private Vector3[] rightArrowRectPos = new Vector3[2]
+	{
+		new Vector3(-249.0f, -182.0f, 0.0f),
+		new Vector3(-249.0f, -182.0f-64.0f, 0.0f),
 	};
 
 	// ステージシーン名
@@ -50,7 +58,8 @@ public class TitleManager : MonoBehaviour
 		}
 		titleText.enabled = true;
 		subText.enabled = true;
-		subText.text = "Please press a Key";
+		subText.text = "Please press a key";
+		rightArrowImg.enabled = false;
 
 		selectNum = 0;
 
@@ -136,6 +145,7 @@ public class TitleManager : MonoBehaviour
 		}
 
 		subText.text = menuStr[selectNum];
+		rightArrowImg.rectTransform.anchoredPosition = rightArrowRectPos[selectNum];
 	}
 
 	private void SetGameState(GameState g)
@@ -145,12 +155,15 @@ public class TitleManager : MonoBehaviour
 		switch (g)
 		{
 			case GameState.TITLE:
-				subText.text = "Please press a Key";
+				subText.text = "Please press a key";
+				rightArrowImg.enabled = false;
 				break;
 
 			case GameState.MENU:
 				selectNum = 0;
 				subText.text = menuStr[0];
+				rightArrowImg.rectTransform.anchoredPosition = rightArrowRectPos[0];
+				rightArrowImg.enabled = true;
 				break;
 
 			case GameState.GAMESTART:
