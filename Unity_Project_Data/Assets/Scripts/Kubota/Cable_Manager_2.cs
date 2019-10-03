@@ -38,8 +38,8 @@ public class Cable_Manager_2 : MonoBehaviour
 		float x = Original_Input.StickLeft_X;
 		float z = Original_Input.StickRight_Y;
 
-		addXNum = x;
-		addYNum = y;
+		//addXNum = x;
+		//addYNum = y;
 
 		if (Input.GetKey(KeyCode.W))addYNum += addNum;
 		if (Input.GetKey(KeyCode.A))addXNum += -addNum;
