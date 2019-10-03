@@ -15,6 +15,7 @@ public class Cable_Manager_2 : MonoBehaviour
 	[Header("加速度")]
 	public float addNum;
 
+	public GameMaster GM;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -85,6 +86,9 @@ public class Cable_Manager_2 : MonoBehaviour
 		else if (addXNum < -add_Max) addXNum = -add_Max;
 		if (addYNum > add_Max) addYNum = add_Max;
 		else if (addYNum < -add_Max) addYNum = -add_Max;
-
+	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Hal")	GM.stageState = GameMaster.StageState.STAGECLEAR;
 	}
 }
