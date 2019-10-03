@@ -10,6 +10,8 @@ public class GameMaster : MonoBehaviour
 	// ゲームステージ上の進行ステータス
 	public enum StageState
 	{
+		FADEIN,			// ステージフェードイン
+		FADEOUT,		// ステージフェードアウト
 		READY,			// スタート前
 		NONE,			// なし
 		PLAYING,		// プレイ中
@@ -40,23 +42,35 @@ public class GameMaster : MonoBehaviour
 	[SerializeField, NonEditable]
 	private float stagePlayDelay;		// 現在の残り時間
 	public float stagePlayDelayMax;		// 最大の残り時間
-	public Text stageTimeText;			// 時間テキスト
+	public Text stageTimeText;          // 時間テキスト
+
+	// フェード用スクリプト
+	public FadeTime fadeTimeScript;
 
 	// 開幕
 	private void Start()
-	{// 序盤のゲームステータスをNONEに
-		stageState = StageState.READY;
+	{
+		// 序盤のゲームステータスをNONEに
+		if (fadeTimeScript)
+		{
+			stageState = StageState.FADEIN;
+			fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+		}
+		else
+		{
+			stageState = StageState.READY;
+		}
 		stageText.text = "";
 		stagePlayDelay = stagePlayDelayMax;
 		stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 	}
-
+	
 	// 舞フレーム
 	private void Update()
 	{
 		// Debug
 		// 1キーを押したらゲームクリアとする
-		if(Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			// ステージステータスをゲームクリアに変更
 			SetStageState(StageState.STAGECLEAR);
@@ -65,6 +79,25 @@ public class GameMaster : MonoBehaviour
 		// 現在のステージステータスで処理を変える
 		switch(stageState)
 		{
+			case StageState.FADEIN:
+				if(fadeTimeScript)
+				{
+					if(fadeTimeScript.IsFadeInFinished())
+					{
+						SetStageState(StageState.READY);
+						break;
+					}
+					if(fadeTimeScript.GetFadeType() != FadeTime.FadeType.FADEIN)
+					{
+						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+					}
+				}
+				else
+				{
+					SetStageState(StageState.READY);
+				}
+				break;
+
 			// ステージ開始前時
 			case StageState.READY:
 				// 時間を経過
@@ -75,11 +108,11 @@ public class GameMaster : MonoBehaviour
 					// ステージステータスをプレイに変更
 					SetStageState(StageState.PLAYING);
 				}
-				else if (stageReadyDelay >= stageReadyDelayMax * 2 / 3)
+				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
 				{
 					stageText.text = "GO!";
 				}
-				else if (stageReadyDelay >= stageReadyDelayMax * 1 / 3)
+				else if (stageReadyDelay >= 0)
 				{
 					stageText.text = "READY...?";
 				}
@@ -103,7 +136,36 @@ public class GameMaster : MonoBehaviour
 				break;
 
 			case StageState.CLEARNEXT:
-				if(Input.anyKeyDown)
+				// スペースキーかマウス左クリックかenter
+				if(IsOkeyKeyDown())
+				{
+					if(fadeTimeScript)
+					{
+						SetStageState(StageState.FADEOUT);
+						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
+					}
+					else
+					{
+						SetStageState(StageState.JUMPTITLE);
+					}
+				}
+				break;
+
+			// ステージフェードアウト
+			case StageState.FADEOUT:
+				if (fadeTimeScript)
+				{
+					if (fadeTimeScript.IsFadeOutFinished())
+					{
+						SetStageState(StageState.JUMPTITLE);
+						break;
+					}
+					if (fadeTimeScript.GetFadeType() != FadeTime.FadeType.FADEOUT)
+					{
+						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
+					}
+				}
+				else
 				{
 					SetStageState(StageState.JUMPTITLE);
 				}
@@ -123,7 +185,7 @@ public class GameMaster : MonoBehaviour
 				break;
 
 			case StageState.FAILURENEXT:
-				if (Input.anyKeyDown)
+				if (IsOkeyKeyDown())
 				{
 					SetStageState(StageState.JUMPTITLE);
 				}
@@ -140,6 +202,11 @@ public class GameMaster : MonoBehaviour
 				stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 				break;
 		}
+	}
+
+	private bool IsOkeyKeyDown()
+	{
+		return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter);
 	}
 
 	// ステージステータス変更専用関数
