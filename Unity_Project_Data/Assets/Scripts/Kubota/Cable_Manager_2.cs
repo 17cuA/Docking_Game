@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DockingGame_Input;
 public class Cable_Manager_2 : MonoBehaviour
 {
 	public float Speed;
@@ -15,6 +15,7 @@ public class Cable_Manager_2 : MonoBehaviour
 	[Header("加速度")]
 	public float addNum;
 
+	public GameMaster GM;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -32,32 +33,23 @@ public class Cable_Manager_2 : MonoBehaviour
 
 	void Movement()
 	{
-		if (Input.GetKey(KeyCode.W))
-		{
-			addYNum += addNum;
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			Debug.Log("左");
-			addXNum += -addNum;
 
-		}
-		if (Input.GetKey(KeyCode.S))
-		{
-			Debug.Log("下");
-			addYNum += -addNum;
+		float y = Original_Input.StickLeft_Y;
+		float x = Original_Input.StickLeft_X;
+		float z = Original_Input.StickRight_Y;
 
-		}
-		if (Input.GetKey(KeyCode.D))
-		{
-			Debug.Log("右");
-			addXNum += addNum;
+		//addXNum = x;
+		//addYNum = y;
 
-		}
+		if (Input.GetKey(KeyCode.W))addYNum += addNum;
+		if (Input.GetKey(KeyCode.A))addXNum += -addNum;
+		if (Input.GetKey(KeyCode.S))addYNum += -addNum;
+		if (Input.GetKey(KeyCode.D))addXNum += addNum;
 	}
 
 	void Forward_Move()
 	{
+		//if(X_Input.b)
 		if(Input.GetKey(KeyCode.X))
 		{
 			addZNum += addNum;
@@ -85,6 +77,9 @@ public class Cable_Manager_2 : MonoBehaviour
 		else if (addXNum < -add_Max) addXNum = -add_Max;
 		if (addYNum > add_Max) addYNum = add_Max;
 		else if (addYNum < -add_Max) addYNum = -add_Max;
-
+	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Hal")	GM.stageState = GameMaster.StageState.STAGECLEAR;
 	}
 }
