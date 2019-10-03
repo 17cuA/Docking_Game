@@ -90,6 +90,7 @@ MonoBehaviour:
   addZNum: 0
   add_Max: 1
   addNum: 0.01
+  GM: {fileID: 0}
 --- !u!1001 &9038333165331159715
 PrefabInstance:
   m_ObjectHideFlags: 0

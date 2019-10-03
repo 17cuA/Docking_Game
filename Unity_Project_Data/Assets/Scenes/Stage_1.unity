@@ -412,6 +412,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1dce169b3984aeb4685aa0b8fe059afc, type: 3}
     m_FontSize: 64
@@ -736,6 +738,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
     m_FontSize: 64
@@ -794,6 +798,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -837,24 +843,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9038333165437244310}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1538303767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538303764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48e9f72ea425fe45bc78079c9cec138, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0.01
-  addXNum: 0
-  addYNum: 0
-  addZNum: 0
-  add_Max: 1
-  addNum: 0.01
 --- !u!1 &1545418382
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +906,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1102,6 +1092,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
     m_FontSize: 64
@@ -1374,71 +1366,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: prevPosPrefab
+    - target: {fileID: 1538303767, guid: de56243f4714ab349bc53ba125801720, type: 3}
+      propertyPath: GM
       value: 
-      objectReference: {fileID: 8642796531240628956, guid: 8e03d16205cda5945829e9a4ed885af2,
-        type: 3}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: decreaseRate
-      value: 0.0025
-      objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: maxAddYAngle
-      value: 2.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: maxAddZAngle
-      value: 2.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: addNum
-      value: 0.294
-      objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: addNun
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1086322224353216313, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 9038333165331284003, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1092199964}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
