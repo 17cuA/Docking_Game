@@ -4,18 +4,20 @@ using UnityEngine;
 using DockingGame_Input;
 public class Cable_Manager_2 : MonoBehaviour
 {
+	//加速度×Speedで移動の速度を変更している
 	public float Speed;
 
+	//各軸に加算されていく加速度------------------
 	[HideInInspector] public float addXNum;
 	[HideInInspector] public float addYNum;
 	[HideInInspector] public float addZNum;
-
+	//--------------------------------------------
 	[Header("加速時の最大の値")]
 	public float add_Max;
 	[Header("加速度")]
 	public float addNum;
 
-	public GameMaster GM;
+	public GameMaster GM;			//ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -35,14 +37,16 @@ public class Cable_Manager_2 : MonoBehaviour
 	/// </summary>
 	void Movement()
 	{
-
+		//入力処理--------------------
 		float y = Original_Input.StickLeft_Y;
 		float x = Original_Input.StickLeft_X;
 		float z = Original_Input.StickRight_Y;
-
+		//---------------------------
 		//addXNum = x;
 		//addYNum = y;
 
+		//ボタン入力されたときの移動系---------------------
+		//加速していくようになってる
 		if (Input.GetKey(KeyCode.W)) addYNum += addNum;
 		if (Input.GetKey(KeyCode.A)) addXNum += -addNum;
 		if (Input.GetKey(KeyCode.S)) addYNum += -addNum;
@@ -54,6 +58,7 @@ public class Cable_Manager_2 : MonoBehaviour
 	void Forward_Move()
 	{
 		//if(X_Input.b)
+		//ボタンを押したら移動するだけの処理
 		if (Input.GetKey(KeyCode.X))
 		{
 			addZNum += addNum;
