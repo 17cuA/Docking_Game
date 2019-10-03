@@ -216,13 +216,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fcb74c59719624787efae978884fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargerObj: {fileID: 1921744020}
+  chargerObj: {fileID: 1538303764}
+  savePos: {x: 0, y: 0, z: 0}
   defPosZ_Value: 2.2
   posZ: 0
-  rotaX_Max: 0
-  rotaX_Min: 0
-  rotaY_Max: 0
-  rotaY_Min: 0
+  rotaX: 0
+  rotaY: 0
+  rotaX_ChangeValue: 0.2
+  rotaY_ChangeValue: 0.2
+  nowRotaX_Max: 0
+  nowRotaX_Min: 0
+  nowRotaY_Max: 0
+  nowRotaY_Min: 0
+  isMove: 0
 --- !u!1001 &474051413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,12 +1049,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864202659}
   m_CullTransparentMesh: 0
---- !u!1 &1921744020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9038333164545580776, guid: de56243f4714ab349bc53ba125801720,
-    type: 3}
-  m_PrefabInstance: {fileID: 9038333165437244310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7579247190892550368
 PrefabInstance:
   m_ObjectHideFlags: 0
