@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraState: 0
   chargerObj: {fileID: 1538303764}
-  FPS_CameraPosObj: {fileID: 0}
+  FPS_CameraPosObj: {fileID: 1522449505}
   backwardCameraPos: {x: 0, y: 0, z: 0}
   savePos: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1070,6 +1070,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1522449505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4252339182924378868, guid: 18119647fd128914c9d78b2d860e6bad,
+    type: 3}
+  m_PrefabInstance: {fileID: 884361155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1538303764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9038333164545580776, guid: de56243f4714ab349bc53ba125801720,
