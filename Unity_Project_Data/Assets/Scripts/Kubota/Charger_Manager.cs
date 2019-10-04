@@ -12,7 +12,8 @@ using DockingGame_Input;
 public class Charger_Manager : MonoBehaviour
 {
 	private Rigidbody myRigidbody;    // 自身のRigidbody
-	private bool isEnteredTheSlot;		// スマホの差込口に入ったか
+	private bool isEnteredTheSlot;      // スマホの差込口に入ったか
+	private Vector3 snapTargetPos;		// スナップターゲット位置
 	[Header("加速時の最大の値")]
 	public float add_Max;
 
@@ -40,10 +41,20 @@ public class Charger_Manager : MonoBehaviour
 	private void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody>();
+		isEnteredTheSlot = false;
+		snapTargetPos = new Vector3(0.0f, 0.0f, -3.723f);
 	}
 	private void Update()
 	{
-		Movement();         //移動処理
+		if (!isEnteredTheSlot)
+		{
+			Movement();         //移動処理
+		}
+		else
+		{
+			myRigidbody.velocity = Vector3.zero;
+			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos, 0.01f);
+		}
 	}
 	/// <summary>
 	/// 移動処理
@@ -73,5 +84,14 @@ public class Charger_Manager : MonoBehaviour
 
 		// 速度適応
 		myRigidbody.velocity = tempVelocity; 
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		// 穴に触れたとき
+		if (col.tag =="Slot")
+		{
+			isEnteredTheSlot = true;
+		}
 	}
 }
