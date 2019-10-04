@@ -402,6 +402,7 @@ MonoBehaviour:
   cameraState: 0
   chargerObj: {fileID: 1538303764}
   FPS_CameraPosObj: {fileID: 1522449505}
+  phoneObj: {fileID: 523758123}
   backwardCameraPos: {x: 0, y: 0, z: 0}
   savePos: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -409,8 +410,10 @@ MonoBehaviour:
   posZ: 0
   rotaX: 0
   rotaY: 0
+  FPS_Distance_XandY_Value: 0
   FPS_Distance_XandY: 0.2
   FPS_Distance_Z: 5
+  once: 1
   isMove: 0
 --- !u!1001 &474051413
 PrefabInstance:
@@ -432,12 +435,12 @@ PrefabInstance:
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6551179741413169012, guid: f808c13b3fe43bf4cb291e37360c9723,
         type: 3}
@@ -551,6 +554,28 @@ PrefabInstance:
       objectReference: {fileID: 1092199964}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f808c13b3fe43bf4cb291e37360c9723, type: 3}
+--- !u!1 &523758123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6551179741413169013, guid: f808c13b3fe43bf4cb291e37360c9723,
+    type: 3}
+  m_PrefabInstance: {fileID: 474051413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &523758125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523758123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ccac41d55c71e4d8411959e2ec46a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomX_ValueMax: 2
+  randomX_ValueMin: -2
+  randomY_ValueMax: 2
+  randomY_ValueMin: -2
 --- !u!1001 &654184594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1659,11 +1684,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speedmeter
       objectReference: {fileID: 0}
-    - target: {fileID: 7233815145102053956, guid: c9194ba504cc51047a6599b04ba5fadd,
-        type: 3}
-      propertyPath: chargerObject
-      value: 
-      objectReference: {fileID: 1538303764}
     - target: {fileID: 7233815145102053957, guid: c9194ba504cc51047a6599b04ba5fadd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1769,6 +1789,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7233815145102053956, guid: c9194ba504cc51047a6599b04ba5fadd,
+        type: 3}
+      propertyPath: chargerObject
+      value: 
+      objectReference: {fileID: 1538303764}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9194ba504cc51047a6599b04ba5fadd, type: 3}
 --- !u!1 &1963170072
