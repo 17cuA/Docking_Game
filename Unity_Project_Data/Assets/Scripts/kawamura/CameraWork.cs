@@ -19,7 +19,9 @@ public class CameraWork : MonoBehaviour
 	[Header("手動で入れよう！その1")]
 	public GameObject chargerObj;                   //チャージャーオブジェクト
 	[Header("手動で入れよう！その2")]
-	public GameObject FPS_CameraPosObj;		//チャージャー視点の位置オブジェクト
+	public GameObject FPS_CameraPosObj;     //チャージャー視点の位置オブジェクト
+	[Header("手動で入れよう！その3")]
+	public GameObject phoneObj;					//スマホオブジェクト
 	public Vector3 backwardCameraPos;			//後方視点の位置オブジェクト
 	public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
 	public Quaternion _rotation;                        //カメラの向く方向
@@ -30,17 +32,17 @@ public class CameraWork : MonoBehaviour
 	public float defPosZ_Value;		//チャージャーからどれだけ後ろにいるかの値
 	public float posZ;					//後方位置のZ座標の値
 
-
 	//Chargerの位置によって変わるカメラの回転値 XとY
 	public float rotaX;
 	public float rotaY;
 
-
-	[Header("入力用　FPS視点になるXとYの範囲")]
+	[Header("入力用　FPS視点になるXとYの範囲の値")]
+	public float FPS_Distance_XandY_Value;
 	public float FPS_Distance_XandY;
 	[Header("入力用　Z距離がこれより近くなるとFPSになる")]
 	public float FPS_Distance_Z;
 
+	public bool once = true;
 	public bool isMove = false;	//動いているかのチェック
 
 	void Start()
@@ -56,6 +58,10 @@ public class CameraWork : MonoBehaviour
 
 	void Update()
 	{
+		if(once)
+		{
+			once = false;
+		}
 		//今のチャージャーの位置が保存した位置と違ったら
 		if (chargerObj.transform.position != savePos)
 		{
@@ -87,8 +93,9 @@ public class CameraWork : MonoBehaviour
 		//transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
 		//FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
-		if (chargerObj.transform.position.x > -FPS_Distance_XandY && chargerObj.transform.position.x < FPS_Distance_XandY
-			&& chargerObj.transform.position.y > -FPS_Distance_XandY && chargerObj.transform.position.y < FPS_Distance_XandY && chargerObj.transform.position.z > -FPS_Distance_Z)
+		if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
+			&& chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.x + FPS_Distance_XandY
+			&& chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < 0)
 		{
 			cameraState = CameraState.FPS;
 		}
@@ -106,7 +113,6 @@ public class CameraWork : MonoBehaviour
 				transform.position = backwardCameraPos;
 				//回転させる
 				transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 1);
-
 				break;
 
 			//FPS視点
