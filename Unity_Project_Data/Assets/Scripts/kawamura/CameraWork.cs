@@ -4,84 +4,89 @@ using UnityEngine;
 
 public class CameraWork : MonoBehaviour
 {
+	//カメラの位置状態
 	public enum CameraState
 	{
-		Backward,
-		FPS,
+		Backward,		//後方
+		FPS,				//チャージャー視点
 	}
-
+	//状態の変数
 	public CameraState cameraState;
 
-	public GameObject chargerObj;
-	//public GameObject backwardCameraPos;
-	public GameObject FPS_CameraPosObj;
-	public Vector3 backwardCameraPos;
-	public Vector3 savePos;
-	public Quaternion _rotation;
+	[Header("手動で入れよう！その1")]
+	public GameObject chargerObj;                   //チャージャーオブジェクト
+	[Header("手動で入れよう！その2")]
+	public GameObject FPS_CameraPosObj;		//チャージャー視点の位置オブジェクト
+	public Vector3 backwardCameraPos;			//後方視点の位置オブジェクト
+	public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
+	public Quaternion _rotation;                        //カメラの向く方向
 
-	public float rotaSpeed;
+	//public float rotaSpeed;
 
-	public float defPosZ_Value;
-	public float posZ;
+	[Header("入力用　チャージャーとのZの距離")]
+	public float defPosZ_Value;		//チャージャーからどれだけ後ろにいるかの値
+	public float posZ;					//後方位置のZ座標の値
 
+
+	//Chargerの位置によって変わるカメラの回転値 XとY
 	public float rotaX;
 	public float rotaY;
-	public float rotaX_ChangeValue;
-	public float rotaY_ChangeValue;
 
-	//Chargerの位置によって変わるカメラの回転限界
-	public float nowRotaX_Max;
-	public float nowRotaX_Min;
-	public float nowRotaY_Max;
-	public float nowRotaY_Min;
 
-	public float nowRotaX_Limit;
-	public float nowRotaY_Limit;
+	[Header("入力用　FPS視点になるXとYの範囲")]
+	public float FPS_Distance_XandY;
+	[Header("入力用　Z距離がこれより近くなるとFPSになる")]
+	public float FPS_Distance_Z;
 
-	//public float rotaX_Max;
-	//public float rotaX_Min;
-	//public float rotaY_Max;
-	//public float rotaY_Min;
-
-	bool once = true;
-	public bool isMove = false;
+	public bool isMove = false;	//動いているかのチェック
 
 	void Start()
 	{
-		rotaX = 15f;
-		rotaY = -20f;
+		//回転限界を初期の値に設定
+		rotaX = 15;
+		rotaY = -20;
+		_rotation = Quaternion.Euler(rotaX, rotaY, 0);
 
-		nowRotaX_Limit = rotaX;
-		nowRotaY_Limit = rotaY;
-		//_rotation = transform.rotation;
-
+		//位置セーブ
 		savePos = chargerObj.transform.position;
 	}
 
 	void Update()
 	{
+		//今のチャージャーの位置が保存した位置と違ったら
 		if (chargerObj.transform.position != savePos)
 		{
+			//動いているかtrue
 			isMove = true;
+			//チャージャーの位置保存更新
 			savePos = chargerObj.transform.position;
 		}
+		//チャージャーの位置が保存位置と同じなら
 		else if (chargerObj.transform.position == savePos)
 		{
+			//動いているかfalse
 			isMove = false;
 		}
 
+		//動いていたら
 		if(isMove)
 		{
+			//カメラの回転値を決める関数呼び出し
 			CameraRotation();
+			//カメラの向く方向を決める
+			_rotation = Quaternion.Euler(rotaX, rotaY, 0);
+
 		}
 
-		_rotation = Quaternion.Euler(nowRotaX_Limit, nowRotaY_Limit, 0);
+		//後方視点のZ位置を更新する
 		posZ = chargerObj.transform.position.z - defPosZ_Value;
+		//後方視点の位置を更新
 		backwardCameraPos = new Vector3(1.4f, 1f, posZ);
 		//transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
-		if (chargerObj.transform.position.x > -0.2f && chargerObj.transform.position.x < 0.2f
-			&& chargerObj.transform.position.y > -0.2f && chargerObj.transform.position.y < 0.2f && chargerObj.transform.position.z > -5.0f)
+		//FPS視点に移動するときの条件（）
+		if (chargerObj.transform.position.x > -FPS_Distance_XandY && chargerObj.transform.position.x < FPS_Distance_XandY
+			&& chargerObj.transform.position.y > -FPS_Distance_XandY && chargerObj.transform.position.y < FPS_Distance_XandY && chargerObj.transform.position.z > -FPS_Distance_Z)
 		{
 			cameraState = CameraState.FPS;
 		}
@@ -105,77 +110,28 @@ public class CameraWork : MonoBehaviour
 		}
 	}
 
+	//カメラの回転限界を決める
 	void CameraRotation()
 	{
 		//RotationのYを決める
 		if (chargerObj.transform.position.x > 0)
 		{
-			//nowRotaY_Max = chargerObj.transform.position.x * 10 - 20;
-			nowRotaY_Limit = chargerObj.transform.position.x * 10 - 20;
-			if (rotaY < nowRotaY_Limit)
-			{
-				rotaY += rotaY_ChangeValue;
-				//if (rotaY > rotaY_Max)
-				//{
-				//	rotaY = rotaY_Max;
-				//}
-			}
-			if (rotaY > nowRotaY_Limit)
-			{
-				rotaY -= rotaY_ChangeValue;
-			}
-
-			//if (rotaY < nowRotaY_Max)
-			//{
-			//	rotaY += rotaY_ChangeValue;
-			//	//if (rotaY > rotaY_Max)
-			//	//{
-			//	//	rotaY = rotaY_Max;
-			//	//}
-			//}
-			//if (rotaY > nowRotaY_Max)
-			//{
-			//	rotaY -= rotaY_ChangeValue;
-			//}
+			rotaY = chargerObj.transform.position.x * 10 - 20;
 		}
 		else if (chargerObj.transform.position.x < 0)
 		{
-			nowRotaY_Limit = 6.6f * chargerObj.transform.position.x - 20;
-			if (rotaY > nowRotaY_Limit)
-			{
-				rotaY -= rotaY_ChangeValue;
-			}
-			else if (rotaY < nowRotaY_Limit)
-			{
-				rotaY += rotaY_ChangeValue;
-			}
+			rotaY = 6.6f * chargerObj.transform.position.x - 20;
 		}
 		//RotationのYを決めるやつの終わり
 
 		//RotationのXを決める
 		if (chargerObj.transform.position.y < 0)
 		{
-			nowRotaX_Limit = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
-			if (rotaX < nowRotaX_Limit)
-			{
-				rotaX += rotaX_ChangeValue;
-			}
-			if (rotaX > nowRotaX_Limit)
-			{
-				rotaX -= rotaX_ChangeValue;
-			}
+			rotaX = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
 		}
 		else if (chargerObj.transform.position.y > 0)
 		{
-			nowRotaX_Limit = -11.6f * chargerObj.transform.position.y + 15f;
-			if (rotaX > nowRotaX_Limit)
-			{
-				rotaX -= rotaX_ChangeValue;
-			}
-			else if (rotaX < nowRotaX_Limit)
-			{
-				rotaX += rotaX_ChangeValue;
-			}
+			rotaX = -11.6f * chargerObj.transform.position.y + 15f;
 		}
 		//RotationのXを決めるやつおわり
 	}
