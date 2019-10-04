@@ -2,6 +2,7 @@
  *　制作：2019/10/04
  *　作者：諸岡勇樹
  *　2019/10/04：充電ケーブルの移動
+ *　2019/10/04：穴に入ったとき、ポジションスナップ
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using DockingGame_Input;
 public class Charger_Manager : MonoBehaviour
 {
 	private Rigidbody myRigidbody;    // 自身のRigidbody
-
+	private bool isEnteredTheSlot;		// スマホの差込口に入ったか
 	[Header("加速時の最大の値")]
 	public float add_Max;
 
