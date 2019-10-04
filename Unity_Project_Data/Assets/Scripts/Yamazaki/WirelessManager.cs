@@ -13,7 +13,12 @@ public class WirelessManager : MonoBehaviour
 	// シーンが切り替わる時間経過
 	[SerializeField, NonEditable]
 	private float nextStageDelay;       // 現在の経過時間
-	public float nextStageDelayMax;    // 最大の待ち時間
+	public float nextStageDelayMax = 3.0f;    // 最大の待ち時間
+
+	// 通常メッセージ無線の時間経過
+	[SerializeField, NonEditable]
+	private float displayTime;				// 現在の経過時間
+	public float displayTimeMax = 3.0f;		// 最大の待ち時間
 
 	// ステージ上テキスト
 	public Text stageText;
@@ -24,6 +29,8 @@ public class WirelessManager : MonoBehaviour
 		FIRST,
 		STAGECLEAR,
 		STAGEFAILURE,
+		MESSAGE_1,
+		MESSAGE_2,
 	}
 
 	[SerializeField, NonEditable]
@@ -50,6 +57,16 @@ public class WirelessManager : MonoBehaviour
 
 			case WirelessMode.STAGEFAILURE:
 				stageText.text = "コンロールセンター「ミッションは失敗した…」\nControlCenter「Mission failed...」";
+				break;
+
+			case WirelessMode.MESSAGE_1:
+				stageText.text = "コンロールセンター「慎重に…」\nControlCenter「Please be careful...」";
+				displayTime = 0.0f;
+				break;
+
+			case WirelessMode.MESSAGE_2:
+				stageText.text = "コード「…」\nCode「...」";
+				displayTime = 0.0f;
 				break;
 
 			default:
@@ -112,6 +129,20 @@ public class WirelessManager : MonoBehaviour
 				if (nextStageDelay >= nextStageDelayMax)
 				{
 					nextStageDelay = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.NONE);
+				}
+				break;
+
+			case WirelessMode.MESSAGE_1:
+			case WirelessMode.MESSAGE_2:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= displayTimeMax)
+				{
+					displayTime = 0.0f;
 
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.NONE);

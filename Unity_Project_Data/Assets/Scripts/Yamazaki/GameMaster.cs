@@ -18,8 +18,7 @@ public class GameMaster : MonoBehaviour
 		JUMPTITLE,		// 直接タイトル移動
 		JUMPRESULT,		// 直接リザルト移動
 	}
-
-	// 本来privaateだが現状publicで動かすことを認める
+	
 	// 現在のゲームステージ上の進行ステータス
 	//[SerializeField, NonEditable]
 	public StageState stageState = StageState.NONE;
@@ -45,10 +44,20 @@ public class GameMaster : MonoBehaviour
 	// 自身
 	public static GameMaster instance;
 
+	// ゲームデータプレハブ
+	private GameObject gameDataPrefab;
+
 	// 開幕前
 	private void Awake()
 	{
 		instance = gameObject.GetComponent<GameMaster>();
+
+		if (!GameObject.Find("GameData"))
+		{
+			gameDataPrefab = Resources.Load("Prefabs/GameData") as GameObject;
+			GameObject g = Instantiate(gameDataPrefab, Vector3.zero, transform.rotation);
+			g.name = "GameData";
+		}
 	}
 
 	// 開幕
@@ -72,15 +81,33 @@ public class GameMaster : MonoBehaviour
 	private void Update()
 	{
 		// Debug
-		// 1キーを押したらゲームクリアとする
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		// F5キーを押したらゲームクリアとする
+		if (Input.GetKeyDown(KeyCode.F5))
 		{
 			// ステージステータスをゲームクリアに変更
 			SetStageState(StageState.STAGECLEAR);
 		}
+		// F6キーを押したらゲーム失敗とする
+		else if (Input.GetKeyDown(KeyCode.F6))
+		{
+			// ステージステータスをゲームクリアに変更
+			SetStageState(StageState.STAGEFAILURE);
+		}
+		// 1キーを押したらプレイ中の無線が出る
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			// プレイ中の無線
+			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_1);
+		}
+		// 2キーを押したらプレイ中の無線2が出る
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			// プレイ中の無線
+			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_2);
+		}
 
 		// 現在のステージステータスで処理を変える
-		switch(stageState)
+		switch (stageState)
 		{
 			case StageState.FADEIN:
 				if(fadeTimeScr)
