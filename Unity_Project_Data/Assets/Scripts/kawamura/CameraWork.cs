@@ -84,7 +84,7 @@ public class CameraWork : MonoBehaviour
 		backwardCameraPos = new Vector3(1.4f, 1f, posZ);
 		//transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
-		//FPS視点に移動するときの条件（）
+		//FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
 		if (chargerObj.transform.position.x > -FPS_Distance_XandY && chargerObj.transform.position.x < FPS_Distance_XandY
 			&& chargerObj.transform.position.y > -FPS_Distance_XandY && chargerObj.transform.position.y < FPS_Distance_XandY && chargerObj.transform.position.z > -FPS_Distance_Z)
 		{
@@ -95,22 +95,29 @@ public class CameraWork : MonoBehaviour
 			cameraState = CameraState.Backward;
 		}
 
+		//カメラの状態を見て切り替える
 		switch(cameraState)
 		{
+			//後方視点
 			case CameraState.Backward:
+				//位置を後方の位置に
 				transform.position = backwardCameraPos;
+				//回転させる
 				transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 1);
 
 				break;
 
+			//FPS視点
 			case CameraState.FPS:
+				//位置をFPS位置に
 				transform.position = FPS_CameraPosObj.transform.position;
+				//まっすぐ向ける
 				transform.rotation = Quaternion.Euler(0, 0, 0);
 				break;
 		}
 	}
 
-	//カメラの回転限界を決める
+	//カメラの回転を決める
 	void CameraRotation()
 	{
 		//RotationのYを決める
