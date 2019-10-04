@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ *　制作：2019/10/04
+ *　作者：諸岡勇樹
+ *　2019/10/04：充電ケーブルと衝突時、ゲームクリア
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
