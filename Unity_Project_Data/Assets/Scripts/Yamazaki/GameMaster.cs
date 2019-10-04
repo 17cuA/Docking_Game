@@ -45,10 +45,19 @@ public class GameMaster : MonoBehaviour
 	// 自身
 	public static GameMaster instance;
 
+	// ゲームデータプレハブ
+	public GameObject gameDataPrefab;
+
 	// 開幕前
 	private void Awake()
 	{
 		instance = gameObject.GetComponent<GameMaster>();
+
+		if (!GameObject.Find("GameData"))
+		{
+			GameObject g = Instantiate(gameDataPrefab, Vector3.zero, transform.rotation);
+			g.name = "GameData";
+		}
 	}
 
 	// 開幕

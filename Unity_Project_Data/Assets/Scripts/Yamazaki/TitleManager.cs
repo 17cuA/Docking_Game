@@ -44,7 +44,19 @@ public class TitleManager : MonoBehaviour
 	// フェードスクリプトをいれよう
 	public FadeTime fadeTimeScript;
 
-	// Start is called before the first frame update
+	// ゲームデータプレハブ
+	public GameObject gameDataPrefab;
+
+	// 開幕前
+	private void Awake()
+	{
+		if (!GameObject.Find("GameData"))
+		{
+			GameObject g = Instantiate(gameDataPrefab, Vector3.zero, transform.rotation);
+			g.name = "GameData";
+		}
+	}
+
 	void Start()
     {
 		if (fadeTimeScript)
