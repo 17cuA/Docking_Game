@@ -47,6 +47,13 @@ public class GameMaster : MonoBehaviour
 	// フェード用スクリプト
 	public FadeTime fadeTimeScript;
 
+	public static GameMaster instance;
+
+	private void Awake()
+	{
+		instance = gameObject.GetComponent<GameMaster>();
+	}
+
 	// 開幕
 	private void Start()
 	{
@@ -62,7 +69,7 @@ public class GameMaster : MonoBehaviour
 		}
 		stageText.text = "";
 		stagePlayDelay = stagePlayDelayMax;
-		stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+		stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 	}
 	
 	// 舞フレーム
@@ -110,11 +117,11 @@ public class GameMaster : MonoBehaviour
 				}
 				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
 				{
-					stageText.text = "GO!";
+					stageText.text = "コード「了解」\nCode「Roger」";
 				}
 				else if (stageReadyDelay >= 0)
 				{
-					stageText.text = "READY...?";
+					stageText.text = "コンロールセンター「慎重にドッキングを開始せよ」\nControlCenter「Code, start docking carefully」";
 				}
 				else
 				{
@@ -131,7 +138,7 @@ public class GameMaster : MonoBehaviour
 				{
 					nextStageDelay = 0.0f;
 					// ステージステータスを直接タイトルジャンプに変更
-					SetStageState(StageState.CLEARNEXT);
+					SetStageState(StageState.FADEOUT);
 				}
 				break;
 
@@ -180,7 +187,7 @@ public class GameMaster : MonoBehaviour
 				{
 					nextStageDelay = 0.0f;
 					// ステージステータスを直接タイトルジャンプに変更
-					SetStageState(StageState.FAILURENEXT);
+					SetStageState(StageState.FADEOUT);
 				}
 				break;
 
@@ -199,7 +206,7 @@ public class GameMaster : MonoBehaviour
 					stagePlayDelay = 0.0f;
 					SetStageState(StageState.STAGEFAILURE);
 				}
-				stageTimeText.text = "Time:" + ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+				stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 				break;
 		}
 	}
@@ -215,24 +222,28 @@ public class GameMaster : MonoBehaviour
 	{
 		switch (s)
 		{
+			case StageState.FADEOUT:
+				stageText.text = "";
+				break;
+				
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
-				stageText.text = "ドッキング成功！\n";
+				stageText.text = "コード「ドッキングに成功した」\nCode「Docking successful」";
 				break;
 
 			// タイトル移動前用テキスト
 			case StageState.CLEARNEXT:
-				stageText.text = "ドッキング成功！\nタイトルに戻る";
+				stageText.text = "";
 				break;
 
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
-				stageText.text = "ドッキング失敗\n";
+				stageText.text = "コンロールセンター「ミッションは失敗した…」\nControlCenter「Mission failed...」";
 				break;
 
 			// 失敗後タイトル移動前用テキスト
 			case StageState.FAILURENEXT:
-				stageText.text = "ドッキング失敗\nタイトルに戻る";
+				stageText.text = "";
 				break;
 
 			// 直接タイトルにジャンプ
@@ -254,5 +265,10 @@ public class GameMaster : MonoBehaviour
 	public StageState GetStageState()
 	{
 		return stageState;
+	}
+
+	public void StageClear()
+	{
+		SetStageState(StageState.STAGECLEAR);
 	}
 }

@@ -155,37 +155,38 @@ namespace DockingGame_Input
 		[SerializeField] AxisManager axisManager;
 		bool isSetUpButton = false;
 		bool isSetAxis = false;
-		bool isSetAxisReversal = false;
 		public static Original_Input instance;
 		static public bool ButtomTurbo_Down { get { return Input.GetButtonDown(instance.inputManager.Button["Turbo"]); } }
-		static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.inputManager.Button["LockOn"]); } }
-		static public float StickRight { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight"]; } }
-		static public float StickLeft { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft"]; } }
+		//static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.inputManager.Button["LockOn"]); } }
+		static public float StickRight_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_Y"]; } }
+		static public float StickLeft_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_Y"]; } }
+		static public float StickLeft_X { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_X"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_X"]; } }
 
 		private void Start()
 		{
 			instance = FindObjectOfType<Original_Input>();
 			inputManager.Init();
+			axisManager.Init();
 			DontDestroyOnLoad(this);
 		}
 		private void Update()
 		{
-			if (isSetUpButton && isSetAxis && isSetAxisReversal)
+			if (isSetUpButton /*&& isSetAxis*/)
 			{
 				isSetUpButton = !inputManager.SettingButton();
 			}
-			else if(!isSetUpButton && isSetAxis && isSetAxisReversal)
-			{
-				isSetAxis = !axisManager.SettingAxis();
-			}
-			else if(!isSetUpButton && !isSetAxis && isSetAxisReversal)
-			{
-				//isSetAxisReversal = ;
-			}
+			//else if(!isSetUpButton && isSetAxis)
+			//{
+			//	isSetAxis = !axisManager.SettingAxis();
+			//}
 			else
 			{
-				isSetAxisReversal = isSetAxis = isSetUpButton = X_Input.Buttom6_Down;
+			 /*isSetAxis =*/ isSetUpButton = X_Input.Buttom6_Down;
 			}
+
+			if(StickRight_Y != 0.0) Debug.Log("StickRight_Y");
+			if(StickLeft_Y != 0.0f) Debug.Log("StickLeft_Y");
+			if(StickLeft_X != 0.0f) Debug.Log("StickLeft_X");
 		}
 	}
 }
