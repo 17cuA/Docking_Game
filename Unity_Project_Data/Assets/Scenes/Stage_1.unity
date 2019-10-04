@@ -815,15 +815,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5869bb9958c41748b461084a72236e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageState: 0
+  stageState: 3
   stageReadyDelay: 0
   stageReadyDelayMax: 6
   stagePlayDelayMax: 90
   fadeTimeScr: {fileID: 1839582086}
   wirelessManagerScr: {fileID: 1456963882}
   timeDisplayScr: {fileID: 1399088752}
-  gameDataPrefab: {fileID: 8539548162328581478, guid: b07ef69b9dd50194296ddcb603754eb5,
-    type: 3}
 --- !u!1 &1247707752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1051,9 @@ MonoBehaviour:
   stageReadyDelay: 0
   stageReadyDelayMax: 6
   nextStageDelay: 0
-  nextStageDelayMax: 0
+  nextStageDelayMax: 3
+  displayTime: 0
+  displayTimeMax: 3
   stageText: {fileID: 1864202661}
   wirelessMode: 0
 --- !u!4 &1456963883
@@ -2208,7 +2208,7 @@ PrefabInstance:
     - target: {fileID: 1538303767, guid: de56243f4714ab349bc53ba125801720, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 1092199964}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
 --- !u!4 &9038333165437244311 stripped

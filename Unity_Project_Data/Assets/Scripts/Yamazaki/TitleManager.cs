@@ -45,13 +45,14 @@ public class TitleManager : MonoBehaviour
 	public FadeTime fadeTimeScript;
 
 	// ゲームデータプレハブ
-	public GameObject gameDataPrefab;
+	private GameObject gameDataPrefab;
 
 	// 開幕前
 	private void Awake()
 	{
 		if (!GameObject.Find("GameData"))
 		{
+			gameDataPrefab = Resources.Load("Prefabs/GameData") as GameObject;
 			GameObject g = Instantiate(gameDataPrefab, Vector3.zero, transform.rotation);
 			g.name = "GameData";
 		}
