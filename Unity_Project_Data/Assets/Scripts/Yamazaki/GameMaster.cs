@@ -121,7 +121,7 @@ public class GameMaster : MonoBehaviour
 				}
 				else if (stageReadyDelay >= 0)
 				{
-					stageText.text = "コンロールセンター「ドッキングを開始せよ」\nControlCenter「Code,Start docking」";
+					stageText.text = "コンロールセンター「慎重にドッキングを開始せよ」\nControlCenter「Code, start docking carefully」";
 				}
 				else
 				{
@@ -138,7 +138,7 @@ public class GameMaster : MonoBehaviour
 				{
 					nextStageDelay = 0.0f;
 					// ステージステータスを直接タイトルジャンプに変更
-					SetStageState(StageState.CLEARNEXT);
+					SetStageState(StageState.FADEOUT);
 				}
 				break;
 
@@ -187,7 +187,7 @@ public class GameMaster : MonoBehaviour
 				{
 					nextStageDelay = 0.0f;
 					// ステージステータスを直接タイトルジャンプに変更
-					SetStageState(StageState.FAILURENEXT);
+					SetStageState(StageState.FADEOUT);
 				}
 				break;
 
@@ -222,24 +222,28 @@ public class GameMaster : MonoBehaviour
 	{
 		switch (s)
 		{
+			case StageState.FADEOUT:
+				stageText.text = "";
+				break;
+				
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
-				stageText.text = "ドッキング成功！\n";
+				stageText.text = "コード「ドッキングに成功した」\nCode「Docking successful」";
 				break;
 
 			// タイトル移動前用テキスト
 			case StageState.CLEARNEXT:
-				stageText.text = "ドッキング成功！\nタイトルに戻る";
+				stageText.text = "";
 				break;
 
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
-				stageText.text = "ドッキング失敗\n";
+				stageText.text = "コンロールセンター「ミッションは失敗した…」\nControlCenter「Mission failed...」";
 				break;
 
 			// 失敗後タイトル移動前用テキスト
 			case StageState.FAILURENEXT:
-				stageText.text = "ドッキング失敗\nタイトルに戻る";
+				stageText.text = "";
 				break;
 
 			// 直接タイトルにジャンプ

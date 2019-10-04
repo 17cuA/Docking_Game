@@ -23,12 +23,11 @@ public class TitleManager : MonoBehaviour
 		GameState.GAMESTART,
 		GameState.TITLE,
 	};
-
-	[SerializeField, NonEditable]
+	
 	private string[] menuStr = new string[2]
 	{
-		"△Game Start\nBack",
-		"Game Start\n△Back",
+		"▼ Game Start\nBack",
+		"Game Start\n▲ Back",
 	};
 
 	// ステージシーン名
