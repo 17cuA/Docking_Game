@@ -40,6 +40,6 @@ public class Speedmeter : MonoBehaviour
 
 		// 矢印の移動
 		DistanceFromZero = Minimum + (OverallDistance * percentageSpeed);
-		ArrowTransform.localPosition = new Vector3(ArrowTransform.localPosition.x, DistanceFromZero, ArrowTransform.localPosition.x);
+		ArrowTransform.localPosition = new Vector3(ArrowTransform.localPosition.x,Mathf.Lerp(ArrowTransform.localPosition.y, DistanceFromZero, 0.05f), ArrowTransform.localPosition.z);
 	}
 }
