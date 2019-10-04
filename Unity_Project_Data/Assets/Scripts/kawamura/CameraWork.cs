@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class CameraWork : MonoBehaviour
 {
+	public enum CameraState
+	{
+		Backward,
+		FPS,
+	}
+
+	public CameraState cameraState;
+
 	public GameObject chargerObj;
+	//public GameObject backwardCameraPos;
+	public GameObject FPS_CameraPosObj;
+	public Vector3 backwardCameraPos;
 	public Vector3 savePos;
-	Quaternion _rotation;
+	public Quaternion _rotation;
+
+	public float rotaSpeed;
 
 	public float defPosZ_Value;
 	public float posZ;
@@ -22,11 +35,15 @@ public class CameraWork : MonoBehaviour
 	public float nowRotaY_Max;
 	public float nowRotaY_Min;
 
+	public float nowRotaX_Limit;
+	public float nowRotaY_Limit;
+
 	//public float rotaX_Max;
 	//public float rotaX_Min;
 	//public float rotaY_Max;
 	//public float rotaY_Min;
 
+	bool once = true;
 	public bool isMove = false;
 
 	void Start()
@@ -34,12 +51,15 @@ public class CameraWork : MonoBehaviour
 		rotaX = 15f;
 		rotaY = -20f;
 
+		nowRotaX_Limit = rotaX;
+		nowRotaY_Limit = rotaY;
+		//_rotation = transform.rotation;
+
 		savePos = chargerObj.transform.position;
 	}
 
 	void Update()
 	{
-		
 		if (chargerObj.transform.position != savePos)
 		{
 			isMove = true;
@@ -55,10 +75,34 @@ public class CameraWork : MonoBehaviour
 			CameraRotation();
 		}
 
-		//transform.rotation=Quaternion.Lerp(transform.rotation,)
-		transform.rotation = Quaternion.Euler(rotaX, rotaY, 0);
+		_rotation = Quaternion.Euler(nowRotaX_Limit, nowRotaY_Limit, 0);
 		posZ = chargerObj.transform.position.z - defPosZ_Value;
-		transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
+		backwardCameraPos = new Vector3(transform.position.x, transform.position.y, posZ);
+		//transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
+
+		if (chargerObj.transform.position.x > -0.1f && chargerObj.transform.position.x < 0.1f
+			&& chargerObj.transform.position.y > -0.1f && chargerObj.transform.position.y < 0.1f && chargerObj.transform.position.z > -5.0f)
+		{
+			cameraState = CameraState.FPS;
+		}
+		else
+		{
+			cameraState = CameraState.Backward;
+		}
+
+		switch(cameraState)
+		{
+			case CameraState.Backward:
+				transform.position = backwardCameraPos;
+				transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 1);
+
+				break;
+
+			case CameraState.FPS:
+				transform.position = FPS_CameraPosObj.transform.position;
+				transform.rotation = Quaternion.Euler(0, 0, 0);
+				break;
+		}
 	}
 
 	void CameraRotation()
@@ -66,8 +110,9 @@ public class CameraWork : MonoBehaviour
 		//RotationのYを決める
 		if (chargerObj.transform.position.x > 0)
 		{
-			nowRotaY_Max = chargerObj.transform.position.x * 10 - 20;
-			if (rotaY < nowRotaY_Max)
+			//nowRotaY_Max = chargerObj.transform.position.x * 10 - 20;
+			nowRotaY_Limit = chargerObj.transform.position.x * 10 - 20;
+			if (rotaY < nowRotaY_Limit)
 			{
 				rotaY += rotaY_ChangeValue;
 				//if (rotaY > rotaY_Max)
@@ -75,23 +120,32 @@ public class CameraWork : MonoBehaviour
 				//	rotaY = rotaY_Max;
 				//}
 			}
-			if (rotaY > nowRotaY_Max)
+			if (rotaY > nowRotaY_Limit)
 			{
 				rotaY -= rotaY_ChangeValue;
 			}
+
+			//if (rotaY < nowRotaY_Max)
+			//{
+			//	rotaY += rotaY_ChangeValue;
+			//	//if (rotaY > rotaY_Max)
+			//	//{
+			//	//	rotaY = rotaY_Max;
+			//	//}
+			//}
+			//if (rotaY > nowRotaY_Max)
+			//{
+			//	rotaY -= rotaY_ChangeValue;
+			//}
 		}
 		else if (chargerObj.transform.position.x < 0)
 		{
-			nowRotaY_Min = 6.6f * chargerObj.transform.position.x - 20;
-			if (rotaY > nowRotaY_Min)
+			nowRotaY_Limit = 6.6f * chargerObj.transform.position.x - 20;
+			if (rotaY > nowRotaY_Limit)
 			{
 				rotaY -= rotaY_ChangeValue;
-				//if (rotaY < rotaY_Min)
-				//{
-				//	rotaY = rotaY_Min;
-				//}
 			}
-			else if (rotaY < nowRotaY_Min)
+			else if (rotaY < nowRotaY_Limit)
 			{
 				rotaY += rotaY_ChangeValue;
 			}
@@ -101,36 +155,28 @@ public class CameraWork : MonoBehaviour
 		//RotationのXを決める
 		if (chargerObj.transform.position.y < 0)
 		{
-			nowRotaX_Max = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
-			if (rotaX < nowRotaX_Max)
+			nowRotaX_Limit = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
+			if (rotaX < nowRotaX_Limit)
 			{
 				rotaX += rotaX_ChangeValue;
-				//if (rotaY > rotaY_Max)
-				//{
-				//	rotaY = rotaY_Max;
-				//}
 			}
-			if (rotaX > nowRotaX_Max)
+			if (rotaX > nowRotaX_Limit)
 			{
 				rotaX -= rotaX_ChangeValue;
 			}
 		}
 		else if (chargerObj.transform.position.y > 0)
 		{
-			nowRotaX_Min = -11.6f * chargerObj.transform.position.y + 15f;
-			if (rotaX > nowRotaX_Min)
+			nowRotaX_Limit = -11.6f * chargerObj.transform.position.y + 15f;
+			if (rotaX > nowRotaX_Limit)
 			{
 				rotaX -= rotaX_ChangeValue;
-				//if (rotaY < rotaY_Min)
-				//{
-				//	rotaY = rotaY_Min;
-				//}
 			}
-			else if (rotaX < nowRotaX_Min)
+			else if (rotaX < nowRotaX_Limit)
 			{
 				rotaX += rotaX_ChangeValue;
 			}
 		}
-
+		//RotationのXを決めるやつおわり
 	}
 }
