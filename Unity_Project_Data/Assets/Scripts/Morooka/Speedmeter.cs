@@ -18,26 +18,28 @@ public class Speedmeter : MonoBehaviour
 	[SerializeField, Tooltip("充電ケーブルオブジェクト")] GameObject chargerObject;
 
 	private RectTransform ArrowTransform { get; set; }		// 矢印のTransform
-	private Cable_Manager_2 ChargerScript { get; set; }		// 充電ケーブルのスクリプト
+	private Charger_Manager ChargerScript { get; set; }		// 充電ケーブルのスクリプト
 	private float OverallDistance { get; set; }				// 最小から最大までの距離
 	private float DistanceFromZero { get; set; }			// 最小からの距離
+	private float Maxmum { get; set; }
+	private float Minimum { get; set; }
 
 	private void Start()
 	{
 		ArrowTransform = arrowObject.GetComponent<RectTransform>();
-		ChargerScript = chargerObject.GetComponent<Cable_Manager_2>();
-		OverallDistance = MaxmumObject.transform.position.y - MinimumObject.transform.position.y;
+		ChargerScript = chargerObject.GetComponent<Charger_Manager>();
+		Maxmum = MaxmumObject.transform.localPosition.y;
+		Minimum = MinimumObject.transform.localPosition.y;
+		OverallDistance = Maxmum - Minimum;
 	}
 
 	void LateUpdate()
     {
-		// 移動量
-		var AmountOfMovement = new Vector3(Mathf.Abs(ChargerScript.addXNum), Mathf.Abs(ChargerScript.addYNum), Mathf.Abs(ChargerScript.addZNum));
 		// 出てるスピードのパーセント
-		var percentageSpeed = AmountOfMovement.magnitude / ChargerScript.add_Max;
+		var percentageSpeed = ChargerScript.NowSpeed_Z / ChargerScript.MaxSpeed_Z;
 
 		// 矢印の移動
-		DistanceFromZero = OverallDistance * percentageSpeed;
+		DistanceFromZero = Minimum + (OverallDistance * percentageSpeed);
 		ArrowTransform.localPosition = new Vector3(ArrowTransform.localPosition.x, DistanceFromZero, ArrowTransform.localPosition.x);
 	}
 }
