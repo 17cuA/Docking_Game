@@ -77,11 +77,11 @@ public class CameraWork : MonoBehaviour
 
 		_rotation = Quaternion.Euler(nowRotaX_Limit, nowRotaY_Limit, 0);
 		posZ = chargerObj.transform.position.z - defPosZ_Value;
-		backwardCameraPos = new Vector3(transform.position.x, transform.position.y, posZ);
+		backwardCameraPos = new Vector3(1.4f, 1f, posZ);
 		//transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
-		if (chargerObj.transform.position.x > -0.1f && chargerObj.transform.position.x < 0.1f
-			&& chargerObj.transform.position.y > -0.1f && chargerObj.transform.position.y < 0.1f && chargerObj.transform.position.z > -5.0f)
+		if (chargerObj.transform.position.x > -0.2f && chargerObj.transform.position.x < 0.2f
+			&& chargerObj.transform.position.y > -0.2f && chargerObj.transform.position.y < 0.2f && chargerObj.transform.position.z > -5.0f)
 		{
 			cameraState = CameraState.FPS;
 		}
