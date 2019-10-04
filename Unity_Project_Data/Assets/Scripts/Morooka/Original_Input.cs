@@ -164,6 +164,7 @@ namespace DockingGame_Input
 
 		private void Start()
 		{
+			if (FindObjectsOfType<Original_Input>().Length >= 2) { Destroy(gameObject); return; }
 			instance = FindObjectOfType<Original_Input>();
 			inputManager.Init();
 			axisManager.Init();
@@ -183,10 +184,6 @@ namespace DockingGame_Input
 			{
 			 /*isSetAxis =*/ isSetUpButton = X_Input.Buttom6_Down;
 			}
-
-			if(StickRight_Y != 0.0) Debug.Log("StickRight_Y");
-			if(StickLeft_Y != 0.0f) Debug.Log("StickLeft_Y");
-			if(StickLeft_X != 0.0f) Debug.Log("StickLeft_X");
 		}
 	}
 }
