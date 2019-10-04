@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//作成者：川村良太
+//作成日：2019/10/03
+//カメラの向きとか位置を変える処理
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,7 +78,6 @@ public class CameraWork : MonoBehaviour
 			CameraRotation();
 			//カメラの向く方向を決める
 			_rotation = Quaternion.Euler(rotaX, rotaY, 0);
-
 		}
 
 		//後方視点のZ位置を更新する
@@ -117,11 +119,13 @@ public class CameraWork : MonoBehaviour
 		}
 	}
 
-	//カメラの回転を決める
+	//------------------ここから関数------------------
+
+	//カメラの回転を決める関数
 	void CameraRotation()
 	{
 		//RotationのYを決める
-		if (chargerObj.transform.position.x > 0)
+		if (chargerObj.transform.position.x >= 0)
 		{
 			rotaY = chargerObj.transform.position.x * 10 - 20;
 		}
@@ -132,7 +136,7 @@ public class CameraWork : MonoBehaviour
 		//RotationのYを決めるやつの終わり
 
 		//RotationのXを決める
-		if (chargerObj.transform.position.y < 0)
+		if (chargerObj.transform.position.y <= 0)
 		{
 			rotaX = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
 		}
