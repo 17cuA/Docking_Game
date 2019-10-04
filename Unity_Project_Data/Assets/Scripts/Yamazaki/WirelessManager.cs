@@ -1,5 +1,6 @@
-﻿//20191004
-// 無線
+﻿// 作成者：17CU0334 山嵜ジョニー
+// 作成日：2019/10/04
+// 概要：無線
 using UnityEngine;
 using UnityEngine.UI;
 

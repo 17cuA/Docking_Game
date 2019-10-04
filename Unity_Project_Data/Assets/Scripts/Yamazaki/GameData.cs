@@ -44,6 +44,7 @@ public class GameData : MonoBehaviour
 
 	private void Awake()
 	{
+		gameData = GetComponent<GameData>();
 		SetGameMode(GameMode.EASY);
 		DontDestroyOnLoad(this);
 	}

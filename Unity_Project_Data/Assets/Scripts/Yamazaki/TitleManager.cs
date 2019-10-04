@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// 作成者：17CU0334 山嵜ジョニー
+// 作成日：2019/10/02
+// 概要：タイトル
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +12,8 @@ public class TitleManager : MonoBehaviour
 		FADEIN,
 		TITLE,
 		MENU,
-		GAMESTART,
+		EASYMODE,
+		HARDMODE,
 	}
 
 	public GameState gameState;
@@ -18,24 +22,27 @@ public class TitleManager : MonoBehaviour
 
 	public int selectNum;
 
-	private GameState[] menuList = new GameState[2]
+	private GameState[] menuList = new GameState[3]
 	{
-		GameState.GAMESTART,
+		GameState.EASYMODE,
+		GameState.HARDMODE,
 		GameState.TITLE,
 	};
 	
-	private string[] menuStr = new string[2]
+	private string[] menuStr = new string[3]
 	{
-		"Game Start\nBack",
-		"Game Start\nBack",
+		"Easy Mode\nHard Mode\nBack",
+		"Easy Mode\nHard Mode\nBack",
+		"Easy Mode\nHard Mode\nBack",
 	};
 
 	public Image rightArrowImg;
 
-	private Vector3[] rightArrowRectPos = new Vector3[2]
+	private Vector3[] rightArrowRectPos = new Vector3[3]
 	{
-		new Vector3(-249.0f, -182.0f, 0.0f),
-		new Vector3(-249.0f, -182.0f-64.0f, 0.0f),
+		new Vector3(-249.0f, -156.0f, 0.0f),
+		new Vector3(-249.0f, -156.0f-64.0f, 0.0f),
+		new Vector3(-249.0f, -156.0f-64.0f-64.0f, 0.0f),
 	};
 
 	// ステージシーン名
@@ -125,7 +132,8 @@ public class TitleManager : MonoBehaviour
 				}
 				break;
 
-			case GameState.GAMESTART:
+			case GameState.EASYMODE:
+			case GameState.HARDMODE:
 				// ゲームステージに移動
 				if (fadeTimeScript)
 				{
@@ -179,7 +187,13 @@ public class TitleManager : MonoBehaviour
 				rightArrowImg.enabled = true;
 				break;
 
-			case GameState.GAMESTART:
+			case GameState.EASYMODE:
+				GameData.gameData.SetGameMode(GameData.GameMode.EASY);
+				fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
+				break;
+
+			case GameState.HARDMODE:
+				GameData.gameData.SetGameMode(GameData.GameMode.HARD);
 				fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
 				break;
 

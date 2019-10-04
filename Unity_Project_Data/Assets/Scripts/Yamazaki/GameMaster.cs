@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {// ゲームステージ上の進行ステータス
@@ -77,7 +76,7 @@ public class GameMaster : MonoBehaviour
 		timeDisplayScr.SetTime(stagePlayDelayMax);
 	}
 	
-	// 舞フレーム
+	// 毎フレーム
 	private void Update()
 	{
 		// Debug
