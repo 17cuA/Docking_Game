@@ -37,6 +37,7 @@ public class TimeDisplay : MonoBehaviour
         if (t > 0.0f) stagePlayDelay = stagePlayDelayMax = t;
         else stagePlayDelay = stagePlayDelayMax;
 
+        //10/04　時間表示を1:30から90表示に変えました(そのほかの場所も)＠川村
         //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
         stageTimeText.text = stagePlayDelay.ToString("00.000");
     }
@@ -66,11 +67,13 @@ public class TimeDisplay : MonoBehaviour
                 break;
 
             case TimeMode.END:
-                stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+                //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+　              stageTimeText.text = stagePlayDelay.ToString("00.000");
                 break;
 
             case TimeMode.STOP:
-                stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+                //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+                stageTimeText.text = stagePlayDelay.ToString("00.000");
                 break;
 
             default:
