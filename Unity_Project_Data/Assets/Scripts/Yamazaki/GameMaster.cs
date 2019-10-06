@@ -25,12 +25,11 @@ public class GameMaster : MonoBehaviour
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
 	private float stageReadyDelay;		// 現在の経過時間
-	public float stageReadyDelayMax;    // 最大の待ち時間
+	private float stageReadyDelayMax = 8.0f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
 	public float stagePlayDelayMax;		// 最大の残り時間
 	
-
 	// フェード用スクリプト
 	public FadeTime fadeTimeScr;
 
@@ -74,6 +73,7 @@ public class GameMaster : MonoBehaviour
 		}
 
 		timeDisplayScr.SetTime(stagePlayDelayMax);
+        wirelessManagerScr.SetTime(stageReadyDelayMax, 4.5f, 3.0f);
 	}
 	
 	// 毎フレーム

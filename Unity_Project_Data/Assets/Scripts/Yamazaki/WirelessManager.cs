@@ -9,7 +9,7 @@ public class WirelessManager : MonoBehaviour
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
 	private float stageReadyDelay = 0.0f;      // 現在の経過時間
-	public float stageReadyDelayMax = 6.0f;    // 最大の待ち時間
+	private float stageReadyDelayMax = 8.0f;    // 最大の待ち時間
 
 	// シーンが切り替わる時間経過
 	[SerializeField, NonEditable]
@@ -76,6 +76,13 @@ public class WirelessManager : MonoBehaviour
 
 		wirelessMode = w;
 	}
+
+    public void SetTime(float readyT, float nextStageT, float displayT)
+    {
+        stageReadyDelayMax = readyT;
+        nextStageDelayMax = nextStageT;
+        displayTimeMax = displayT;
+    }
 
 	public WirelessMode GetWirelessMode()
 	{
