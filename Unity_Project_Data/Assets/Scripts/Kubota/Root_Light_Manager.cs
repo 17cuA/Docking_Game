@@ -28,15 +28,17 @@ public class Root_Light_Manager : MonoBehaviour
 		Vector3 a = Hal9000.transform.position;
 		Vector3 b = Chager.transform.position;
 
-		return Mathf.Sqrt(Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.y - b.y, 2) + Mathf.Pow(a.z - b.z, 2));
+		return b.z - a.z;
+		//return Mathf.Sqrt(Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.y - b.y, 2) + Mathf.Pow(a.z - b.z, 2));
 	}
 	void make_distance()
 	{
 		int num = Mathf.FloorToInt(calc_distance());
 
-		for (int i = num; num > 0; i--)
+		int num2 = -num;
+		for(int i = 0; i < -num; i++)
 		{
-			Instantiate(Root_Light, new Vector3(0, Hal9000.transform.position.y, Hal9000.transform.position.z - num), Quaternion.identity);
+			Instantiate(Root_Light, new Vector3(Hal9000.transform.position.x, Hal9000.transform.position.y, Hal9000.transform.position.z + -i), Quaternion.identity);
 		}
 	}
 }
