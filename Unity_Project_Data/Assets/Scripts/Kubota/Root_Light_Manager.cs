@@ -15,13 +15,6 @@ public class Root_Light_Manager : MonoBehaviour
 		make_distance();
 
 	}
-
-	// Update is called once per frame
-	void Update()
-    {
-
-	}
-
 	//距離の計算
 	float calc_distance()
 	{
@@ -36,7 +29,7 @@ public class Root_Light_Manager : MonoBehaviour
 		int num = Mathf.FloorToInt(calc_distance());
 
 		int num2 = -num;
-		for(int i = 0; i < -num; i++)
+		for(int i = 0; i < -(num + 2); i++)
 		{
 			Instantiate(Root_Light, new Vector3(Hal9000.transform.position.x, Hal9000.transform.position.y, Hal9000.transform.position.z + -i), Quaternion.identity);
 		}
