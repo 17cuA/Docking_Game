@@ -25,6 +25,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Cameras;
 
 public class AcrobaticCamera : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class AcrobaticCamera : MonoBehaviour
 	[Header("フェードは最初のみ行うかのフラグ")]
 	[SerializeField] private bool startOnryFade;
 	[SerializeField] private FadeEditor fadeEditor;
-	[SerializeField] private int lineNum;	// 線番号
+	[Header("線番号")]
+	[SerializeField] private int lineNum;
 	float elapsedTime;						// 経過時間
 	Camera mainCamera;						// カメラ情報
 	Vector3 nowPosition;					// 現在の座標
@@ -53,10 +55,10 @@ public class AcrobaticCamera : MonoBehaviour
 		SetAnkers(lineCreaters);
 	}
 	//更新処理────────────────────────────────────────
-	public void CameraUpdate()
+	public void CameraUpdate(bool unFade)
 	{
 		MoveOnRail();
-		MeasTime();
+		MeasTime(unFade);
 	}
 	//内部処理────────────────────────────────────────
 	/// <summary>
@@ -116,14 +118,15 @@ public class AcrobaticCamera : MonoBehaviour
 		Vector3 beje2 = BezierCurve2(ankers[lineNum][0].nextHandle, ankers[lineNum][1].prevHandle, ankers[lineNum][1].anker, easingEditor.Anims[lineNum].Evaluate(elapsedTime));
 		//!< 3次元ベジェ取得
 		transform.position = BezierCurve3(beje1, beje2, easingEditor.Anims[lineNum].Evaluate(elapsedTime));
-		transform.LookAt(targets[lineNum].transform.position);
+		//transform.LookAt(targets[lineNum].transform.position);
 	}
 	//時間遷移処理────────────────────────────────────────
-	void MeasTime()
+	void MeasTime(bool unFade)
 	{
 		//!< 時間を計測
 		elapsedTime += Time.deltaTime;
-		Fade();
+		if(unFade == false)
+			Fade();
 		//!< 指定した時間を経過した
 		if (elapsedTime > easingEditor.Anims[lineNum].keys[easingEditor.Anims[lineNum].keys.Length - 1].time)
 		{

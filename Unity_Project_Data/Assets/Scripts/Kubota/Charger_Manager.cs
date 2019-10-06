@@ -37,7 +37,7 @@ public class Charger_Manager : MonoBehaviour
 	#endregion
 
 	public GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
-
+	//public Time
 	private void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody>();
@@ -66,7 +66,6 @@ public class Charger_Manager : MonoBehaviour
 		saveInputNum.x = Original_Input.StickLeft_X / 100.0f;
 		saveInputNum.y = Original_Input.StickLeft_Y / 100.0f;
 		//---------------------------
-
 		// 前後入力(スティック、ボタン対応)-------------------
 		saveInputNum.z = Original_Input.StickRight_Y / 100.0f;
 		if (Original_Input.ButtomFront_Hold) saveInputNum.z = 0.01f;
@@ -84,6 +83,11 @@ public class Charger_Manager : MonoBehaviour
 
 		// 速度適応
 		myRigidbody.velocity = tempVelocity; 
+
+		//if(Original_Input.StickLeft_X != 0 || Original_Input.StickLeft_Y != 0 || Original_Input.StickRight_Y != 0)
+		//{
+			
+		//}
 	}
 
 	private void OnTriggerEnter(Collider col)
