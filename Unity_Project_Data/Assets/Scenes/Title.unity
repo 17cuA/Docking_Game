@@ -406,6 +406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Title
   acrobaticCamera: {fileID: 799488955}
+  nextSceneName: Stage_1
+  fadeEditor: {fileID: 1959377249}
   timeFlow: {fileID: 182604820}
 --- !u!1 &244060878 stripped
 GameObject:
@@ -1184,8 +1186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -328}
-  m_SizeDelta: {x: 1728, y: 400}
+  m_AnchoredPosition: {x: 0, y: -256}
+  m_SizeDelta: {x: 1728, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348309036
 MonoBehaviour:
@@ -4189,13 +4191,13 @@ MonoBehaviour:
       comment: 
     execDelegate: []
     playUpdateDelegate: []
-    nodePosition: {x: -149, y: 225}
+    nodePosition: {x: -207, y: 92}
     toggleWindow: 1
   - stateName: OP
     ID:
       number: 2
     nextStateJudge:
-    - nextStateName: Entry
+    - nextStateName: FadeOut
       nextID:
         number: 3
       arg1:
@@ -4214,6 +4216,28 @@ MonoBehaviour:
       argType1: 2
       argType2: 0
       judgeFuncName: IsInput
+      judgeFuncInstance: {fileID: 182604821}
+      priority: 0
+      comment: 
+    - nextStateName: FadeOut
+      nextID:
+        number: 3
+      arg1:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      arg2:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      argMode: 0
+      argType1: 2
+      argType2: 0
+      judgeFuncName: IsInput_Debug
       judgeFuncInstance: {fileID: 182604821}
       priority: 0
       comment: 
@@ -4237,15 +4261,81 @@ MonoBehaviour:
       argType1: 0
       argType2: 0
       comment: 
-    nodePosition: {x: 275, y: 219}
+    nodePosition: {x: 221, y: 99}
     toggleWindow: 1
-  - stateName: Entry
+  - stateName: FadeOut
     ID:
       number: 3
-    nextStateJudge: []
-    execDelegate: []
+    nextStateJudge:
+    - nextStateName: NextScene
+      nextID:
+        number: 4
+      arg1:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 1.1
+        string_Arg: 
+        bool_Arg: 0
+      arg2:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      argMode: 1
+      argType1: 2
+      argType2: 0
+      judgeFuncName: IsTimeFlow
+      judgeFuncInstance: {fileID: 182604821}
+      priority: 0
+      comment: 
+    execDelegate:
+    - actionName: Fadein
+      instance: {fileID: 182604821}
+      arg1:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      arg2:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      argMode: 0
+      argType1: 0
+      argType2: 0
+      comment: 
     playUpdateDelegate: []
-    nodePosition: {x: 693, y: 221}
+    nodePosition: {x: 576, y: 95}
+    toggleWindow: 1
+  - stateName: NextScene
+    ID:
+      number: 4
+    nextStateJudge: []
+    execDelegate:
+    - actionName: TransitionNextScene
+      instance: {fileID: 182604821}
+      arg1:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      arg2:
+        object_Arg: {fileID: 0}
+        int_Arg: 0
+        float_Arg: 0
+        string_Arg: 
+        bool_Arg: 0
+      argMode: 0
+      argType1: 0
+      argType2: 0
+      comment: 
+    playUpdateDelegate: []
+    nodePosition: {x: 925, y: 93}
     toggleWindow: 1
 --- !u!1 &2507882632971071754
 GameObject:
