@@ -10,7 +10,8 @@ public class TimeDisplay : MonoBehaviour
     private float stagePlayDelay;       // 現在の残り時間
     public float stagePlayDelayMax;     // 最大の残り時間
     public Text stageTimeText;          // 時間テキスト
-
+	[Header("減少していく値")]
+	public float subtract;		//移動を繰り返したときに減っていく値
     public enum TimeMode
     {
         NONE,
@@ -80,4 +81,9 @@ public class TimeDisplay : MonoBehaviour
                 break;
         }
     }
+
+	public void Subtract_Value()
+	{
+		stagePlayDelay -= subtract;
+	}
 }

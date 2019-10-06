@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 424504778}
   - component: {fileID: 424504781}
   - component: {fileID: 424504782}
+  - component: {fileID: 424504783}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -258,11 +259,13 @@ MonoBehaviour:
   posZ: 0
   rotaX: 0
   rotaY: 0
-  FPS_Distance_XandY_Value: 0
   FPS_Distance_XandY: 0.2
   FPS_Distance_Z: 5
   once: 1
   isMove: 0
+  xxxxxxxxxxxxx: 0
+  yyyyyyyyyyyyy: 0
+  zzzzzzzzzzzzz: 0
 --- !u!95 &424504782
 Animator:
   serializedVersion: 3
@@ -282,6 +285,68 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &424504783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424504777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 424504780}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles:
+  - assemblyQualifiedName: UnityEngine.Rendering.PostProcessing.MyMotionBulr, Unity.Postprocessing.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &474051413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,6 +1165,7 @@ MonoBehaviour:
   stagePlayDelay: 0
   stagePlayDelayMax: 0
   stageTimeText: {fileID: 841081600}
+  subtract: 1
   timeMode: 0
 --- !u!4 &1399088753
 Transform:
@@ -1411,6 +1477,75 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &1680944678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4390903687241212875, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_Name
+      value: PostEffects (1) 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672452263025796678, guid: 9ebd02c44604f0241ba529747ebaa42b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ebd02c44604f0241ba529747ebaa42b, type: 3}
 --- !u!1 &1839582085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,15 +2586,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1538303765, guid: de56243f4714ab349bc53ba125801720, type: 3}
+      propertyPath: GM
+      value: 
+      objectReference: {fileID: 1092199964}
     - target: {fileID: 5250963404160346077, guid: de56243f4714ab349bc53ba125801720,
         type: 3}
       propertyPath: charger
       value: 
       objectReference: {fileID: 674345633}
-    - target: {fileID: 1538303765, guid: de56243f4714ab349bc53ba125801720, type: 3}
-      propertyPath: GM
-      value: 
-      objectReference: {fileID: 1092199964}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
 --- !u!33 &9208662317008953440
