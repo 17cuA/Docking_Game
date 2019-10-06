@@ -29,7 +29,7 @@ public class Root_Light_Manager : MonoBehaviour
 		int num = Mathf.FloorToInt(calc_distance());
 
 		int num2 = -num;
-		for(int i = 0; i < -(num + 2); i++)
+		for(int i = 0; i < -(num + 1); i++)
 		{
 			Instantiate(Root_Light, new Vector3(Hal9000.transform.position.x, Hal9000.transform.position.y, Hal9000.transform.position.z + -i), Quaternion.identity);
 		}
