@@ -57,7 +57,9 @@ public class Root_Light_Manager : MonoBehaviour
 		for (int i = 0; i < obj.Length; i++)
 		{
 			//obj[i].transform.position = new Vector3(obj[i].transform.position.x + subscript.x * (i + 1), obj[i].transform.position.y + subscript.y * (i + 1), obj[i].transform.position.z );
-			obj[i].transform.position =Hal9000.transform.position + subscript * (i + 1);
+			//obj[i].transform.position =Hal9000.transform.position + subscript * (i + 1);
+			obj[i].transform.position = new Vector3(Hal9000.transform.position.x + subscript.x * (i + 1), Hal9000.transform.position.y + subscript.y * (i + 1),obj[i].transform.position.z);
+
 
 		}
 	}
