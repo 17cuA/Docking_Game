@@ -57,10 +57,6 @@ public class CameraWork : MonoBehaviour
 	public bool isBackRotaSet = false;
 	public bool isReset = false;
 
-    public bool xxxxxxxxxxxxx = false;
-    public bool yyyyyyyyyyyyy = false;
-    public bool zzzzzzzzzzzzz = false;
-
     void Start()
     {
 		cameraPosNum = 1;
@@ -107,7 +103,6 @@ public class CameraWork : MonoBehaviour
         posZ = chargerObj.transform.position.z - defPosZ_Value;
         //後方視点の位置を更新
         backwardCameraPos = new Vector3(1.4f, 1f, posZ);
-        //transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
         //FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
         if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
@@ -132,8 +127,6 @@ public class CameraWork : MonoBehaviour
 				cameraState = saveCameraState;
 				isReset = false;
 			}
-			//CameraPosSet();
-			//cameraState = CameraState.Backward;
 		}
 
 		//カメラの位置変更関数呼び出し
@@ -160,13 +153,6 @@ public class CameraWork : MonoBehaviour
 						cameraState = CameraState.Top;
 						break;
 				}
-
-				//cameraPosNum--;
-				//if (cameraPosNum <= 0)
-				//{
-				//	cameraPosNum = 3;
-				//}
-				//CameraPosSet();
 			}
 			//Yボタンが押されたら　後方→真上→横から→後方…で切り替わる
 			else if (Input.GetButtonDown("GamePad_1_3"))
@@ -186,13 +172,6 @@ public class CameraWork : MonoBehaviour
 						cameraState = CameraState.Backward;
 						break;
 				}
-
-				//cameraPosNum++;
-				//if (cameraPosNum >= 4)
-				//{
-				//	cameraPosNum = 0;
-				//}
-				//CameraPosSet();
 			}
 		}
 	}
