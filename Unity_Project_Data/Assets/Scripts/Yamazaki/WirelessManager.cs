@@ -22,7 +22,8 @@ public class WirelessManager : MonoBehaviour
 	public float displayTimeMax = 3.0f;		// 最大の待ち時間
 
 	// ステージ上テキスト
-	public Text stageText;
+	public Text wirelessJPText;
+	public Text wirelessENText;
 
 	public enum WirelessMode
 	{
@@ -34,13 +35,50 @@ public class WirelessManager : MonoBehaviour
 		MESSAGE_2,
 	}
 
+	private struct WirelessString
+	{
+		public string jPStr;
+		public string eNStr;
+
+		public WirelessString(string v1, string v2) : this()
+		{
+			this.jPStr = v1;
+			this.eNStr = v2;
+		}
+	}
+
+	private WirelessString[] wirelessList = new WirelessString[20]
+	{
+		new WirelessString( "" , ""),
+		new WirelessString( "コード「ドッキングに成功した」", "Code「Docking successful」"),
+		new WirelessString("コンロールセンター「ミッションは失敗した…」", "ControlCenter「Mission failed...」"),
+		new WirelessString("コンロールセンター「慎重に…」","ControlCenter「Please be careful...」"),
+		new WirelessString("コード「...」","Code「...」"),
+		new WirelessString("コード「ドッキングに成功した」","Ｃｏｄｅ「Ｄｏｃｋｉｎｇ　ｓｕｃｃｅｓｓｆｕｌ」"),
+		new WirelessString("コンロールセンター「ミッションは失敗した…」","ＣｏｎｔｒｏｌＣｅｎｔｅｒ「Ｍｉｓｓｉｏｎ　ｆａｉｌｅｄ．．．」"),
+		new WirelessString("コンロールセンター「慎重に…」","ＣｏｎｔｒｏｌＣｅｎｔｅｒ「Ｐｌｅａｓｅ　ｂｅ　ｃａｒｅｆｕｌ」"),
+		new WirelessString("コード「．．．」","Code「．．．」"),
+		new WirelessString("コード「了解」","Code「Roger」"),
+		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ControlCenter「Code, start docking carefully"),
+		new WirelessString("コード「了解」", "Code「Roger」"),
+		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「Ｃｏｄｅ，ｓｔａｒｔ　ｄｏｃｋｉｎｇ　ｃａｒｅｆｕｌｌｙ」"),
+		new WirelessString("コード「了解」", "Ｃｏｄｅ「Ｒｏｇｅｒ」"),
+		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「Ｃｏｄｅ，　ｓｔａｒｔ」"),
+		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「ｄｏｃｋｉｎｇ　ｃａｒｅｆｕｌｌｙ」"),
+		new WirelessString("", ""),
+		new WirelessString("", ""),
+		new WirelessString("", ""),
+		new WirelessString("", ""),
+	};
+
 	[SerializeField, NonEditable]
 	private WirelessMode wirelessMode = WirelessMode.NONE;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		stageText.text = "";
+		wirelessJPText.text = "";
+		wirelessENText.text = "";
 		wirelessMode = WirelessMode.NONE;
 	}
 
@@ -49,24 +87,29 @@ public class WirelessManager : MonoBehaviour
 		switch(w)
 		{
 			case WirelessMode.NONE:
-				stageText.text = "";
+				wirelessJPText.text = "";
+				wirelessENText.text = wirelessList[0].eNStr;
 				break;
 
 			case WirelessMode.STAGECLEAR:
-				stageText.text = "コード「ドッキングに成功した」\nCode「Docking successful」";
+				wirelessJPText.text = wirelessList[5].jPStr;
+				wirelessENText.text = wirelessList[5].eNStr;
 				break;
 
 			case WirelessMode.STAGEFAILURE:
-				stageText.text = "コンロールセンター「ミッションは失敗した…」\nControlCenter「Mission failed...」";
+				wirelessJPText.text = wirelessList[6].jPStr;
+				wirelessENText.text = wirelessList[6].eNStr;
 				break;
 
 			case WirelessMode.MESSAGE_1:
-				stageText.text = "コンロールセンター「慎重に…」\nControlCenter「Please be careful...」";
+				wirelessJPText.text = wirelessList[7].jPStr;
+				wirelessENText.text = wirelessList[7].eNStr;
 				displayTime = 0.0f;
 				break;
 
 			case WirelessMode.MESSAGE_2:
-				stageText.text = "コード「…」\nCode「...」";
+				wirelessJPText.text = wirelessList[8].jPStr;
+				wirelessENText.text = wirelessList[8].eNStr;
 				displayTime = 0.0f;
 				break;
 
@@ -105,15 +148,23 @@ public class WirelessManager : MonoBehaviour
 				}
 				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
 				{
-					stageText.text = "コード「了解」\nCode「Roger」";
+					wirelessJPText.text = wirelessList[13].jPStr;
+					wirelessENText.text = wirelessList[13].eNStr;
+				}
+				else if (stageReadyDelay >= stageReadyDelayMax * (1.0f / 2.0f) * 0.25f)
+				{
+					wirelessJPText.text = wirelessList[15].jPStr;
+					wirelessENText.text = wirelessList[15].eNStr;
+					Debug.Log(wirelessList[15].eNStr);
 				}
 				else if (stageReadyDelay >= 0)
 				{
-					stageText.text = "コンロールセンター「慎重にドッキングを開始せよ」\nControlCenter「Code, start docking carefully」";
+					wirelessJPText.text = wirelessList[14].jPStr;
+					wirelessENText.text = wirelessList[14].eNStr;
 				}
 				else
 				{
-					stageText.text = "";
+					wirelessJPText.text = "";
 				}
 				break;
 
