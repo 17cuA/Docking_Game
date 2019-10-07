@@ -21,7 +21,7 @@ public class CameraTopPos : MonoBehaviour
     {
         if(once)
 		{
-			transform.position = new Vector3(phoneObj.transform.position.x, transform.position.y, transform.position.z);
+			transform.position = new Vector3(phoneObj.transform.position.x, transform.position.y, phoneObj.transform.position.z - 2f);
 			once = false;
 		}
     }
