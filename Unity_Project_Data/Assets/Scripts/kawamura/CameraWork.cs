@@ -10,21 +10,31 @@ public class CameraWork : MonoBehaviour
     //カメラの位置状態
     public enum CameraState
     {
-        Backward,       //後方
-        FPS,                //チャージャー視点
+		Top,					//見下ろし
+		Left,					//横から
+        Backward,		//後方
+        FPS,					//チャージャー視点
     }
     //状態の変数
     public CameraState cameraState;
+	public CameraState saveCameraState;
 
-    [Header("手動で入れよう！その1")]
-    public GameObject chargerObj;                   //チャージャーオブジェクト
-    [Header("手動で入れよう！その2")]
-    public GameObject FPS_CameraPosObj;     //チャージャー視点の位置オブジェクト
-    [Header("手動で入れよう！その3")]
+    [Header("チャージャーを手動で入れよう！")]
+    public GameObject chargerObj;					//チャージャーオブジェクト
+    [Header("FPS視点を手動で入れよう！")]
+    public GameObject FPS_CameraPosObj;		//チャージャー視点の位置オブジェクト
+	[Header("真上視点を手動で入れよう！")]
+	public GameObject TopCameraPosObj;		//真上視点オブジェクト
+	[Header("横から視点を手動で入れよう！")]
+	public GameObject LeftCameraPosObj;		//横から視点オブジェクト
+	[Header("スマホを手動で入れよう！")]
     public GameObject phoneObj;                 //スマホオブジェクト
-    public Vector3 backwardCameraPos;           //後方視点の位置オブジェクト
+
+    public Vector3 backwardCameraPos;           //後方視点の位置
     public Vector3 savePos;                             //チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
     public Quaternion _rotation;                        //カメラの向く方向
+
+	public int cameraPosNum;		// 1が後方 2が真上 3が横から
 
     //public float rotaSpeed;
 
@@ -43,7 +53,9 @@ public class CameraWork : MonoBehaviour
     public float FPS_Distance_Z;
 
     public bool once = true;
-    public bool isMove = false;	//動いているかのチェック
+    public bool isMove = false; //動いているかのチェック
+	public bool isBackRotaSet = false;
+	public bool isReset = false;
 
     public bool xxxxxxxxxxxxx = false;
     public bool yyyyyyyyyyyyy = false;
@@ -51,6 +63,7 @@ public class CameraWork : MonoBehaviour
 
     void Start()
     {
+		cameraPosNum = 1;
         //回転限界を初期の値に設定
         rotaX = 15;
         rotaY = -20;
@@ -96,70 +109,98 @@ public class CameraWork : MonoBehaviour
         backwardCameraPos = new Vector3(1.4f, 1f, posZ);
         //transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
-        if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY)
-        {
-            xxxxxxxxxxxxx = true;
-        }
-        else
-        {
-            xxxxxxxxxxxxx = false;
-        }
-
-        if (chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY)
-        {
-            yyyyyyyyyyyyy = true;
-        }
-        else
-        {
-            yyyyyyyyyyyyy = false;
-        }
-
-        if (chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < -3.94)
-        {
-            zzzzzzzzzzzzz = true;
-        }
-        else
-        {
-            zzzzzzzzzzzzz = false;
-        }
-
         //FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
         if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
             && chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY
             && chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < -3.94)
         {
-            cameraState = CameraState.FPS;
+			if(!isReset)
+			{
+				//FPS視点になる前の位置を保存
+				saveCameraState = cameraState;
+				//FPS視点範囲外に行ったときに位置を戻すフラグON
+				isReset = true;
+			}
+			cameraState = CameraState.FPS;
         }
         else
         {
-            cameraState = CameraState.Backward;
-        }
+			//FPSからカメラを戻すフラグがONなら
+			if(isReset)
+			{
+				//カメラの位置を保存していた位置へ戻す
+				cameraState = saveCameraState;
+				isReset = false;
+			}
+			//CameraPosSet();
+			//cameraState = CameraState.Backward;
+		}
 
-        //カメラの状態を見て切り替える
-        switch (cameraState)
-        {
-            //後方視点
-            case CameraState.Backward:
-                //位置を後方の位置に
-                transform.position = backwardCameraPos;
-                //回転させる
-                transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 1);
-                break;
+		//カメラの位置変更関数呼び出し
+		CameraPosChange();
 
-            //FPS視点
-            case CameraState.FPS:
-                //位置をFPS位置に
-                transform.position = FPS_CameraPosObj.transform.position;
-                //まっすぐ向ける
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                break;
-        }
-    }
+		//FPS視点以外のときに位置切り替えボタンが押されたら位置（カメラの状態）を変える
+		if (cameraState != CameraState.FPS)
+		{
+			//Xボタンが押されたら　後方→横から→真上→後方…で切り替わる
+			if (Input.GetButtonDown("GamePad_1_2"))
+			{
+				switch(cameraState)
+				{
+					//後方視点
+					case CameraState.Backward:
+						cameraState = CameraState.Left;
+						break;
 
-    //------------------ここから関数------------------
+					case CameraState.Top:
+						cameraState = CameraState.Backward;
+						break;
 
-    //カメラの回転を決める関数
-    void CameraRotation()
+					case CameraState.Left:
+						cameraState = CameraState.Top;
+						break;
+				}
+
+				//cameraPosNum--;
+				//if (cameraPosNum <= 0)
+				//{
+				//	cameraPosNum = 3;
+				//}
+				//CameraPosSet();
+			}
+			//Yボタンが押されたら　後方→真上→横から→後方…で切り替わる
+			else if (Input.GetButtonDown("GamePad_1_3"))
+			{
+				switch (cameraState)
+				{
+					//後方視点
+					case CameraState.Backward:
+						cameraState = CameraState.Top;
+						break;
+
+					case CameraState.Top:
+						cameraState = CameraState.Left;
+						break;
+
+					case CameraState.Left:
+						cameraState = CameraState.Backward;
+						break;
+				}
+
+				//cameraPosNum++;
+				//if (cameraPosNum >= 4)
+				//{
+				//	cameraPosNum = 0;
+				//}
+				//CameraPosSet();
+			}
+		}
+	}
+
+	//------------------ここから関数------------------
+
+	//カメラの回転を決める関数
+	void CameraRotation()
     {
         //RotationのYを決める
         if (chargerObj.transform.position.x >= 0)
@@ -183,4 +224,71 @@ public class CameraWork : MonoBehaviour
         }
         //RotationのXを決めるやつおわり
     }
+
+	//カメラの位置チェンジ
+	void CameraPosChange()
+	{
+		//カメラの状態を見て切り替える
+		switch (cameraState)
+		{
+			//後方視点
+			case CameraState.Backward:
+				if (isBackRotaSet)
+				{
+					transform.rotation = _rotation;
+				}
+				//位置を後方の位置に
+				transform.position = backwardCameraPos;
+				//回転させる
+				transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 1);
+				break;
+
+			case CameraState.Top:
+				//位置を真上の位置に
+				transform.position = TopCameraPosObj.transform.position;
+				//回転させる
+				transform.rotation = Quaternion.Euler(90, 0, 0);
+				isBackRotaSet = true;
+				break;
+
+			case CameraState.Left:
+				//位置を後方の位置に
+				transform.position = LeftCameraPosObj.transform.position;
+				//回転させる
+				transform.rotation = Quaternion.Euler(0, 90, 0);
+
+				isBackRotaSet = true;
+				break;
+
+			//FPS視点
+			case CameraState.FPS:
+				//位置をFPS位置に
+				transform.position = FPS_CameraPosObj.transform.position;
+				//まっすぐ向ける
+				transform.rotation = Quaternion.Euler(0, 0, 0);
+				break;
+		}
+	}
+
+	//カメラの位置変更の数字設定
+	void CameraPosSet()
+	{
+		switch(cameraPosNum)
+		{
+			case 0:
+				break;
+
+			case 1:
+				cameraState = CameraState.Backward;
+				break;
+
+			case 2:
+				cameraState = CameraState.Top;
+				break;
+
+			case 3:
+				cameraState = CameraState.Left;
+				break;
+		}
+	}
 }
