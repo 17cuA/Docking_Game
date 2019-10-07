@@ -18,14 +18,17 @@ public class Light_Manager : MonoBehaviour
 	private MeshRenderer[] r = new MeshRenderer[2];
 	int frame;
 	public int frame_Max;
+	public float Color_decrease_Rate;
+	public float Min_Decrease;
 	// Start is called before the first frame update
 	void Start()
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			transforms[i] = gameObject.transform.GetChild(i).gameObject;
+			transforms[i] = gameObject.transform.GetChild(i).gameObject;		//
 			r[i] = transforms[i].GetComponent<MeshRenderer>();
 			r[i].material.EnableKeyword("_EMISSION");		//Emissionを変更する際に必要なもの
+			color1[i].in
 		}
 		Color_Cnt = 0;
 		Is_Down_color = true;
