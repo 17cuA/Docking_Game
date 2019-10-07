@@ -690,6 +690,36 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9038333165437244310}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &796443173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796443174}
+  m_Layer: 0
+  m_Name: CameraTopPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &796443174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796443173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 13, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &797818794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1151,7 +1181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageState: 3
   stageReadyDelay: 0
-  stageReadyDelayMax: 6
   stagePlayDelayMax: 90
   fadeTimeScr: {fileID: 1839582086}
   wirelessManagerScr: {fileID: 1456963882}
@@ -1453,7 +1482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageReadyDelay: 0
-  stageReadyDelayMax: 6
   nextStageDelay: 0
   nextStageDelayMax: 3
   displayTime: 0
@@ -1800,6 +1828,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Codse
       objectReference: {fileID: 0}
+    - target: {fileID: 5439041776388642483, guid: 4e6701ce509b86741ae1d85464434ad4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5439041776388642482, guid: 4e6701ce509b86741ae1d85464434ad4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1862,6 +1895,36 @@ PrefabInstance:
       objectReference: {fileID: 1538303766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6701ce509b86741ae1d85464434ad4, type: 3}
+--- !u!1 &2022008001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2022008002}
+  m_Layer: 0
+  m_Name: CameraLeftPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2022008002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022008001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1025963041709694816
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2789,6 +2852,10 @@ PrefabInstance:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 941929466}
+    - target: {fileID: 404495704, guid: de56243f4714ab349bc53ba125801720, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
 --- !u!33 &9208662317008953440
