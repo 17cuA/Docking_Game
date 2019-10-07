@@ -28,19 +28,19 @@ public class CameraWork : MonoBehaviour
 	[Header("横から視点を手動で入れよう！")]
 	public GameObject LeftCameraPosObj;		//横から視点オブジェクト
 	[Header("スマホを手動で入れよう！")]
-    public GameObject phoneObj;                 //スマホオブジェクト
+    public GameObject phoneObj;						//スマホオブジェクト
 
-    public Vector3 backwardCameraPos;           //後方視点の位置
-    public Vector3 savePos;                             //チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
-    public Quaternion _rotation;                        //カメラの向く方向
+    public Vector3 backwardCameraPos;			//後方視点の位置
+    public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
+    public Quaternion _rotation;						//カメラの向く方向
 
 	public int cameraPosNum;		// 1が後方 2が真上 3が横から
 
     //public float rotaSpeed;
 
     [Header("入力用　チャージャーとのZの距離")]
-    public float defPosZ_Value;     //チャージャーからどれだけ後ろにいるかの値
-    public float posZ;                  //後方位置のZ座標の値
+    public float defPosZ_Value;		//チャージャーからどれだけ後ろにいるかの値
+    public float posZ;						//後方位置のZ座標の値
 
     //Chargerの位置によって変わるカメラの回転値 XとY
     public float rotaX;
@@ -53,7 +53,7 @@ public class CameraWork : MonoBehaviour
     public float FPS_Distance_Z;
 
     public bool once = true;
-    public bool isMove = false; //動いているかのチェック
+    public bool isMove = false;	//動いているかのチェック
 	public bool isBackRotaSet = false;
 	public bool isReset = false;
 
