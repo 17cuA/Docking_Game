@@ -132,7 +132,7 @@ public class RotateText : UIBehaviour, IMeshModifier
 							}
 							else
 							{
-								Debug.Log(characters[index] + " は回転をスキップしました。");
+								//Debug.Log(characters[index] + " は回転をスキップしました。");
 								break;
 							}
 							vertexList[i + r] = element;
