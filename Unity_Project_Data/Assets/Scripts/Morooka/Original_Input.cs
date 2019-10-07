@@ -156,7 +156,8 @@ namespace DockingGame_Input
 		bool isSetUpButton = false;
 		bool isSetAxis = false;
 		public static Original_Input instance;
-		static public bool ButtomTurbo_Down { get { return Input.GetButtonDown(instance.inputManager.Button["Turbo"]); } }
+		static public bool ButtomFront_Hold { get { return Input.GetButton(instance.inputManager.Button["Front"]); } }
+		static public bool ButtomBack_Hold { get { return Input.GetButton(instance.inputManager.Button["Back"]); } }
 		//static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.inputManager.Button["LockOn"]); } }
 		static public float StickRight_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_Y"]; } }
 		static public float StickLeft_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_Y"]; } }
@@ -164,6 +165,7 @@ namespace DockingGame_Input
 
 		private void Start()
 		{
+			if (FindObjectsOfType<Original_Input>().Length >= 2) { Destroy(gameObject); return; }
 			instance = FindObjectOfType<Original_Input>();
 			inputManager.Init();
 			axisManager.Init();
@@ -183,10 +185,6 @@ namespace DockingGame_Input
 			{
 			 /*isSetAxis =*/ isSetUpButton = X_Input.Buttom6_Down;
 			}
-
-			if(StickRight_Y != 0.0) Debug.Log("StickRight_Y");
-			if(StickLeft_Y != 0.0f) Debug.Log("StickLeft_Y");
-			if(StickLeft_X != 0.0f) Debug.Log("StickLeft_X");
 		}
 	}
 }

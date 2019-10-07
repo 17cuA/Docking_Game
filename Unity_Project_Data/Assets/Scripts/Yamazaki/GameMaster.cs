@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
-{
-	// ステージ上テキスト
-	public Text stageText;
-
-	// ゲームステージ上の進行ステータス
+{// ゲームステージ上の進行ステータス
 	public enum StageState
 	{
 		FADEIN,			// ステージフェードイン
@@ -22,81 +17,108 @@ public class GameMaster : MonoBehaviour
 		JUMPTITLE,		// 直接タイトル移動
 		JUMPRESULT,		// 直接リザルト移動
 	}
-
-	// 本来privaateだが現状publicで動かすことを認める
+	
 	// 現在のゲームステージ上の進行ステータス
 	//[SerializeField, NonEditable]
 	public StageState stageState = StageState.NONE;
 
-	// シーンが切り替わる時間経過
-	[SerializeField, NonEditable]
-	private float nextStageDelay;		// 現在の経過時間
-	public float nextStageDelayMax;    // 最大の待ち時間
-
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
 	private float stageReadyDelay;		// 現在の経過時間
-	public float stageReadyDelayMax;    // 最大の待ち時間
+	private float stageReadyDelayMax = 8.0f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
-	[SerializeField, NonEditable]
-	private float stagePlayDelay;		// 現在の残り時間
 	public float stagePlayDelayMax;		// 最大の残り時間
-	public Text stageTimeText;          // 時間テキスト
-
+	
 	// フェード用スクリプト
-	public FadeTime fadeTimeScript;
+	public FadeTime fadeTimeScr;
 
+	// 無線スクリプト
+	public WirelessManager wirelessManagerScr;
+
+	// 時間表示スクリプト
+	public TimeDisplay timeDisplayScr;
+
+	// 自身
 	public static GameMaster instance;
 
+	// ゲームデータプレハブ
+	private GameObject gameDataPrefab;
+
+	// 開幕前
 	private void Awake()
 	{
 		instance = gameObject.GetComponent<GameMaster>();
+
+		if (!GameObject.Find("GameData"))
+		{
+			gameDataPrefab = Resources.Load("Prefabs/GameData") as GameObject;
+			GameObject g = Instantiate(gameDataPrefab, Vector3.zero, transform.rotation);
+			g.name = "GameData";
+		}
 	}
 
 	// 開幕
 	private void Start()
 	{
 		// 序盤のゲームステータスをNONEに
-		if (fadeTimeScript)
+		if (fadeTimeScr)
 		{
 			stageState = StageState.FADEIN;
-			fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+			fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEIN);
 		}
 		else
 		{
 			stageState = StageState.READY;
 		}
-		stageText.text = "";
-		stagePlayDelay = stagePlayDelayMax;
-		stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
+
+		timeDisplayScr.SetTime(stagePlayDelayMax);
+        wirelessManagerScr.SetTime(stageReadyDelayMax, 4.5f, 3.0f);
 	}
 	
-	// 舞フレーム
+	// 毎フレーム
 	private void Update()
 	{
 		// Debug
-		// 1キーを押したらゲームクリアとする
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		// F5キーを押したらゲームクリアとする
+		if (Input.GetKeyDown(KeyCode.F5))
 		{
 			// ステージステータスをゲームクリアに変更
 			SetStageState(StageState.STAGECLEAR);
 		}
+		// F6キーを押したらゲーム失敗とする
+		else if (Input.GetKeyDown(KeyCode.F6))
+		{
+			// ステージステータスをゲームクリアに変更
+			SetStageState(StageState.STAGEFAILURE);
+		}
+		// 1キーを押したらプレイ中の無線が出る
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			// プレイ中の無線
+			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_1);
+		}
+		// 2キーを押したらプレイ中の無線2が出る
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			// プレイ中の無線
+			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_2);
+		}
 
 		// 現在のステージステータスで処理を変える
-		switch(stageState)
+		switch (stageState)
 		{
 			case StageState.FADEIN:
-				if(fadeTimeScript)
+				if(fadeTimeScr)
 				{
-					if(fadeTimeScript.IsFadeInFinished())
+					if(fadeTimeScr.IsFadeInFinished())
 					{
 						SetStageState(StageState.READY);
 						break;
 					}
-					if(fadeTimeScript.GetFadeType() != FadeTime.FadeType.FADEIN)
+					if(fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEIN)
 					{
-						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEIN);
+						fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEIN);
 					}
 				}
 				else
@@ -107,37 +129,30 @@ public class GameMaster : MonoBehaviour
 
 			// ステージ開始前時
 			case StageState.READY:
-				// 時間を経過
-				stageReadyDelay += Time.deltaTime;
-				if(stageReadyDelay >= stageReadyDelayMax)
+				// 無線が無しになった時
+				if(wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
-					stageReadyDelay = 0.0f;
 					// ステージステータスをプレイに変更
 					SetStageState(StageState.PLAYING);
+					// タイム開始
+					timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
 				}
-				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
+				break;
+
+			// ステージプレイ中
+			case StageState.PLAYING:
+				if(timeDisplayScr.GetTimeMode() == TimeDisplay.TimeMode.END)
 				{
-					stageText.text = "コード「了解」\nCode「Roger」";
-				}
-				else if (stageReadyDelay >= 0)
-				{
-					stageText.text = "コンロールセンター「慎重にドッキングを開始せよ」\nControlCenter「Code, start docking carefully」";
-				}
-				else
-				{
-					stageText.text = "";
+					SetStageState(StageState.STAGEFAILURE);
 				}
 				break;
 
 			// ステージクリアステータス時
 			case StageState.STAGECLEAR:
-				// 時間を経過
-				nextStageDelay += Time.deltaTime;
-				// 待ち時間を達した時
-				if(nextStageDelay >= nextStageDelayMax)
+				// 無線が無しになった時
+				if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
-					nextStageDelay = 0.0f;
-					// ステージステータスを直接タイトルジャンプに変更
+					// ステージステータスをプレイに変更
 					SetStageState(StageState.FADEOUT);
 				}
 				break;
@@ -146,10 +161,10 @@ public class GameMaster : MonoBehaviour
 				// スペースキーかマウス左クリックかenter
 				if(IsOkeyKeyDown())
 				{
-					if(fadeTimeScript)
+					if(fadeTimeScr)
 					{
 						SetStageState(StageState.FADEOUT);
-						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
+						fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEOUT);
 					}
 					else
 					{
@@ -160,16 +175,16 @@ public class GameMaster : MonoBehaviour
 
 			// ステージフェードアウト
 			case StageState.FADEOUT:
-				if (fadeTimeScript)
+				if (fadeTimeScr)
 				{
-					if (fadeTimeScript.IsFadeOutFinished())
+					if (fadeTimeScr.IsFadeOutFinished())
 					{
 						SetStageState(StageState.JUMPTITLE);
 						break;
 					}
-					if (fadeTimeScript.GetFadeType() != FadeTime.FadeType.FADEOUT)
+					if (fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEOUT)
 					{
-						fadeTimeScript.SetFadeType(FadeTime.FadeType.FADEOUT);
+						fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEOUT);
 					}
 				}
 				else
@@ -180,13 +195,10 @@ public class GameMaster : MonoBehaviour
 
 			// ステージクリアステータス時
 			case StageState.STAGEFAILURE:
-				// 時間を経過
-				nextStageDelay += Time.deltaTime;
-				// 待ち時間を達した時
-				if (nextStageDelay >= nextStageDelayMax)
+				// 無線が無しになった時
+				if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
-					nextStageDelay = 0.0f;
-					// ステージステータスを直接タイトルジャンプに変更
+					// ステージステータスをプレイに変更
 					SetStageState(StageState.FADEOUT);
 				}
 				break;
@@ -200,13 +212,6 @@ public class GameMaster : MonoBehaviour
 
 			// その他
 			default:
-				stagePlayDelay -= Time.deltaTime;
-				if(stagePlayDelay <= 0.0f)
-				{
-					stagePlayDelay = 0.0f;
-					SetStageState(StageState.STAGEFAILURE);
-				}
-				stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 				break;
 		}
 	}
@@ -222,28 +227,37 @@ public class GameMaster : MonoBehaviour
 	{
 		switch (s)
 		{
+			case StageState.READY:
+				// 最初の無線
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.FIRST);
+				break;
+
 			case StageState.FADEOUT:
-				stageText.text = "";
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
 				break;
 				
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
-				stageText.text = "コード「ドッキングに成功した」\nCode「Docking successful」";
+				// クリアの無線
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR);
+				// タイムストップ
+				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
 				break;
 
 			// タイトル移動前用テキスト
 			case StageState.CLEARNEXT:
-				stageText.text = "";
 				break;
 
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
-				stageText.text = "コンロールセンター「ミッションは失敗した…」\nControlCenter「Mission failed...」";
+				// 失敗の無線
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE);
+				// タイムストップ
+				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
 				break;
 
 			// 失敗後タイトル移動前用テキスト
 			case StageState.FAILURENEXT:
-				stageText.text = "";
 				break;
 
 			// 直接タイトルにジャンプ
@@ -253,7 +267,7 @@ public class GameMaster : MonoBehaviour
 
 			// その他テキスト削除
 			default:
-				stageText.text = "";
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
 				break;
 		}
 
