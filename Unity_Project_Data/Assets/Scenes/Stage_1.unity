@@ -251,10 +251,13 @@ MonoBehaviour:
   cameraState: 0
   chargerObj: {fileID: 1538303764}
   FPS_CameraPosObj: {fileID: 1522449505}
+  TopCameraPosObj: {fileID: 796443173}
+  LeftCameraPosObj: {fileID: 2022008001}
   phoneObj: {fileID: 523758123}
   backwardCameraPos: {x: 0, y: 0, z: 0}
   savePos: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0, w: 0}
+  cameraPosNum: 0
   defPosZ_Value: 2.2
   posZ: 0
   rotaX: 0
@@ -263,6 +266,7 @@ MonoBehaviour:
   FPS_Distance_Z: 5
   once: 1
   isMove: 0
+  isBackRotaSet: 0
   xxxxxxxxxxxxx: 0
   yyyyyyyyyyyyy: 0
   zzzzzzzzzzzzz: 0
@@ -699,6 +703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 796443174}
+  - component: {fileID: 796443175}
   m_Layer: 0
   m_Name: CameraTopPos
   m_TagString: Untagged
@@ -720,6 +725,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796443175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796443173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fafdd5873fcda46815be11089b9396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneObj: {fileID: 523758123}
 --- !u!1001 &797818794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1904,6 +1922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022008002}
+  - component: {fileID: 2022008003}
   m_Layer: 0
   m_Name: CameraLeftPos
   m_TagString: Untagged
@@ -1925,6 +1944,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022008003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022008001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bbc3feed218a794bb7e3098a50964cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneObj: {fileID: 523758123}
 --- !u!33 &1025963041709694816
 MeshFilter:
   m_ObjectHideFlags: 0
