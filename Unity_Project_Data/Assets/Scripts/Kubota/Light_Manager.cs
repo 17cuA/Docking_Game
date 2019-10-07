@@ -28,7 +28,7 @@ public class Light_Manager : MonoBehaviour
 			transforms[i] = gameObject.transform.GetChild(i).gameObject;		//
 			r[i] = transforms[i].GetComponent<MeshRenderer>();
 			r[i].material.EnableKeyword("_EMISSION");		//Emissionを変更する際に必要なもの
-			color1[i].in
+			//color1[i].in
 		}
 		Color_Cnt = 0;
 		Is_Down_color = true;
