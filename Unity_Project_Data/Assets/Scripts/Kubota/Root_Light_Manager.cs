@@ -8,12 +8,22 @@ public class Root_Light_Manager : MonoBehaviour
 	[SerializeField] GameObject Chager;
 
 	public GameObject Root_Light;
-    void Start()
+	int num;
+	int num2;
+	GameObject[] obj;
+
+	void Start()
     {
 		Debug.Log( calc_distance());
-		calc_distance();
+		num = Mathf.FloorToInt(calc_distance());
+		num2 = -num;
+		obj = new GameObject[num2];
 		make_distance();
 
+	}
+	private void Update()
+	{
+		Move_Root();
 	}
 	//距離の計算
 	float calc_distance()
@@ -26,12 +36,29 @@ public class Root_Light_Manager : MonoBehaviour
 	}
 	void make_distance()
 	{
-		int num = Mathf.FloorToInt(calc_distance());
-
-		int num2 = -num;
-		for(int i = 0; i < -(num + 1); i++)
+		Vector3 subscript = Chager.transform.position - Hal9000.transform.position;
+		subscript = subscript / num2;
+		//GameObject[] obj = new GameObject[num2];
+		
+		for(int i = 0; i < obj.Length; i++)
 		{
-			Instantiate(Root_Light, new Vector3(Hal9000.transform.position.x, Hal9000.transform.position.y, Hal9000.transform.position.z + -i), Quaternion.identity);
+			//Instantiate(Root_Light, new Vector3(Hal9000.transform.position.x, Hal9000.transform.position.y, Hal9000.transform.position.z + -i), Quaternion.identity);
+			obj[i] = Instantiate(Root_Light,Hal9000.transform.position, Quaternion.identity);
+			obj[i].transform.position = new Vector3(obj[i].transform.position.x + subscript.x * (i + 1), obj[i].transform.position.y + subscript.y * (i + 1), obj[i].transform.position.z + subscript.z * (i + 1));
+
+		}
+	}
+
+	void Move_Root()
+	{
+		Vector3 subscript = Chager.transform.position - Hal9000.transform.position;
+		subscript = subscript / num2;
+
+		for (int i = 0; i < obj.Length; i++)
+		{
+			//obj[i].transform.position = new Vector3(obj[i].transform.position.x + subscript.x * (i + 1), obj[i].transform.position.y + subscript.y * (i + 1), obj[i].transform.position.z );
+			obj[i].transform.position =Hal9000.transform.position + subscript * (i + 1);
+
 		}
 	}
 }
