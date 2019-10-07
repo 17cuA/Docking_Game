@@ -225,12 +225,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraState: 0
+  saveCameraState: 0
   chargerObj: {fileID: 1538303764}
   FPS_CameraPosObj: {fileID: 1522449505}
+  TopCameraPosObj: {fileID: 0}
+  LeftCameraPosObj: {fileID: 0}
   phoneObj: {fileID: 523758123}
   backwardCameraPos: {x: 0, y: 0, z: 0}
   savePos: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0, w: 0}
+  cameraPosNum: 0
   defPosZ_Value: 2.2
   posZ: 0
   rotaX: 0
@@ -239,6 +243,8 @@ MonoBehaviour:
   FPS_Distance_Z: 5
   once: 1
   isMove: 0
+  isBackRotaSet: 0
+  isReset: 0
   xxxxxxxxxxxxx: 0
   yyyyyyyyyyyyy: 0
   zzzzzzzzzzzzz: 0
@@ -837,8 +843,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f563fde6b4c11340bea5bdacbbf978a, type: 3}
     m_FontSize: 64
@@ -1215,8 +1219,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 070c9eb4a072da740af556562f25efe4, type: 3}
     m_FontSize: 64
@@ -1323,8 +1325,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1465,7 +1465,8 @@ MonoBehaviour:
   nextStageDelayMax: 3
   displayTime: 0
   displayTimeMax: 3
-  stageText: {fileID: 1864202661}
+  wirelessJPText: {fileID: 0}
+  wirelessENText: {fileID: 0}
   wirelessMode: 0
 --- !u!4 &1456963883
 Transform:
@@ -1574,8 +1575,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1832,8 +1831,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f563fde6b4c11340bea5bdacbbf978a, type: 3}
     m_FontSize: 64
@@ -2859,10 +2856,6 @@ PrefabInstance:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 941929466}
-    - target: {fileID: 1538303769, guid: de56243f4714ab349bc53ba125801720, type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.60999966
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de56243f4714ab349bc53ba125801720, type: 3}
 --- !u!33 &9208662317008953440
