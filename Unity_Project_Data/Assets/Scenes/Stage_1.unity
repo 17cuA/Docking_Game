@@ -120,36 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &404495703
+--- !u!1 &404495703 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 404495703, guid: de56243f4714ab349bc53ba125801720,
+    type: 3}
+  m_PrefabInstance: {fileID: 9038333165437244310}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 404495704}
-  m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &404495704
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404495703}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.19343328}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-  m_Children: []
-  m_Father: {fileID: 1538303765}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424504777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1127,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageState: 3
   stageReadyDelay: 0
-  stageReadyDelayMax: 6
   stagePlayDelayMax: 90
   fadeTimeScr: {fileID: 1839582086}
   wirelessManagerScr: {fileID: 1456963882}
@@ -1453,7 +1428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageReadyDelay: 0
-  stageReadyDelayMax: 6
   nextStageDelay: 0
   nextStageDelayMax: 3
   displayTime: 0
@@ -1483,12 +1457,6 @@ GameObject:
 --- !u!1 &1538303764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9038333164545580776, guid: de56243f4714ab349bc53ba125801720,
-    type: 3}
-  m_PrefabInstance: {fileID: 9038333165437244310}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1538303765 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9038333164545580777, guid: de56243f4714ab349bc53ba125801720,
     type: 3}
   m_PrefabInstance: {fileID: 9038333165437244310}
   m_PrefabAsset: {fileID: 0}
@@ -1856,6 +1824,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5439041776685459959, guid: 4e6701ce509b86741ae1d85464434ad4,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 1538303766}
+    - target: {fileID: 5439041776685459958, guid: 4e6701ce509b86741ae1d85464434ad4,
         type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -2712,11 +2685,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Charger
       objectReference: {fileID: 0}
-    - target: {fileID: 9038333164545580776, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: m_TagString
-      value: Charger
-      objectReference: {fileID: 0}
     - target: {fileID: 9038333164545580777, guid: de56243f4714ab349bc53ba125801720,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2776,16 +2744,7 @@ PrefabInstance:
       propertyPath: GM
       value: 
       objectReference: {fileID: 1092199964}
-    - target: {fileID: 5250963404160346077, guid: de56243f4714ab349bc53ba125801720,
-        type: 3}
-      propertyPath: charger
-      value: 
-      objectReference: {fileID: 674345633}
     - target: {fileID: 1538303769, guid: de56243f4714ab349bc53ba125801720, type: 3}
-      propertyPath: m_ConnectedBody
-      value: 
-      objectReference: {fileID: 941929466}
-    - target: {fileID: 1538303771, guid: de56243f4714ab349bc53ba125801720, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 941929466}
