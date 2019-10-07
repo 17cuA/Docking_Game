@@ -151,7 +151,7 @@ public class WirelessManager : MonoBehaviour
 					wirelessJPText.text = wirelessList[13].jPStr;
 					wirelessENText.text = wirelessList[13].eNStr;
 				}
-				else if (stageReadyDelay >= stageReadyDelayMax * (1.0f / 2.0f) * 0.25f)
+				else if (stageReadyDelay >= stageReadyDelayMax * (1.0f / 2.0f) * 0.5f)
 				{
 					wirelessJPText.text = wirelessList[15].jPStr;
 					wirelessENText.text = wirelessList[15].eNStr;
