@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//作成者：川村良太
+//作成日：2019/10/07
+//横から見るカメラ視点の位置オブジェクトの位置を決める
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

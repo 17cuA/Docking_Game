@@ -107,32 +107,32 @@ public class CameraWork : MonoBehaviour
         backwardCameraPos = new Vector3(1.4f, 1f, posZ);
         //transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
 
-        if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY)
-        {
-            xxxxxxxxxxxxx = true;
-        }
-        else
-        {
-            xxxxxxxxxxxxx = false;
-        }
+        //if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY)
+        //{
+        //    xxxxxxxxxxxxx = true;
+        //}
+        //else
+        //{
+        //    xxxxxxxxxxxxx = false;
+        //}
 
-        if (chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY)
-        {
-            yyyyyyyyyyyyy = true;
-        }
-        else
-        {
-            yyyyyyyyyyyyy = false;
-        }
+        //if (chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY)
+        //{
+        //    yyyyyyyyyyyyy = true;
+        //}
+        //else
+        //{
+        //    yyyyyyyyyyyyy = false;
+        //}
 
-        if (chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < -3.94)
-        {
-            zzzzzzzzzzzzz = true;
-        }
-        else
-        {
-            zzzzzzzzzzzzz = false;
-        }
+        //if (chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < -3.94)
+        //{
+        //    zzzzzzzzzzzzz = true;
+        //}
+        //else
+        //{
+        //    zzzzzzzzzzzzz = false;
+        //}
 
         //FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
         if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
