@@ -33,6 +33,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7892385180470822576}
+  - component: {fileID: 3721584076850400224}
   m_Layer: 0
   m_Name: Root_Light
   m_TagString: Untagged
@@ -56,6 +57,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3721584076850400224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557474684961496627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52a27379332c3a4db89afec13ada8bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color1:
+  - {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 0}
+  - {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
+  - {r: 0.52963686, g: 0.52963686, b: 0.52963686, a: 0}
+  - {r: 0.3745098, g: 0.3745098, b: 0.3745098, a: 0}
+  - {r: 0.26481843, g: 0.26481843, b: 0.26481843, a: 0}
+  frame_Max: 5
+  Color_decrease_Rate: 0
+  Min_Decrease: 0
 --- !u!1001 &5447862890140439885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,11 +85,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7892385180470822576}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: feda0c66a15e6bf44b3b855846d4e951,
-        type: 3}
-      propertyPath: m_Name
-      value: Prism
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: feda0c66a15e6bf44b3b855846d4e951,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -138,6 +155,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: feda0c66a15e6bf44b3b855846d4e951,
+        type: 3}
+      propertyPath: m_Name
+      value: Prism
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: feda0c66a15e6bf44b3b855846d4e951,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -164,11 +186,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7892385180470822576}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: feda0c66a15e6bf44b3b855846d4e951,
-        type: 3}
-      propertyPath: m_Name
-      value: Prism (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: feda0c66a15e6bf44b3b855846d4e951,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -238,6 +255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: feda0c66a15e6bf44b3b855846d4e951,
+        type: 3}
+      propertyPath: m_Name
+      value: Prism (1)
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: feda0c66a15e6bf44b3b855846d4e951,
         type: 3}
