@@ -2,6 +2,7 @@
  *　制作：2019/09/30
  *　作者：諸岡勇樹
  *　2019/10/02：Axisの設定
+ *　2019/10/08：スティックコントローラーセッティング
  */
 
 using System.Collections;
@@ -162,5 +163,18 @@ public class AxisManager
 			}
 		}
 		return isComplete;
+	}
+
+	public bool ControllerChange()
+	{
+		if(reflectAxisNameMap["StickRight_Y"] == defaultAxisNameList[2])
+		{
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[6];
+		}
+		else
+		{
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[2];
+		}
+		return true;
 	}
 }

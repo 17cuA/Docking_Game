@@ -158,7 +158,6 @@ namespace DockingGame_Input
 		public static Original_Input instance;
 		static public bool ButtomFront_Hold { get { return Input.GetButton(instance.inputManager.Button["Front"]); } }
 		static public bool ButtomBack_Hold { get { return Input.GetButton(instance.inputManager.Button["Back"]); } }
-		//static public bool ButtomB_Down { get { return Input.GetButtonDown(instance.inputManager.Button["LockOn"]); } }
 		static public float StickRight_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_Y"]; } }
 		static public float StickLeft_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_Y"]; } }
 		static public float StickLeft_X { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_X"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_X"]; } }
@@ -173,17 +172,18 @@ namespace DockingGame_Input
 		}
 		private void Update()
 		{
-			if (isSetUpButton /*&& isSetAxis*/)
+			if (isSetUpButton)
 			{
 				isSetUpButton = !inputManager.SettingButton();
 			}
-			//else if(!isSetUpButton && isSetAxis)
-			//{
-			//	isSetAxis = !axisManager.SettingAxis();
-			//}
 			else
 			{
-			 /*isSetAxis =*/ isSetUpButton = X_Input.Buttom6_Down;
+			 isSetUpButton = X_Input.Buttom6_Down;
+			}
+
+			if(Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.S))
+			{
+				instance.axisManager.ControllerChange();
 			}
 		}
 	}
