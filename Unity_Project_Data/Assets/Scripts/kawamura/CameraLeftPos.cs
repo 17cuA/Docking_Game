@@ -21,7 +21,8 @@ public class CameraLeftPos : MonoBehaviour
 	{
 		if (once)
 		{
-			transform.position = new Vector3(transform.position.x, phoneObj.transform.position.y, phoneObj.transform.position.z - 2f);
+			//transform.position = new Vector3(transform.position.x, phoneObj.transform.position.y, phoneObj.transform.position.z - 2f);
+			transform.position = new Vector3(-12f, phoneObj.transform.position.y, -7.8f);
 			once = false;
 		}
 	}

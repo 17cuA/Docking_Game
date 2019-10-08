@@ -104,10 +104,10 @@ public class CameraWork : MonoBehaviour
         //後方視点の位置を更新
         backwardCameraPos = new Vector3(1.4f, 1f, posZ);
 
-        //FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
-        if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
-            && chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY
-            && chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < -3.94)
+		//FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
+		if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
+			&& chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY
+			&& chargerObj.transform.position.z > -FPS_Distance_Z && chargerObj.transform.position.z < phoneObj.transform.position.z - 3.94f)
         {
 			if(!isReset)
 			{
