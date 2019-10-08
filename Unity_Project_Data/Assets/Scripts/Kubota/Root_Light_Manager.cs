@@ -18,6 +18,7 @@ public class Root_Light_Manager : MonoBehaviour
 		num = Mathf.FloorToInt(calc_distance());
 		num2 = -num;
 		obj = new GameObject[num2];
+
 		make_distance();
 
 	}
