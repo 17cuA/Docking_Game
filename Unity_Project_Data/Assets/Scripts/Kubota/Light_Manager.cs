@@ -18,7 +18,8 @@ public class Light_Manager : MonoBehaviour
 	private MeshRenderer[] r = new MeshRenderer[2];
 	int frame;
 	public int frame_Max;
-	public float Color_decrease_Rate;
+	[Header("何番目の明るさを使用するのか")]
+	public int Color_Number;
 	public float Min_Decrease;
 	// Start is called before the first frame update
 	void Start()
@@ -30,7 +31,7 @@ public class Light_Manager : MonoBehaviour
 			r[i].material.EnableKeyword("_EMISSION");		//Emissionを変更する際に必要なもの
 			//color1[i].in
 		}
-		Color_Cnt = 0;
+		Color_Cnt = Color_Number;
 		Is_Down_color = true;
 	}
 
@@ -57,7 +58,7 @@ public class Light_Manager : MonoBehaviour
 			{
 				Is_Down_color = true;
 			}
-			else if (Color_Cnt == 4)
+			else if (Color_Cnt == color1.Length - 1)
 			{
 				Is_Down_color = false;
 			}
