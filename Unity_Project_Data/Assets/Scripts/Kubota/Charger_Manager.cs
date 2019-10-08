@@ -13,7 +13,7 @@ public class Charger_Manager : MonoBehaviour
 {
 	private Rigidbody myRigidbody;    // 自身のRigidbody
 	private bool isEnteredTheSlot;      // スマホの差込口に入ったか
-	private Vector3 snapTargetPos;		// スナップターゲット位置
+	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;		// スナップターゲット位置
 	[Header("加速時の最大の値")]
 	public float add_Max;
 
@@ -42,7 +42,6 @@ public class Charger_Manager : MonoBehaviour
 	{
 		myRigidbody = GetComponent<Rigidbody>();
 		isEnteredTheSlot = false;
-		snapTargetPos = new Vector3(0.0f, 0.0f, -3.723f);
 	}
 	private void Update()
 	{
@@ -53,7 +52,7 @@ public class Charger_Manager : MonoBehaviour
 		else
 		{
 			myRigidbody.velocity = Vector3.zero;
-			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos, 0.01f);
+			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
 	}
 	/// <summary>
