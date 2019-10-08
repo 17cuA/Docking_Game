@@ -60,10 +60,24 @@ public class CameraWork : MonoBehaviour
     void Start()
     {
 		cameraPosNum = 1;
-        //回転限界を初期の値に設定
-        rotaX = 15;
-        rotaY = -20;
-        _rotation = Quaternion.Euler(rotaX, rotaY, 0);
+		//回転限界を設定
+		if (chargerObj.transform.position.y <= 0)
+		{
+			rotaX = 7.2f * Mathf.Abs(chargerObj.transform.position.y) + 15f;
+		}
+		else if (chargerObj.transform.position.y > 0)
+		{
+			rotaX = -11.6f * chargerObj.transform.position.y + 15f;
+		}
+		if (chargerObj.transform.position.x >= 0)
+		{
+			rotaY = chargerObj.transform.position.x * 10 - 20;
+		}
+		else if (chargerObj.transform.position.x < 0)
+		{
+			rotaY = 6.6f * chargerObj.transform.position.x - 20;
+		}
+		_rotation = Quaternion.Euler(rotaX, rotaY, 0);
 
         //位置セーブ
         savePos = chargerObj.transform.position;
@@ -101,8 +115,8 @@ public class CameraWork : MonoBehaviour
 
         //後方視点のZ位置を更新する
         posZ = chargerObj.transform.position.z - defPosZ_Value;
-        //後方視点の位置を更新
-        backwardCameraPos = new Vector3(1.4f, 1f, posZ);
+		//後方視点の位置を更新
+		backwardCameraPos = new Vector3(chargerObj.transform.position.x+1.4f, chargerObj.transform.position.y + 1f, posZ);
 
 		//FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
 		if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
