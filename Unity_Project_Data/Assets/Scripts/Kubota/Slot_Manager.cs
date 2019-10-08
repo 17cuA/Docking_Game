@@ -11,8 +11,14 @@ using UnityEngine;
 public class Slot_Manager : MonoBehaviour
 {
 	public GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
+	[SerializeField]private SmartphoneManagement Manager;
 	void OnTriggerEnter(Collider col)
 	{
-		if(col.tag == "Charger") GM.stageState = GameMaster.StageState.STAGECLEAR;
-	}
+
+		if (col.tag == "Charger")
+		{
+			Manager.OffTriggerCollidersEnabledSet = false;
+			GM.stageState = GameMaster.StageState.STAGECLEAR;
+		}
+	} 
 }
