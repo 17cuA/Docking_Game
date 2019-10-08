@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualize: 0
   maxBending: 0
-  stiffness: 1
+  stiffness: 0
   batches:
   - maxYoungModulus: 2.5e+10
     minYoungModulus: 100
