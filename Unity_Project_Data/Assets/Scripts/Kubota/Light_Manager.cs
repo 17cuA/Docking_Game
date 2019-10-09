@@ -14,8 +14,8 @@ public class Light_Manager : MonoBehaviour
 
 	private int Color_Cnt;
 	private bool Is_Down_color;
-	private GameObject[] transforms = new GameObject[2];
-	private MeshRenderer[] r = new MeshRenderer[2];
+	public GameObject[] prism;
+	private MeshRenderer[] r;
 	int frame;
 	public int frame_Max;
 	[Header("何番目の明るさを使用するのか")]
@@ -24,10 +24,11 @@ public class Light_Manager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		for (int i = 0; i < 2; i++)
+		r = new MeshRenderer[prism.Length];
+		for (int i = 0; i < transform.childCount; i++)
 		{
-			transforms[i] = gameObject.transform.GetChild(i).gameObject;		//
-			r[i] = transforms[i].GetComponent<MeshRenderer>();
+			prism[i] = gameObject.transform.GetChild(i).gameObject;		//
+			r[i] = prism[i].GetComponent<MeshRenderer>();
 			r[i].material.EnableKeyword("_EMISSION");		//Emissionを変更する際に必要なもの
 			//color1[i].in
 		}
@@ -46,14 +47,13 @@ public class Light_Manager : MonoBehaviour
 		frame++;
 
 		//child_Material.color = color1[Color_Cnt];
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < r.Length; i++)
 		{
 			r[i].material.SetColor("_EmissionColor", color1[Color_Cnt]);
 		}
 		//color2 = color1[Color_Cnt];
 		if (frame > frame_Max)
 		{
-			Debug.Log("hei");
 			if (Color_Cnt == 0)
 			{
 				Is_Down_color = true;
