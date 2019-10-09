@@ -153,4 +153,16 @@ public class InputManager
 		}
 		return isComplete;
 	}
+	public bool ControllerChange()
+	{
+		if (reflectButtonNameMap["Front"] == defaultButtonNameList[0])
+		{
+			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
+		}
+		else
+		{
+			reflectButtonNameMap["Front"] = defaultButtonNameList[0];
+		}
+		return true;
+	}
 }

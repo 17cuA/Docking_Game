@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputManager:
     defaultButtonNameList:
-    - GamePad_1_0
     - GamePad_1_1
+    - GamePad_1_0
     - GamePad_1_2
     - GamePad_1_3
     - GamePad_1_4
