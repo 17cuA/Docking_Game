@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745475173981761621}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.5058594, y: -0.38336182, z: -4.9417887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputManager:
     defaultButtonNameList:
-    - GamePad_1_0
     - GamePad_1_1
+    - GamePad_1_0
     - GamePad_1_2
     - GamePad_1_3
     - GamePad_1_4
@@ -56,7 +56,8 @@ MonoBehaviour:
     - GamePad_1_8
     - GamePad_1_9
     useButtonNameList:
-    - Turbo
+    - Front
+    - Back
     decisionTime: 3
     textFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     textPositionX: 960
@@ -68,6 +69,7 @@ MonoBehaviour:
     - GamePad_1_Axis_4
     - GamePad_1_Axis_6
     - GamePad_1_Axis_7
+    - GamePad_2_Axis_2
     useAxisNameList:
     - StickLeft_X
     - StickLeft_Y
