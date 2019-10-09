@@ -37,13 +37,16 @@ public class WirelessManager : MonoBehaviour
 
 	private struct WirelessString
 	{
-		public string jPStr;
-		public string eNStr;
+		public string sJP;	// 日本語
+		public string sUS;	// 英語
+		public string sES;    // スペイン語
+		public string sCN;    // 中国語
+		public string sKR;	// 韓国語
 
-		public WirelessString(string v1, string v2) : this()
+		public WirelessString(string _sJP, string _sUS) : this()
 		{
-			this.jPStr = v1;
-			this.eNStr = v2;
+			this.sJP = _sJP;
+			this.sUS = _sUS;
 		}
 	}
 
@@ -88,28 +91,28 @@ public class WirelessManager : MonoBehaviour
 		{
 			case WirelessMode.NONE:
 				wirelessJPText.text = "";
-				wirelessENText.text = wirelessList[0].eNStr;
+				wirelessENText.text = wirelessList[0].sUS;
 				break;
 
 			case WirelessMode.STAGECLEAR:
-				wirelessJPText.text = wirelessList[5].jPStr;
-				wirelessENText.text = wirelessList[5].eNStr;
+				wirelessJPText.text = wirelessList[5].sJP;
+				wirelessENText.text = wirelessList[5].sUS;
 				break;
 
 			case WirelessMode.STAGEFAILURE:
-				wirelessJPText.text = wirelessList[6].jPStr;
-				wirelessENText.text = wirelessList[6].eNStr;
+				wirelessJPText.text = wirelessList[6].sJP;
+				wirelessENText.text = wirelessList[6].sUS;
 				break;
 
 			case WirelessMode.MESSAGE_1:
-				wirelessJPText.text = wirelessList[7].jPStr;
-				wirelessENText.text = wirelessList[7].eNStr;
+				wirelessJPText.text = wirelessList[7].sJP;
+				wirelessENText.text = wirelessList[7].sUS;
 				displayTime = 0.0f;
 				break;
 
 			case WirelessMode.MESSAGE_2:
-				wirelessJPText.text = wirelessList[8].jPStr;
-				wirelessENText.text = wirelessList[8].eNStr;
+				wirelessJPText.text = wirelessList[8].sJP;
+				wirelessENText.text = wirelessList[8].sUS;
 				displayTime = 0.0f;
 				break;
 
@@ -148,19 +151,19 @@ public class WirelessManager : MonoBehaviour
 				}
 				else if (stageReadyDelay >= stageReadyDelayMax * 1.0f / 2.0f)
 				{
-					wirelessJPText.text = wirelessList[13].jPStr;
-					wirelessENText.text = wirelessList[13].eNStr;
+					wirelessJPText.text = wirelessList[13].sJP;
+					wirelessENText.text = wirelessList[13].sUS;
 				}
 				else if (stageReadyDelay >= stageReadyDelayMax * (1.0f / 2.0f) * 0.5f)
 				{
-					wirelessJPText.text = wirelessList[15].jPStr;
-					wirelessENText.text = wirelessList[15].eNStr;
-					Debug.Log(wirelessList[15].eNStr);
+					wirelessJPText.text = wirelessList[15].sJP;
+					wirelessENText.text = wirelessList[15].sUS;
+					Debug.Log(wirelessList[15].sUS);
 				}
 				else if (stageReadyDelay >= 0)
 				{
-					wirelessJPText.text = wirelessList[14].jPStr;
-					wirelessENText.text = wirelessList[14].eNStr;
+					wirelessJPText.text = wirelessList[14].sJP;
+					wirelessENText.text = wirelessList[14].sUS;
 				}
 				else
 				{
