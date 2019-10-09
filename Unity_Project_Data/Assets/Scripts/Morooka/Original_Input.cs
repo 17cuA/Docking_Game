@@ -180,10 +180,10 @@ namespace DockingGame_Input
 			//{
 			//	isSetUpButton = X_Input.Buttom6_Down;
 			//}
-
 			if(X_Input.Buttom6_Down)
 			{
 				instance.axisManager.ControllerChange();
+				instance.inputManager.ControllerChange();
 				Debug.Log("chenge");
 			}
 		}

@@ -21,6 +21,6 @@ public class TitleManager : StateBaseScriptMonoBehaviour
 	public void Fadeout()					{ StartCoroutine(fadeEditor.FadeoutCol()); }
 	public bool IsTimeFlow(float time)		{ return timeFlow.IsTimeFlow(time); }
 	public bool IsTimeCurveFlow(AnimationCurve_One anim) { return timeFlow.IsTimeFlow(anim.TimeMax); }
-	public bool IsInput()					{ return X_Input.ButtomB_Down; }
+	public bool IsInput()					{ return Original_Input.ButtomFront_Hold; }
 	public bool IsInput_Debug()				{ return Input.GetKey(KeyCode.Z); }
 }
