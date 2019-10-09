@@ -24,20 +24,23 @@ public class CameraWork : MonoBehaviour
     [Header("FPS視点を手動で入れよう！")]
     public GameObject FPS_CameraPosObj;		//チャージャー視点の位置オブジェクト
 	[Header("真上視点を手動で入れよう！")]
-	public GameObject TopCameraPosObj;		//真上視点オブジェクト
+	public GameObject TopCameraPosObj;			//真上視点オブジェクト
 	[Header("横から視点を手動で入れよう！")]
-	public GameObject LeftCameraPosObj;		//横から視点オブジェクト
+	public GameObject LeftCameraPosObj;			//横から視点オブジェクト
 	[Header("スマホを手動で入れよう！")]
-    public GameObject phoneObj;                     //スマホオブジェクト
+    public GameObject phoneObj;						//スマホオブジェクト
 
 	[Header("カメラの移動位置を入れる配列")]
 	public GameObject[] cameraPosObjects;
+	[Header("カメラの回転を入れる配列")]
+	public Quaternion[] cameraRotations;
+
 
     public Vector3 backwardCameraPos;			//後方視点の位置
     public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
     public Quaternion _rotation;						//カメラの向く方向
 
-	public int cameraPosNum;		// 1が後方 2が真上 3が横から
+	public int cameraPosNum;		// (1が後方 2が真上 3が横から)  ←これは嘘		これが今→ (これの数のcameraPosObjectsの位置を見る)
 
     //public float rotaSpeed;
 
@@ -55,10 +58,10 @@ public class CameraWork : MonoBehaviour
     [Header("入力用　Z距離がこれより近くなるとFPSになる")]
     public float FPS_Distance_Z;
 
-    public bool once = true;
-    public bool isMove = false;	//動いているかのチェック
-	public bool isBackRotaSet = false;
-	public bool isReset = false;
+    public bool once = true;					//一回だけやる処理用
+    public bool isMove = false;				//動いているかのチェック
+	public bool isBackRotaSet = false;	//
+	public bool isReset = false;				//
 
     void Start()
     {
@@ -93,7 +96,7 @@ public class CameraWork : MonoBehaviour
         //    once = false;
         //}
 
-		//チャージャーが動いているか判定関数
+		//チャージャーが動いているかの判定関数
 		ChargerMoveCheck();
 
         //動いていたら
@@ -172,6 +175,11 @@ public class CameraWork : MonoBehaviour
             isMove = true;
             //チャージャーの位置保存更新
             savePos = chargerObj.transform.position;
+			//カメラの回転値を決める関数呼び出し
+            CameraRotation();
+            //カメラの向く方向を決める
+            _rotation = Quaternion.Euler(rotaX, rotaY, 0);
+
         }
         //チャージャーの位置が保存位置と同じなら
         else if (chargerObj.transform.position == savePos)
