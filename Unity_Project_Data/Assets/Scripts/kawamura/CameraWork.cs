@@ -12,7 +12,7 @@ public class CameraWork : MonoBehaviour
     {
 		Top,					//見下ろし
 		Left,					//横から
-        Backward,		//後方
+        Backward,			//後方
         FPS,					//チャージャー視点
     }
     //状態の変数
@@ -62,7 +62,7 @@ public class CameraWork : MonoBehaviour
 
     void Start()
     {
-		cameraPosNum = 1;
+		cameraPosNum = 0;
 		//回転限界を設定
 		if (chargerObj.transform.position.y <= 0)
 		{
@@ -88,24 +88,13 @@ public class CameraWork : MonoBehaviour
 
     void Update()
     {
-        if (once)
-        {
-            once = false;
-        }
-        //今のチャージャーの位置が保存した位置と違ったら
-        if (chargerObj.transform.position != savePos)
-        {
-            //動いているかtrue
-            isMove = true;
-            //チャージャーの位置保存更新
-            savePos = chargerObj.transform.position;
-        }
-        //チャージャーの位置が保存位置と同じなら
-        else if (chargerObj.transform.position == savePos)
-        {
-            //動いているかfalse
-            isMove = false;
-        }
+        //if (once)
+        //{
+        //    once = false;
+        //}
+
+		//チャージャーが動いているか判定関数
+		ChargerMoveCheck();
 
         //動いていたら
         if (isMove)
@@ -167,48 +156,30 @@ public class CameraWork : MonoBehaviour
 		//FPS視点以外のときに位置切り替えボタンが押されたら位置（カメラの状態）を変える
 		if (cameraState != CameraState.FPS)
 		{
-			//Xボタンが押されたら　後方→横から→真上→後方…で切り替わる
-			if (Input.GetButtonDown("GamePad_1_2"))
-			{
-				switch(cameraState)
-				{
-					//後方視点
-					case CameraState.Backward:
-						cameraState = CameraState.Left;
-						break;
-
-					case CameraState.Top:
-						cameraState = CameraState.Backward;
-						break;
-
-					case CameraState.Left:
-						cameraState = CameraState.Top;
-						break;
-				}
-			}
-			//Yボタンが押されたら　後方→真上→横から→後方…で切り替わる
-			else if (Input.GetButtonDown("GamePad_1_3"))
-			{
-				switch (cameraState)
-				{
-					//後方視点
-					case CameraState.Backward:
-						cameraState = CameraState.Top;
-						break;
-
-					case CameraState.Top:
-						cameraState = CameraState.Left;
-						break;
-
-					case CameraState.Left:
-						cameraState = CameraState.Backward;
-						break;
-				}
-			}
+			CameraPosChangeInput();
 		}
 	}
 
 	//------------------ここから関数------------------
+
+	//チャージャーが移動したか判定する関数
+	void ChargerMoveCheck()
+	{
+		//今のチャージャーの位置が保存した位置と違ったら
+        if (chargerObj.transform.position != savePos)
+        {
+            //動いているかtrue
+            isMove = true;
+            //チャージャーの位置保存更新
+            savePos = chargerObj.transform.position;
+        }
+        //チャージャーの位置が保存位置と同じなら
+        else if (chargerObj.transform.position == savePos)
+        {
+            //動いているかfalse
+            isMove = false;
+        }
+	}
 
 	//カメラの回転を決める関数
 	void CameraRotation()
@@ -235,6 +206,49 @@ public class CameraWork : MonoBehaviour
         }
         //RotationのXを決めるやつおわり
     }
+
+	//ボタンでカメラの位置状態を変える関数
+	void CameraPosChangeInput()
+	{
+		//Xボタンが押されたら　後方→横から→真上→後方…で切り替わる
+		if (Input.GetButtonDown("GamePad_1_2"))
+		{
+			switch(cameraState)
+			{
+				//後方視点
+				case CameraState.Backward:
+					cameraState = CameraState.Left;
+					break;
+
+				case CameraState.Top:
+					cameraState = CameraState.Backward;
+					break;
+
+				case CameraState.Left:
+					cameraState = CameraState.Top;
+					break;
+			}
+		}
+		//Yボタンが押されたら　後方→真上→横から→後方…で切り替わる
+		else if (Input.GetButtonDown("GamePad_1_3"))
+		{
+			switch (cameraState)
+			{
+				//後方視点
+				case CameraState.Backward:
+					cameraState = CameraState.Top;
+					break;
+
+				case CameraState.Top:
+					cameraState = CameraState.Left;
+					break;
+
+				case CameraState.Left:
+					cameraState = CameraState.Backward;
+					break;
+			}
+		}
+	}
 
 	//カメラの位置チェンジ
 	void CameraPosChange()
@@ -287,18 +301,30 @@ public class CameraWork : MonoBehaviour
 		switch(cameraPosNum)
 		{
 			case 0:
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
 				break;
 
 			case 1:
-				cameraState = CameraState.Backward;
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+
+				//cameraState = CameraState.Backward;
 				break;
 
 			case 2:
-				cameraState = CameraState.Top;
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				//cameraState = CameraState.Top;
 				break;
 
 			case 3:
-				cameraState = CameraState.Left;
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				//cameraState = CameraState.Left;
+				break;
+			case 4:
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				break;
+
+			case 5:
+				transform.position=cameraPosObjects[cameraPosNum].transform.position;
 				break;
 		}
 	}
