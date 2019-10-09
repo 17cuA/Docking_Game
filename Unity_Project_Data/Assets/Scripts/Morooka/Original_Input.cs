@@ -172,18 +172,19 @@ namespace DockingGame_Input
 		}
 		private void Update()
 		{
-			if (isSetUpButton)
-			{
-				isSetUpButton = !inputManager.SettingButton();
-			}
-			else
-			{
-			 isSetUpButton = X_Input.Buttom6_Down;
-			}
+			//if (isSetUpButton)
+			//{
+			//	isSetUpButton = !inputManager.SettingButton();
+			//}
+			//else
+			//{
+			//	isSetUpButton = X_Input.Buttom6_Down;
+			//}
 
-			if(Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.S))
+			if(X_Input.Buttom6_Down)
 			{
 				instance.axisManager.ControllerChange();
+				Debug.Log("chenge");
 			}
 		}
 	}

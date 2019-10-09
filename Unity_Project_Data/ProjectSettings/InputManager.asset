@@ -278,7 +278,7 @@ InputManager:
     axis: 6
     joyNum: 1
   - serializedVersion: 3
-    m_Name: GamePad_2_Axis_5
+    m_Name: GamePad_2_Axis_2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -289,7 +289,7 @@ InputManager:
     dead: 0.19
     sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
-    axis: 4
+    axis: 1
     joyNum: 2
