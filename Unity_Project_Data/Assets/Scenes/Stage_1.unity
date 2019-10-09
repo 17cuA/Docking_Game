@@ -695,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a399bd090ab7944f805fd8ef7a02a77, type: 3}
---- !u!43 &613065527
+--- !u!43 &626644049
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3759,7 +3759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &6224264893175773170
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4312,6 +4312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MovementLimitRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575754511343787744, guid: 2294fd03891d6ce4e84a2a357c74516c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575754511343787745, guid: 2294fd03891d6ce4e84a2a357c74516c,
         type: 3}
