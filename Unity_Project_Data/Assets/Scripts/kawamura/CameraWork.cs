@@ -28,7 +28,10 @@ public class CameraWork : MonoBehaviour
 	[Header("横から視点を手動で入れよう！")]
 	public GameObject LeftCameraPosObj;		//横から視点オブジェクト
 	[Header("スマホを手動で入れよう！")]
-    public GameObject phoneObj;						//スマホオブジェクト
+    public GameObject phoneObj;                     //スマホオブジェクト
+
+	[Header("カメラの移動位置を入れる配列")]
+	public GameObject[] cameraPosObjects;
 
     public Vector3 backwardCameraPos;			//後方視点の位置
     public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
@@ -40,7 +43,7 @@ public class CameraWork : MonoBehaviour
 
     [Header("入力用　チャージャーとのZの距離")]
     public float defPosZ_Value;		//チャージャーからどれだけ後ろにいるかの値
-    public float posZ;						//後方位置のZ座標の値
+    public float posZ;					//後方位置のZ座標の値
 
     //Chargerの位置によって変わるカメラの回転値 XとY
     public float rotaX;
@@ -132,13 +135,28 @@ public class CameraWork : MonoBehaviour
 			}
 			cameraState = CameraState.FPS;
         }
-        else
-        {
+		////チャージャーのX座標がある程度合っていて、Yがずれているとき　横視点にする
+		//else if((chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY)
+		//		   && (chargerObj.transform.position.y < phoneObj.transform.position.y - FPS_Distance_XandY || chargerObj.transform.position.y > phoneObj.transform.position.y + FPS_Distance_XandY))
+		//{
+		//	cameraState = CameraState.Left;
+		//}
+		////チャージャーのX座標がある程度合っていて、Yがずれているとき　横視点にする
+		//else if ((chargerObj.transform.position.y > phoneObj.transform.position.y - FPS_Distance_XandY && chargerObj.transform.position.y < phoneObj.transform.position.y + FPS_Distance_XandY)
+		//		   && (chargerObj.transform.position.x < phoneObj.transform.position.x - FPS_Distance_XandY || chargerObj.transform.position.x > phoneObj.transform.position.x + FPS_Distance_XandY))
+		//{
+		//	cameraState = CameraState.Top;
+		//}
+		else
+		{
+			//cameraState = CameraState.Backward;
+
 			//FPSからカメラを戻すフラグがONなら
-			if(isReset)
+			if (isReset)
 			{
 				//カメラの位置を保存していた位置へ戻す
 				cameraState = saveCameraState;
+				//cameraState = CameraState.Backward;
 				isReset = false;
 			}
 		}
