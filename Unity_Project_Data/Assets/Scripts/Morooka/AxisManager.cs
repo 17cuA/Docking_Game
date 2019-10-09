@@ -165,6 +165,10 @@ public class AxisManager
 		return isComplete;
 	}
 
+	/// <summary>
+	///  簡易コンフィグ、コントローラー切り替え
+	/// </summary>
+	/// <returns> </returns>
 	public bool ControllerChange()
 	{
 		if(reflectAxisNameMap["StickRight_Y"] == defaultAxisNameList[2])
@@ -175,6 +179,9 @@ public class AxisManager
 		{
 			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[2];
 		}
+
+		reflect_PositiveAndOppositeDirection_Map["StickLeft_Y"] *= -1.0f;
+
 		return true;
 	}
 }
