@@ -153,4 +153,21 @@ public class InputManager
 		}
 		return isComplete;
 	}
+
+	/// <summary>
+	///  簡易コンフィグ、コントローラー切り替え
+	/// </summary>
+	/// <returns> </returns>
+	public bool ControllerChange()
+	{
+		if (reflectButtonNameMap["Front"] == defaultButtonNameList[0])
+		{
+			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
+		}
+		else
+		{
+			reflectButtonNameMap["Front"] = defaultButtonNameList[0];
+		}
+		return true;
+	}
 }
