@@ -18,7 +18,7 @@ public class Slot_Manager : MonoBehaviour
 		if (col.tag == "Charger")
 		{
 			Manager.OffTriggerCollidersEnabledSet = false;
-			GM.stageState = GameMaster.StageState.STAGECLEAR;
+			GM.SetStageState(GameMaster.StageState.STAGECLEAR);
 		}
 	} 
 }
