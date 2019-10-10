@@ -64,6 +64,16 @@ public class UI_Gauge : MonoBehaviour
 		maxValue = _maxValue;
 	}
 
+	public int Get_nowValue()
+	{
+		return currentValue;
+	}
+
+	public void Calc_nowVolue(int value)
+	{
+		currentValue -= value;
+	}
+
 	/// <summary>
 	/// リセットするときに呼ぶ
 	/// </summary>
