@@ -33,6 +33,8 @@ public class WirelessManager : MonoBehaviour
 		STAGEFAILURE,
 		MESSAGE_1,
 		MESSAGE_2,
+		DEBUG_1,
+		DEBUG_2,
 	}
 
 	private struct WirelessString
@@ -68,8 +70,8 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("コードＴＣー３「了解」", "ＣｏｄｅＴＣー３「Ｒｏｇｅｒ」"),
 		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「ＣｏｄｅＴＣー３，　ｓｔａｒｔ」"),
 		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「ｄｏｃｋｉｎｇ　ｃａｒｅｆｕｌｌｙ」"),
-		new WirelessString("", ""),
-		new WirelessString("", ""),
+		new WirelessString("「・・・！？時が止まっただと・・・！？", "「．．．！Ｓｔｏｐｐｅｄ！？」"),
+		new WirelessString("「時間が動いた」", "「ＴＩＭＥＩＳＭＯＶＥ」"),
 		new WirelessString("", ""),
 		new WirelessString("", ""),
 	};
@@ -114,6 +116,16 @@ public class WirelessManager : MonoBehaviour
 				wirelessJPText.text = wirelessList[8].sJP;
 				wirelessENText.text = wirelessList[8].sUS;
 				displayTime = 0.0f;
+				break;
+
+			case WirelessMode.DEBUG_1:
+				wirelessJPText.text = wirelessList[16].sJP;
+				wirelessENText.text = wirelessList[16].sUS;
+				break;
+
+			case WirelessMode.DEBUG_2:
+				wirelessJPText.text = wirelessList[17].sJP;
+				wirelessENText.text = wirelessList[17].sUS;
 				break;
 
 			default:
@@ -199,6 +211,8 @@ public class WirelessManager : MonoBehaviour
 
 			case WirelessMode.MESSAGE_1:
 			case WirelessMode.MESSAGE_2:
+			case WirelessMode.DEBUG_1:
+			case WirelessMode.DEBUG_2:
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
