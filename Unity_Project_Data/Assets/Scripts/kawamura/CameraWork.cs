@@ -357,7 +357,6 @@ public class CameraWork : MonoBehaviour
                 {
                     transform.position = backwardCameraPos;
                     transform.rotation = Quaternion.Euler(15f, -20f, 0);
-					BGM_Manager.BGM_obj.Sound_Docking();
                 }
                 //transform.position=cameraPosObjects[cameraPosNum].transform.position;
                 //transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
