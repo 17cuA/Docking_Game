@@ -173,6 +173,9 @@ namespace DockingGame_Input
 			//instance.axisManager.ControllerChange();
 			//instance.inputManager.ControllerChange();
 
+			instance.axisManager.ControllerStart();
+			instance.inputManager.ControllerStart();
+
 			DontDestroyOnLoad(this);
 		}
 		private void Update()
@@ -189,7 +192,6 @@ namespace DockingGame_Input
 			{
 				instance.axisManager.ControllerChange();
 				instance.inputManager.ControllerChange();
-				Debug.Log("chenge");
 			}
 		}
 
