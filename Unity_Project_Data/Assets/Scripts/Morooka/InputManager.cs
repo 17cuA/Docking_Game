@@ -161,7 +161,7 @@ public class InputManager
 	/// <returns> </returns>
 	public bool ControllerChange()
 	{
-			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
+		reflectButtonNameMap["Front"] = defaultButtonNameList[1];
 		return true;
 	}
 
@@ -179,5 +179,10 @@ public class InputManager
 			reflectButtonNameMap["Back"] = defaultButtonNameList[1];
 		}
 		return true;
+	}
+
+	public void ControllerStart()
+	{
+		reflectButtonNameMap["Front"] = defaultButtonNameList[1];
 	}
 }
