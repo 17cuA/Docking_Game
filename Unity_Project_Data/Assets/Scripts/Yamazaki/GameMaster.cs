@@ -16,11 +16,13 @@ public class GameMaster : MonoBehaviour
 		CLEARNEXT,		// 次のキーでタイトル移動
 		JUMPTITLE,		// 直接タイトル移動
 		JUMPRESULT,		// 直接リザルト移動
+		JUMPCLEARSCENE,			// 直接クリアシーン移動
+		JUMPFAILURESCENE,		// 直接失敗シーン移動
 	}
-	
+
 	// 現在のゲームステージ上の進行ステータス
-	//[SerializeField, NonEditable]
-	public StageState stageState = StageState.NONE;
+	[SerializeField, NonEditable]
+	private StageState stageState = StageState.NONE;
 
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
@@ -44,6 +46,18 @@ public class GameMaster : MonoBehaviour
 
 	// ゲームデータプレハブ
 	private GameObject gameDataPrefab;
+
+	// ゲームクリアシーン
+	public string gameFailureSceneName = "Title";
+
+	// ゲーム失敗シーン
+	public string gameClearSceneName = "Title";
+
+	// ゲームクリア状態
+	[SerializeField, NonEditable]
+	private bool isGameClear;
+
+	private string masterKey = "P1H0Pilot2Q9";
 
 	// 開幕前
 	private void Awake()
@@ -74,6 +88,10 @@ public class GameMaster : MonoBehaviour
 
 		timeDisplayScr.SetTime(stagePlayDelayMax);
         wirelessManagerScr.SetTime(stageReadyDelayMax, 4.5f, 3.0f);
+		isGameClear = false;
+
+		if (gameClearSceneName == "") gameClearSceneName = "Title";
+		if (gameFailureSceneName == "") gameFailureSceneName = "Title";
 	}
 	
 	// 毎フレーム
@@ -184,7 +202,7 @@ public class GameMaster : MonoBehaviour
 					}
 					else
 					{
-						SetStageState(StageState.JUMPTITLE);
+						SetStageState(StageState.JUMPCLEARSCENE);
 					}
 				}
 				break;
@@ -195,7 +213,8 @@ public class GameMaster : MonoBehaviour
 				{
 					if (fadeTimeScr.IsFadeOutFinished())
 					{
-						SetStageState(StageState.JUMPTITLE);
+						if (isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
+						else SetStageState(StageState.JUMPFAILURESCENE);
 						break;
 					}
 					if (fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEOUT)
@@ -205,7 +224,9 @@ public class GameMaster : MonoBehaviour
 				}
 				else
 				{
-					SetStageState(StageState.JUMPTITLE);
+					if(isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
+					else SetStageState(StageState.JUMPFAILURESCENE);
+
 				}
 				break;
 
@@ -222,7 +243,7 @@ public class GameMaster : MonoBehaviour
 			case StageState.FAILURENEXT:
 				if (IsOkeyKeyDown())
 				{
-					SetStageState(StageState.JUMPTITLE);
+					SetStageState(StageState.JUMPFAILURESCENE);
 				}
 				break;
 
@@ -239,7 +260,35 @@ public class GameMaster : MonoBehaviour
 
 	// ステージステータス変更専用関数
 	// 受け取ったステータスに応じて処理を変えます
-	public void SetStageState(StageState s)
+	public void SetStageState(StageState s, string key = "")
+	{
+		switch (s)
+		{
+			// 受け入れるもの
+			case StageState.STAGEFAILURE:
+			case StageState.STAGECLEAR:
+			case StageState.JUMPTITLE:
+			case StageState.JUMPRESULT:
+			case StageState.JUMPCLEARSCENE:
+			case StageState.JUMPFAILURESCENE:
+				SetStageStateInTheMaster(s);
+				break;
+
+			// 受け入れないもの
+			default:
+			case StageState.FADEIN:
+			case StageState.FADEOUT:
+			case StageState.READY:
+			case StageState.NONE:
+			case StageState.PLAYING:
+			case StageState.FAILURENEXT:
+			case StageState.CLEARNEXT:
+				if(key == "") SetStageStateInTheMaster(s);
+				break;
+		}
+	}
+
+	private void SetStageStateInTheMaster(StageState s)
 	{
 		switch (s)
 		{
@@ -251,9 +300,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.FADEOUT:
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
 				break;
-				
+
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
+				// 状況成功
+				isGameClear = true;
 				// クリアの無線
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				// タイムストップ
@@ -266,6 +317,8 @@ public class GameMaster : MonoBehaviour
 
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
+				// 状況失敗
+				isGameClear = false;
 				// 失敗の無線
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
 				// タイムストップ
@@ -279,6 +332,16 @@ public class GameMaster : MonoBehaviour
 			// 直接タイトルにジャンプ
 			case StageState.JUMPTITLE:
 				SceneManager.LoadScene("Title");
+				break;
+
+			// 直接ゲームクリアシーンにジャンプ
+			case StageState.JUMPCLEARSCENE:
+				SceneManager.LoadScene(gameClearSceneName);
+				break;
+
+			// 直接ゲーム失敗シーンにジャンプ
+			case StageState.JUMPFAILURESCENE:
+				SceneManager.LoadScene(gameFailureSceneName);
 				break;
 
 			// その他テキスト削除
