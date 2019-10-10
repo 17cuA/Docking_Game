@@ -82,7 +82,7 @@ public class UI_Gauge : MonoBehaviour
 
 		if (temp != 0)
 		{
-			return guageWidth * (_valueMax + _valueMax - temp) / _valueMax - 1;
+			return guageWidth * (_valueMax + _valueMax - temp) / _valueMax * -1;
 		}
 		return 0;
 	}
