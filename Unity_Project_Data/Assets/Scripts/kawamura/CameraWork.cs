@@ -339,6 +339,7 @@ public class CameraWork : MonoBehaviour
 
 			case 3:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				//cameraState = CameraState.Left;
 				break;
 			case 4:
@@ -347,8 +348,10 @@ public class CameraWork : MonoBehaviour
 				break;
 
 			case 5:
-				transform.position=cameraPosObjects[cameraPosNum].transform.position;
-				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
+				transform.position = FPS_CameraPosObj.transform.position;
+				transform.rotation = FPS_CameraPosObj.transform.rotation;
+				//transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				//transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				break;
 		}
 	}
