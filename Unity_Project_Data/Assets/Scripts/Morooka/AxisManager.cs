@@ -171,13 +171,10 @@ public class AxisManager
 	/// <returns> </returns>
 	public bool ControllerChange()
 	{
-		if(reflectAxisNameMap["StickRight_Y"] == defaultAxisNameList[2])
-		{
 			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
 			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
 			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[4];
 			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[5];
-		}
 		return true;
 	}
 

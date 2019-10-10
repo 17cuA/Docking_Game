@@ -161,10 +161,7 @@ public class InputManager
 	/// <returns> </returns>
 	public bool ControllerChange()
 	{
-		if (reflectButtonNameMap["Front"] == defaultButtonNameList[0])
-		{
 			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
-		}
 		return true;
 	}
 
