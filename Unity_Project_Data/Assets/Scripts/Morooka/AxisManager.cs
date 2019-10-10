@@ -184,4 +184,26 @@ public class AxisManager
 
 		return true;
 	}
+
+	public bool LeftRightSet(string temp)
+	{
+		if (temp == "") return false;
+		else if (temp.Substring(0, 9) == "GamePad_1")
+		{
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[6];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[7];
+
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
+		}
+		else if (temp.Substring(0, 9) == "GamePad_2")
+		{
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[1];
+
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[6];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[7];
+		}
+		return true;
+	}
 }

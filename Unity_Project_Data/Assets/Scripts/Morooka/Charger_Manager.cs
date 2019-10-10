@@ -60,15 +60,42 @@ public class Charger_Manager : MonoBehaviour
 	/// </summary>
 	private void Movement()
 	{
-		//入力処理--------------------
+		Vector2 saveInputNum_Right = new Vector3(Original_Input.StickRight_X, Original_Input.StickRight_Y);
+		Vector2 saveInputNum_Left = new Vector3(Original_Input.StickLeft_X, Original_Input.StickLeft_Y);
+
 		Vector3 saveInputNum = Vector3.zero;
-		saveInputNum.x = Original_Input.StickLeft_X / 100.0f;
-		saveInputNum.y = Original_Input.StickLeft_Y / 100.0f;
+
+			if (saveInputNum_Right.x < 0 && saveInputNum_Left.x > 0)
+			{
+				saveInputNum.y -= (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
+			}
+			else if (saveInputNum_Right.x > 0 && saveInputNum_Left.x <0)
+			{
+				saveInputNum.y += (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
+			}
+			else
+			{
+				saveInputNum.x += (saveInputNum_Right.x + saveInputNum_Left.x) / 200.0f;
+			}
+
+		// Y軸入力があるとき
+		if (Mathf.Sin(saveInputNum_Right.y) == Mathf.Sin(saveInputNum_Left.y))
+		{
+			// スティックの向きに横移動
+			saveInputNum.z += (saveInputNum_Right.y + saveInputNum_Left.y) / 200.0f;
+		}
+		else if (Mathf.Sin(saveInputNum_Right.y) != Mathf.Sin(saveInputNum_Left.y))
+		{
+			// 音を入れるかも
+		}
+
+		//入力処理--------------------
+		//saveInputNum.y = Original_Input.StickLeft_Y / 100.0f;
 		//---------------------------
 		// 前後入力(スティック、ボタン対応)-------------------
-		saveInputNum.z = Original_Input.StickRight_Y / 100.0f;
-		if (Original_Input.ButtomFront_Hold) saveInputNum.z = 0.01f;
-		else if(Original_Input.ButtomBack_Hold)saveInputNum.z = -0.01f;
+		//saveInputNum.z = Original_Input.StickRight_Y / 100.0f;
+		//if (Original_Input.ButtomFront_Hold) saveInputNum.z = 0.01f;
+		//else if(Original_Input.ButtomBack_Hold)saveInputNum.z = -0.01f;
 		// ---------------------------
 
 		//	加速後の Velocity 値の仮保存
@@ -82,11 +109,6 @@ public class Charger_Manager : MonoBehaviour
 
 		// 速度適応
 		myRigidbody.velocity = tempVelocity; 
-
-		//if(Original_Input.StickLeft_X != 0 || Original_Input.StickLeft_Y != 0 || Original_Input.StickRight_Y != 0)
-		//{
-			
-		//}
 	}
 
 	private void OnTriggerEnter(Collider col)
