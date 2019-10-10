@@ -189,7 +189,6 @@ namespace DockingGame_Input
 			{
 				instance.axisManager.ControllerChange();
 				instance.inputManager.ControllerChange();
-				Debug.Log("chenge");
 			}
 		}
 
