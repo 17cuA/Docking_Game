@@ -29,9 +29,8 @@ public class Target_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Vector3.Distance(Target_Pos[Target_cnt], Charger.transform.position) < distance && Target_cnt < Target.Length - 1)
+		if (Target_cnt < Target.Length - 1 && Vector3.Distance(Target_Pos[Target_cnt], Charger.transform.position) < distance )
 		{
-
 			Next_Target();
 		}
 	}
