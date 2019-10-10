@@ -14,26 +14,26 @@ public class WarpHoleBehavior : MonoBehaviour
 	//再生番号
 	public int reproducingNum;
 	//再生変更タイミング
-	public float[] reproducingChangeTiming = new float[2] {1.5f , 3.0f };
+	public float[] reproducingChangeTiming = new float[2] { 1.5f, 3.0f };
 
 	//最大サイズ
 	public float maxSize;
 
 	//ライトオブジェクト
 	public GameObject lightObj;
-	
+
 	void Start()
-    {
+	{
 		reproducingNum = 0;//再生番号の初期化
-		elapsedTime = 0.0f;	//経過時間の初期化
+		elapsedTime = 0.0f; //経過時間の初期化
 		material = GetComponent<MeshRenderer>().material;//コンポーネントからマテリアルを取得、保存
-		transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);	//スケールを初期化
+		transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);   //スケールを初期化
 	}
 
-    void Update()
-    {
-		elapsedTime += Time.deltaTime;	//経過時間の加算
-		if(reproducingNum == 0)
+	void Update()
+	{
+		elapsedTime += Time.deltaTime;  //経過時間の加算
+		if (reproducingNum == 0)
 		{
 			transform.localScale = new Vector3(
 				transform.localScale.x + maxSize / (reproducingChangeTiming[0] * 60.0f),
@@ -42,7 +42,7 @@ public class WarpHoleBehavior : MonoBehaviour
 			);
 
 			//時間経過処理
-			if(elapsedTime > reproducingChangeTiming[reproducingNum])
+			if (elapsedTime > reproducingChangeTiming[reproducingNum])
 			{
 				reproducingNum++;
 			}
@@ -70,22 +70,9 @@ public class WarpHoleBehavior : MonoBehaviour
 			//時間経過処理
 			if (elapsedTime > playTime)
 			{
+				elapsedTime = 0.0f;
 				gameObject.SetActive(false);
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		}
+	}
 }
