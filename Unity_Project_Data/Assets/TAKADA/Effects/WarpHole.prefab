@@ -42,7 +42,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 0.646899, g: 0.6179246, b: 1, a: 1}
+  m_Color: {r: 0.74008566, g: 0.7216981, b: 1, a: 1}
   m_Intensity: 20
   m_Range: 10
   m_SpotAngle: 30
@@ -675,7 +675,7 @@ Transform:
   m_GameObject: {fileID: 8890333669244744439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 8890333670169967209}
   - {fileID: 8890333669670485733}
@@ -759,7 +759,7 @@ MonoBehaviour:
   reproducingChangeTiming:
   - 0.8
   - 3
-  maxSize: 8
+  maxSize: 10
   lightObj: {fileID: 125557675}
 --- !u!1 &8890333669670485732
 GameObject:
@@ -889,7 +889,7 @@ ParticleSystem:
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -1589,7 +1589,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 2
       mode: 0
       spread: 0
       speed:
@@ -1708,7 +1708,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
