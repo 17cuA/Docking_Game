@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class BGM_Manager : MonoBehaviour
 {
-	[Header("呼吸音を鳴らしている")]
+	[Header("呼吸音を鳴らしているもの")]
 	public AudioSource Breathing;
-	[Header("無線を鳴らしてる関係")]
-	public AudioSource Wireless;
-	public AudioClip Wireless_Clip;
+	[Header("無線を鳴らすもの")]
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +18,4 @@ public class BGM_Manager : MonoBehaviour
     {
         
     }
-
-	//void Wireless
 }
