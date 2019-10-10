@@ -116,7 +116,7 @@ public class CameraWork : MonoBehaviour
             _rotation = Quaternion.Euler(rotaX, rotaY, 0);
         }
 
-		itigamitaiyoooo = cameraPosObjects[cameraPosNum].transform.position;
+		//itigamitaiyoooo = cameraPosObjects[cameraPosNum].transform.position;
 
 		CameraPosSet();
         //後方視点のZ位置を更新する
