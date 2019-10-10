@@ -165,10 +165,6 @@ public class InputManager
 		{
 			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
 		}
-		else
-		{
-			reflectButtonNameMap["Front"] = defaultButtonNameList[0];
-		}
 		return true;
 	}
 

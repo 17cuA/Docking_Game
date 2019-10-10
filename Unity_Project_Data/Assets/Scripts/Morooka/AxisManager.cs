@@ -173,15 +173,11 @@ public class AxisManager
 	{
 		if(reflectAxisNameMap["StickRight_Y"] == defaultAxisNameList[2])
 		{
-			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[6];
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[4];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[5];
 		}
-		else
-		{
-			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[2];
-		}
-
-		reflect_PositiveAndOppositeDirection_Map["StickLeft_Y"] *= -1.0f;
-
 		return true;
 	}
 
