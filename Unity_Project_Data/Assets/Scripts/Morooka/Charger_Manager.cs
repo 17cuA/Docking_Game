@@ -65,28 +65,30 @@ public class Charger_Manager : MonoBehaviour
 
 		Vector3 saveInputNum = Vector3.zero;
 
-			if (saveInputNum_Right.x < 0 && saveInputNum_Left.x > 0)
-			{
-				saveInputNum.y -= (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
-			}
-			else if (saveInputNum_Right.x > 0 && saveInputNum_Left.x <0)
-			{
-				saveInputNum.y += (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
-			}
-			else
-			{
-				saveInputNum.x += (saveInputNum_Right.x + saveInputNum_Left.x) / 200.0f;
-			}
-
-		// Y軸入力があるとき
-		if (Mathf.Sin(saveInputNum_Right.y) == Mathf.Sin(saveInputNum_Left.y))
+		if (saveInputNum_Right.x < 0 && saveInputNum_Left.x > 0)
 		{
-			// スティックの向きに横移動
-			saveInputNum.z += (saveInputNum_Right.y + saveInputNum_Left.y) / 200.0f;
+			saveInputNum.y -= (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
 		}
-		else if (Mathf.Sin(saveInputNum_Right.y) != Mathf.Sin(saveInputNum_Left.y))
+		else if (saveInputNum_Right.x > 0 && saveInputNum_Left.x < 0)
 		{
-			// 音を入れるかも
+			saveInputNum.y += (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
+		}
+		else
+		{
+			saveInputNum.x += (saveInputNum_Right.x + saveInputNum_Left.x) / 200.0f;
+		}
+
+
+		// スティックの向きに前後移動
+		if (saveInputNum_Right.y != 0.0f || saveInputNum_Left.y != 0)
+		{
+			saveInputNum.z += (saveInputNum_Right.y + saveInputNum_Left.y) / 200.0f;
+			if ((saveInputNum_Right.y > 0 && saveInputNum_Left.y < 0)
+				|| (saveInputNum_Right.y < 0 && saveInputNum_Left.y > 0 ))
+			{
+				saveInputNum.z = 0.0f;
+				// 音を入れるかも
+			}
 		}
 
 		//入力処理--------------------

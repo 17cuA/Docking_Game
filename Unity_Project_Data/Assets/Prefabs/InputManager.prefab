@@ -66,8 +66,8 @@ MonoBehaviour:
     defaultAxisNameList:
     - GamePad_1_Axis_1
     - GamePad_1_Axis_2
-    - GamePad_1_Axis_5
     - GamePad_1_Axis_4
+    - GamePad_1_Axis_5
     - GamePad_1_Axis_6
     - GamePad_1_Axis_7
     - GamePad_2_Axis_1

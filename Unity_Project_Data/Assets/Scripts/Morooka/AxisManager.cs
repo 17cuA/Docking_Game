@@ -173,8 +173,8 @@ public class AxisManager
 	{
 			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
 			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
-			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[4];
-			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[5];
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[2];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[3];
 		return true;
 	}
 
