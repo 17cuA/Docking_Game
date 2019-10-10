@@ -217,6 +217,7 @@ MonoBehaviour:
   - {fileID: -2553031344802557392}
   - {fileID: -6996475114226639064}
   - {fileID: -4738287860281240690}
+  - {fileID: 1650649514683218425}
 --- !u!114 &1256729466384572279
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -243,6 +244,25 @@ MonoBehaviour:
   fastMode:
     overrideState: 1
     value: 0
+--- !u!114 &1650649514683218425
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d62681c608a27a46a55012f908f5b60, type: 3}
+  m_Name: OldEffect
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  contrast:
+    overrideState: 1
+    value: 0.127
 --- !u!114 &2728726204175336842
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -280,6 +300,25 @@ MonoBehaviour:
   speedDown:
     overrideState: 1
     value: 1
+--- !u!114 &5250617559066905386
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d62681c608a27a46a55012f908f5b60, type: 3}
+  m_Name: OldEffect
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  contrast:
+    overrideState: 1
+    value: 0.132
 --- !u!114 &6541249161493795974
 MonoBehaviour:
   m_ObjectHideFlags: 3
