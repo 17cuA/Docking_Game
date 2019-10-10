@@ -89,11 +89,11 @@ public class LineCreater : MonoBehaviour
 	//初期化─────────────────────────────────────────
 	private void Start()
 	{
-		if (EditorApplication.isPlaying)
-		{
-			Debug.LogWarning("この状態だと書き出しできないので上のif文を消してください");
+		//if (EditorApplication.isPlaying)
+		//{
+		//	Debug.LogWarning("この状態だと書き出しできないので上のif文を消してください");
 			gameObject.SetActive(false);
-		}
+		//}
 	}
 	//────────────────────────────────────────────
 #if UNITY_EDITOR
