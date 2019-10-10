@@ -11,11 +11,24 @@ using DockingGame_Input;
 
 public class Charger_Manager : MonoBehaviour
 {
-	private Rigidbody myRigidbody;    // 自身のRigidbody
-	private bool isEnteredTheSlot;      // スマホの差込口に入ったか
+	/// <summary>
+	/// 充電の移動向き
+	/// </summary>
+	public enum MOVE_DIRECTION
+	{
+		eFRONT,		// まえ
+		eBACK,		// うしろ
+		eRIGHT,		// みぎ
+		eLEFT,		// ひだり
+		eSTOP,		// とまれ
+	}
+
+	private Rigidbody MyRigidbody { get; set; }    // 自身のRigidbody
+	private bool IsEnteredTheSlot { get; set; }      // スマホの差込口に入ったか
+	public MOVE_DIRECTION Direction { private set; get; } //現在の移動向き
 	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;		// スナップターゲット位置
-	[Header("加速時の最大の値")]
-	public float add_Max;
+	[SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
+	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 
 	#region いじるなBy諸岡
 	/// <summary>
@@ -25,7 +38,7 @@ public class Charger_Manager : MonoBehaviour
 	/// <summary>
 	///  現在の速度を渡す
 	/// </summary>
-	public float NowSpeed { get { return myRigidbody.velocity.magnitude; } }
+	public float NowSpeed { get { return MyRigidbody.velocity.magnitude; } }
 	/// <summary>
 	/// Z軸の最大速度
 	/// </summary>
@@ -33,25 +46,24 @@ public class Charger_Manager : MonoBehaviour
 	/// <summary>
 	/// Z軸の現在速度
 	/// </summary>
-	public float NowSpeed_Z { get { return Mathf.Abs( myRigidbody.velocity.z); } }
+	public float NowSpeed_Z { get { return Mathf.Abs( MyRigidbody.velocity.z); } }
 	#endregion
 
-	public GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 	//public Time
 	private void Start()
 	{
-		myRigidbody = GetComponent<Rigidbody>();
-		isEnteredTheSlot = false;
+		MyRigidbody = GetComponent<Rigidbody>();
+		IsEnteredTheSlot = false;
 	}
 	private void Update()
 	{
-		if (!isEnteredTheSlot)
+		if (!IsEnteredTheSlot)
 		{
 			Movement();         //移動処理
 		}
 		else
 		{
-			myRigidbody.velocity = Vector3.zero;
+			MyRigidbody.velocity = Vector3.zero;
 			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
 	}
@@ -60,19 +72,65 @@ public class Charger_Manager : MonoBehaviour
 	/// </summary>
 	private void Movement()
 	{
-		//入力処理--------------------
+		Vector2 saveInputNum_Right = new Vector3(Original_Input.StickRight_X, Original_Input.StickRight_Y);
+		Vector2 saveInputNum_Left = new Vector3(Original_Input.StickLeft_X, Original_Input.StickLeft_Y);
+
+		// 操作なしのとき
+		if(saveInputNum_Right.magnitude == 0.0f && 0.0f == saveInputNum_Left.magnitude)
+		{
+			Direction = MOVE_DIRECTION.eSTOP;
+			return;
+		}
+
 		Vector3 saveInputNum = Vector3.zero;
-		saveInputNum.x = Original_Input.StickLeft_X / 100.0f;
-		saveInputNum.y = Original_Input.StickLeft_Y / 100.0f;
-		//---------------------------
-		// 前後入力(スティック、ボタン対応)-------------------
-		saveInputNum.z = Original_Input.StickRight_Y / 100.0f;
-		if (Original_Input.ButtomFront_Hold) saveInputNum.z = 0.01f;
-		else if(Original_Input.ButtomBack_Hold)saveInputNum.z = -0.01f;
-		// ---------------------------
+
+		// 左右開きで下移動
+		if (saveInputNum_Right.x < 0 && saveInputNum_Left.x > 0)
+		{
+			saveInputNum.y -= (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
+		}
+		// 左右綴じで上移動
+		else if (saveInputNum_Right.x > 0 && saveInputNum_Left.x < 0)
+		{
+			saveInputNum.y += (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
+		}
+		else
+		{
+			saveInputNum.x += (saveInputNum_Right.x + saveInputNum_Left.x) / 200.0f;
+
+			if(saveInputNum.x < 0)
+			{
+				Direction = MOVE_DIRECTION.eLEFT;
+			}
+			else if(saveInputNum.x > 0)
+			{
+				Direction = MOVE_DIRECTION.eRIGHT;
+			}
+		}
+
+		// スティックの向きに前後移動
+		if (saveInputNum_Right.y != 0.0f || saveInputNum_Left.y != 0)
+		{
+			saveInputNum.z += (saveInputNum_Right.y + saveInputNum_Left.y) / 200.0f;
+			if ((saveInputNum_Right.y > 0 && saveInputNum_Left.y < 0)
+				|| (saveInputNum_Right.y < 0 && saveInputNum_Left.y > 0 ))
+			{
+				saveInputNum.z = 0.0f;
+				// 音を入れるかも
+			}
+
+			if(saveInputNum.z > 0.0f)
+			{
+				Direction = MOVE_DIRECTION.eFRONT;
+			}
+			else if(saveInputNum.z < 0.0f)
+			{
+				Direction = MOVE_DIRECTION.eBACK;
+			}
+		}
 
 		//	加速後の Velocity 値の仮保存
-		Vector3 tempVelocity = myRigidbody.velocity + saveInputNum;
+		Vector3 tempVelocity = MyRigidbody.velocity + saveInputNum;
 
 		// スピード制限(絶対値より)--------------------
 		if (Mathf.Abs(tempVelocity.x) > add_Max) tempVelocity.x = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.x);
@@ -81,12 +139,7 @@ public class Charger_Manager : MonoBehaviour
 		//----------------------------------------------
 
 		// 速度適応
-		myRigidbody.velocity = tempVelocity; 
-
-		//if(Original_Input.StickLeft_X != 0 || Original_Input.StickLeft_Y != 0 || Original_Input.StickRight_Y != 0)
-		//{
-			
-		//}
+		MyRigidbody.velocity = tempVelocity; 
 	}
 
 	private void OnTriggerEnter(Collider col)
@@ -94,7 +147,7 @@ public class Charger_Manager : MonoBehaviour
 		// 穴に触れたとき
 		if (col.tag =="Slot")
 		{
-			isEnteredTheSlot = true;
+			IsEnteredTheSlot = true;
 		}
 	}
 }

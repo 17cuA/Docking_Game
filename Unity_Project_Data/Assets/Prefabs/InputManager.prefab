@@ -66,16 +66,17 @@ MonoBehaviour:
     defaultAxisNameList:
     - GamePad_1_Axis_1
     - GamePad_1_Axis_2
-    - GamePad_1_Axis_5
     - GamePad_1_Axis_4
+    - GamePad_1_Axis_5
     - GamePad_1_Axis_6
     - GamePad_1_Axis_7
-    - GamePad_2_Axis_2
     - GamePad_2_Axis_1
+    - GamePad_2_Axis_2
     useAxisNameList:
     - StickLeft_X
     - StickLeft_Y
     - StickRight_Y
+    - StickRight_X
     decisionTime: 3
     textFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     textPositionX: 960

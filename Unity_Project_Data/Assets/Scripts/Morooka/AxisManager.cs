@@ -171,17 +171,32 @@ public class AxisManager
 	/// <returns> </returns>
 	public bool ControllerChange()
 	{
-		if(reflectAxisNameMap["StickRight_Y"] == defaultAxisNameList[2])
-		{
-			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[6];
-		}
-		else
-		{
-			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[2];
-		}
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[2];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[3];
+		return true;
+	}
 
-		reflect_PositiveAndOppositeDirection_Map["StickLeft_Y"] *= -1.0f;
+	public bool LeftRightSet(string temp)
+	{
+		if (temp == "") return false;
+		else if (temp.Substring(0, 9) == "GamePad_1")
+		{
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[6];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[7];
 
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
+		}
+		else if (temp.Substring(0, 9) == "GamePad_2")
+		{
+			reflectAxisNameMap["StickRight_X"] = defaultAxisNameList[0];
+			reflectAxisNameMap["StickRight_Y"] = defaultAxisNameList[1];
+
+			reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[6];
+			reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[7];
+		}
 		return true;
 	}
 }

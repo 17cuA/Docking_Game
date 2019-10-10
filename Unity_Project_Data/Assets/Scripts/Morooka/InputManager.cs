@@ -13,17 +13,18 @@ using UnityEngine.UI;
 [System.Serializable]
 public class InputManager
 {
-	[SerializeField, Tooltip("Unity側で設定するボタン名のリスト")] List<string> defaultButtonNameList = new List<string>();	// uinty側で設定するボタンの名前のリスト
-	[SerializeField, Tooltip("実際に使用する名前のリスト")] List<string> useButtonNameList = new List<string>();				// スクリプト側で使用するボタン名のリスト
-	[SerializeField, Tooltip("確定させるまでの時間")] float decisionTime = 5f;												// 決定するまでの時間
-	float inputTime;																									// 入力を受けている時間
-	Dictionary<string, string> reflectButtonNameMap = new Dictionary<string, string>();									// スクリプト側に渡すボタンの名前
-	Dictionary<string, string> settingButtonNameMap = new Dictionary<string, string>();									// ボタンの再設定をするときの一時変数
-	int settingButtonNum = 0;																							// 設定しているボタンの要素番号
-	string previousInputButtonName = "";																				// 前フレームに入力を受けていたボタンの名前
+	[SerializeField, Tooltip("Unity側で設定するボタン名のリスト")] List<string> defaultButtonNameList = new List<string>();   // uinty側で設定するボタンの名前のリスト
+	[SerializeField, Tooltip("実際に使用する名前のリスト")] List<string> useButtonNameList = new List<string>();             // スクリプト側で使用するボタン名のリスト
+	[SerializeField, Tooltip("確定させるまでの時間")] float decisionTime = 5f;                                                // 決定するまでの時間
+	float inputTime;                                                                                                    // 入力を受けている時間
+	Dictionary<string, string> reflectButtonNameMap = new Dictionary<string, string>();                                 // スクリプト側に渡すボタンの名前
+	Dictionary<string, string> settingButtonNameMap = new Dictionary<string, string>();                                 // ボタンの再設定をするときの一時変数
+	int settingButtonNum = 0;                                                                                           // 設定しているボタンの要素番号
+	string previousInputButtonName = "";                                                                                // 前フレームに入力を受けていたボタンの名前
 	public Dictionary<string, string> Button { get { return reflectButtonNameMap; } }
-	[SerializeField, Tooltip("設定時に表示するフォント")] Font textFont;													// 設定時に表示するテキストのフォント
-	[SerializeField, Tooltip("表示するフォントのX座標")] float textPositionX = 0;											// 表示するテキストのx座標
+	public List<string> DefaultButton { get { return defaultButtonNameList; } }
+	[SerializeField, Tooltip("設定時に表示するフォント")] Font textFont;                                                    // 設定時に表示するテキストのフォント
+	[SerializeField, Tooltip("表示するフォントのX座標")] float textPositionX = 0;                                          // 表示するテキストのx座標
 	Text inputInfoText;
 	/// <summary>
 	/// コンストラクタ
@@ -160,13 +161,22 @@ public class InputManager
 	/// <returns> </returns>
 	public bool ControllerChange()
 	{
-		if (reflectButtonNameMap["Front"] == defaultButtonNameList[0])
+			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
+		return true;
+	}
+
+	public bool LeftRightSet(string temp)
+	{
+		if (temp == "") return false;
+		else if (temp.Substring(0, 9) == "GamePad_1")
 		{
 			reflectButtonNameMap["Front"] = defaultButtonNameList[1];
+			reflectButtonNameMap["Back"] = defaultButtonNameList[10];
 		}
-		else
+		else if (temp.Substring(0, 9) == "GamePad_2")
 		{
-			reflectButtonNameMap["Front"] = defaultButtonNameList[0];
+			reflectButtonNameMap["Front"] = defaultButtonNameList[10];
+			reflectButtonNameMap["Back"] = defaultButtonNameList[1];
 		}
 		return true;
 	}
