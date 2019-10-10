@@ -151,7 +151,7 @@ namespace DockingGame_Input
 	[System.Serializable]
 	public class Original_Input : MonoBehaviour
 	{
-		[SerializeField] InputManager inputManager;
+		[SerializeField] InputManager inputManager ;
 		[SerializeField] AxisManager axisManager;
 		bool isSetUpButton = false;
 		bool isSetAxis = false;
@@ -168,6 +168,10 @@ namespace DockingGame_Input
 			instance = FindObjectOfType<Original_Input>();
 			inputManager.Init();
 			axisManager.Init();
+
+			instance.axisManager.ControllerChange();
+			instance.inputManager.ControllerChange();
+
 			DontDestroyOnLoad(this);
 		}
 		private void Update()
@@ -180,12 +184,19 @@ namespace DockingGame_Input
 			//{
 			//	isSetUpButton = X_Input.Buttom6_Down;
 			//}
-			if(X_Input.Buttom6_Down)
+			if(Input.GetKeyDown(KeyCode.Alpha1))
 			{
 				instance.axisManager.ControllerChange();
 				instance.inputManager.ControllerChange();
 				Debug.Log("chenge");
 			}
+		}
+
+		public bool SetStickLeft()
+		{
+
+
+			return true;
 		}
 	}
 }

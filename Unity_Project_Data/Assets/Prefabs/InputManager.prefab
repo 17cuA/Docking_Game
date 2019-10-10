@@ -55,6 +55,7 @@ MonoBehaviour:
     - GamePad_1_7
     - GamePad_1_8
     - GamePad_1_9
+    - GamePad_2_0
     useButtonNameList:
     - Front
     - Back
@@ -70,6 +71,7 @@ MonoBehaviour:
     - GamePad_1_Axis_6
     - GamePad_1_Axis_7
     - GamePad_2_Axis_2
+    - GamePad_2_Axis_1
     useAxisNameList:
     - StickLeft_X
     - StickLeft_Y
