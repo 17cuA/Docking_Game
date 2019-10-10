@@ -29,6 +29,7 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;		// スナップターゲット位置
 	[SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
 	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
+	[SerializeField, Tooltip("移動速度")] private float speed;
 
 	#region いじるなBy諸岡
 	/// <summary>
@@ -59,7 +60,10 @@ public class Charger_Manager : MonoBehaviour
 	{
 		if (!IsEnteredTheSlot)
 		{
-			Movement_2();         //移動処理
+			if (GameMaster.instance.stageState == GameMaster.StageState.PLAYING)
+			{
+				Movement_2();         //移動処理
+			}
 		}
 		else
 		{
@@ -147,15 +151,18 @@ public class Charger_Manager : MonoBehaviour
 	private void Movement_2()
 	{
 
-		Vector3 saveInputNum = new Vector3(Original_Input.StickLeft_X / 100.0f, Original_Input.StickLeft_Y / 100.0f, 0.0f);
+		Vector3 saveInputNum = new Vector3((Original_Input.StickLeft_X / 100.0f) * speed, (Original_Input.StickLeft_Y / 100.0f)*speed, 0.0f);
 		if(Original_Input.ButtomFront_Hold)
 		{
-			saveInputNum.z -= 1 / 100.0f;
-			Direction = MOVE_DIRECTION.eBACK;
+			saveInputNum.z -= (1 / 100.0f) * speed;
+			if(MyRigidbody.velocity.z < 0.1f)
+			{
+				saveInputNum.z = 0.0f;
+			}
 		}
 		else
 		{
-			saveInputNum.z += 1 / 100.0f;
+			saveInputNum.z += (1 / 100.0f) * speed;
 			Direction = MOVE_DIRECTION.eFRONT;
 		}
 
@@ -168,8 +175,8 @@ public class Charger_Manager : MonoBehaviour
 			Direction = MOVE_DIRECTION.eRIGHT;
 		}
 
-	//	加速後の Velocity 値の仮保存
-	Vector3 tempVelocity = MyRigidbody.velocity + saveInputNum;
+		//	加速後の Velocity 値の仮保存
+		Vector3 tempVelocity = MyRigidbody.velocity + saveInputNum;
 
 		// スピード制限(絶対値より)--------------------
 		if (Mathf.Abs(tempVelocity.x) > add_Max) tempVelocity.x = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.x);

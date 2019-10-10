@@ -7,6 +7,8 @@ public class Target_Distance : MonoBehaviour
 {
 	private Text text;
 	private GameObject Charger;
+
+	private int Index;
 	private List<GameObject> NextTarget;
 
 	private void Start()
@@ -23,10 +25,22 @@ public class Target_Distance : MonoBehaviour
 			NextTarget.Add(temp_1.transform.GetChild(i).gameObject);
 		}
 		NextTarget.Add(temp_2);
+
+		Index = 0;
 	}
 
 	void Update()
     {
-        
-    }
+		if(!NextTarget[Index].activeSelf)
+		{
+			Index++;
+		}
+
+		Vector3 vector = NextTarget[Index].transform.position - Charger.transform.position;
+
+		text.text = "Distance("
+			+"X:" + vector.x.ToString() +", "
+			+"Y:" + vector.y.ToString() +", "
+			+"Z:" + vector.z.ToString() +")";
+	}
 }
