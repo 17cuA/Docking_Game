@@ -25,7 +25,7 @@ public class GameMaster : MonoBehaviour
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
 	private float stageReadyDelay;		// 現在の経過時間
-	private float stageReadyDelayMax = 6.0f;    // 最大の待ち時間
+	private float stageReadyDelayMax = 5.25f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
 	public float stagePlayDelayMax;		// 最大の残り時間
