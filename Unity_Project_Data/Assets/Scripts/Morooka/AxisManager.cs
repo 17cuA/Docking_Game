@@ -204,5 +204,6 @@ public class AxisManager
 	{
 		reflectAxisNameMap["StickLeft_X"] = defaultAxisNameList[0];
 		reflectAxisNameMap["StickLeft_Y"] = defaultAxisNameList[1];
+		reflect_PositiveAndOppositeDirection_Map["StickLeft_Y"] = -1.0f;
 	}
 }
