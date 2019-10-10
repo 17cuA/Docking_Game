@@ -14,7 +14,7 @@ public class BGM_Manager : MonoBehaviour
 	[Header("ドッキングに使うもの")]
 	public AudioSource Docking;
 	public AudioClip Docking_Audioclip;
-
+	private bool Is_Active_Docking_Sound;
 	void Awake()
 	{
 		BGM_obj = GetComponent<BGM_Manager>();
@@ -23,6 +23,7 @@ public class BGM_Manager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		Is_Active_Docking_Sound = true;
 		Breathing.Play();
     }
 	/// <summary>
@@ -35,8 +36,12 @@ public class BGM_Manager : MonoBehaviour
 	/// <summary>
 	/// ドッキング時に鳴らすもの
 	/// </summary>
-	void Sound_Docking()
+	public void Sound_Docking()
 	{
-		Docking.PlayOneShot(Docking_Audioclip);
+		if(Is_Active_Docking_Sound)
+		{
+			Docking.PlayOneShot(Docking_Audioclip);
+			Is_Active_Docking_Sound = false;
+		}
 	}
 }
