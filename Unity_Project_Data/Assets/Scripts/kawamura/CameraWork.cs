@@ -28,7 +28,11 @@ public class CameraWork : MonoBehaviour
 	[Header("横から視点を手動で入れよう！")]
 	public GameObject LeftCameraPosObj;			//横から視点オブジェクト
 	[Header("スマホを手動で入れよう！")]
-    public GameObject phoneObj;						//スマホオブジェクト
+    public GameObject phoneObj;                     //スマホオブジェクト
+	[Header("ゲームマスターオブジェクト！")]
+	public GameObject gameMatherObj;
+	Target_Manager targetMnager_Script;
+
 
 	[Header("カメラの移動位置を入れる配列")]
 	public GameObject[] cameraPosObjects;
@@ -37,7 +41,8 @@ public class CameraWork : MonoBehaviour
 
 
     public Vector3 backwardCameraPos;			//後方視点の位置
-    public Vector3 savePos;								//チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
+    public Vector3 savePos;                             //チャージャーの前の位置を保存（チャージャーが動いているかを見るため）
+	public Vector3 itigamitaiyoooo;
     public Quaternion _rotation;						//カメラの向く方向
 
 	public int cameraPosNum;		// (1が後方 2が真上 3が横から)  ←これは嘘		これが今→ (これの数のcameraPosObjectsの位置を見る)
@@ -66,6 +71,7 @@ public class CameraWork : MonoBehaviour
     void Start()
     {
 		cameraPosNum = 0;
+		targetMnager_Script = gameMatherObj.GetComponent<Target_Manager>();
 		//回転限界を設定
 		if (chargerObj.transform.position.y <= 0)
 		{
@@ -91,27 +97,32 @@ public class CameraWork : MonoBehaviour
 
     void Update()
     {
-        //if (once)
-        //{
-        //    once = false;
-        //}
+		//if (once)
+		//{
+		//    once = false;
+		//}
+
+		cameraPosNum = targetMnager_Script.Get_InRadius();
 
 		//チャージャーが動いているかの判定関数
-		ChargerMoveCheck();
+		//ChargerMoveCheck();
 
         //動いていたら
         if (isMove)
         {
             //カメラの回転値を決める関数呼び出し
-            CameraRotation();
+            //CameraRotation();
             //カメラの向く方向を決める
             _rotation = Quaternion.Euler(rotaX, rotaY, 0);
         }
 
+		itigamitaiyoooo = cameraPosObjects[cameraPosNum].transform.position;
+
+		CameraPosSet();
         //後方視点のZ位置を更新する
         posZ = chargerObj.transform.position.z - defPosZ_Value;
 		//後方視点の位置を更新
-		backwardCameraPos = new Vector3(chargerObj.transform.position.x+1.4f, chargerObj.transform.position.y + 1f, posZ);
+		//backwardCameraPos = new Vector3(chargerObj.transform.position.x+1.4f, chargerObj.transform.position.y + 1f, posZ);
 
 		//FPS視点に移動するときの条件（チャージャーのXY座標が決めた値の範囲内で、Zの座標が決めた値よりスマホと近くなったら）
 		if (chargerObj.transform.position.x > phoneObj.transform.position.x - FPS_Distance_XandY && chargerObj.transform.position.x < phoneObj.transform.position.x + FPS_Distance_XandY
@@ -154,7 +165,7 @@ public class CameraWork : MonoBehaviour
 		}
 
 		//カメラの位置変更関数呼び出し
-		CameraPosChange();
+		//CameraPosChange();
 
 		//FPS視点以外のときに位置切り替えボタンが押されたら位置（カメラの状態）を変える
 		if (cameraState != CameraState.FPS)
@@ -310,16 +321,19 @@ public class CameraWork : MonoBehaviour
 		{
 			case 0:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				break;
 
 			case 1:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 
 				//cameraState = CameraState.Backward;
 				break;
 
 			case 2:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				//cameraState = CameraState.Top;
 				break;
 
@@ -329,10 +343,12 @@ public class CameraWork : MonoBehaviour
 				break;
 			case 4:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				break;
 
 			case 5:
 				transform.position=cameraPosObjects[cameraPosNum].transform.position;
+				transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
 				break;
 		}
 	}
