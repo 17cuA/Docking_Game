@@ -25,7 +25,7 @@ public class GameMaster : MonoBehaviour
 	// ゲームが開始するまでの時間経過
 	[SerializeField, NonEditable]
 	private float stageReadyDelay;		// 現在の経過時間
-	private float stageReadyDelayMax = 10.5f;    // 最大の待ち時間
+	private float stageReadyDelayMax = 5.25f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
 	public float stagePlayDelayMax;		// 最大の残り時間
@@ -92,17 +92,32 @@ public class GameMaster : MonoBehaviour
 			// ステージステータスをゲームクリアに変更
 			SetStageState(StageState.STAGEFAILURE);
 		}
-		// 1キーを押したらプレイ中の無線が出る
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			// プレイ中の無線
-			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_1);
-		}
+		//// 1キーを押したらプレイ中の無線が出る
+		//if (Input.GetKeyDown(KeyCode.Alpha1))
+		//{
+		//	// プレイ中の無線
+		//	wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_1);
+		//}
 		// 2キーを押したらプレイ中の無線2が出る
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			// プレイ中の無線
 			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_2);
+		}
+		// 2キーを押したらプレイ中の無線2が出る
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			// TIMEの変更
+			if(timeDisplayScr.GetTimeMode() == TimeDisplay.TimeMode.PLAY)
+			{
+				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.DEBUG_1);
+			}
+			else if (timeDisplayScr.GetTimeMode() == TimeDisplay.TimeMode.STOP)
+			{
+				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.DEBUG_2);
+			}
 		}
 
 		// 現在のステージステータスで処理を変える
@@ -129,8 +144,9 @@ public class GameMaster : MonoBehaviour
 
 			// ステージ開始前時
 			case StageState.READY:
+				stageReadyDelay += Time.deltaTime;
 				// 無線が無しになった時
-				if(wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
+				if (stageReadyDelay >= stageReadyDelayMax)
 				{
 					// ステージステータスをプレイに変更
 					SetStageState(StageState.PLAYING);
@@ -229,7 +245,7 @@ public class GameMaster : MonoBehaviour
 		{
 			case StageState.READY:
 				// 最初の無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.FIRST);
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.FIRST_1);
 				break;
 
 			case StageState.FADEOUT:
@@ -239,7 +255,7 @@ public class GameMaster : MonoBehaviour
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
 				// クリアの無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR);
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
 				break;
@@ -251,7 +267,7 @@ public class GameMaster : MonoBehaviour
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
 				// 失敗の無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE);
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
 				break;
@@ -267,7 +283,7 @@ public class GameMaster : MonoBehaviour
 
 			// その他テキスト削除
 			default:
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
+				//wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
 				break;
 		}
 

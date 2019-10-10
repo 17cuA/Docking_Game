@@ -24,12 +24,17 @@ public class BehaviorRandomThunder : MonoBehaviour
 	//移動後最大座標バックアップ
 	private float maxCoordinateAfterMoveBU;
 
+	//基準座標
+	public GameObject baseCoordinate;
+
 	//ワープホール管理 : WarpHoleBehavior
 	public WarpHoleBehavior warpHoleBehaviorCS;
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
+		baseCoordinate = transform.root.gameObject;
+
 		transform.position = new Vector3(
 		Random.Range(-maxMovingDistance, maxMovingDistance),
 		Random.Range(-maxMovingDistance, maxMovingDistance),
@@ -43,30 +48,31 @@ public class BehaviorRandomThunder : MonoBehaviour
 		maxCoordinateAfterMoveBU = maxCoordinateAfterMove;
 	}
 
-    void Update()
-    {
+	void Update()
+	{
 		movingCycleCount++;
 		if (movingCycle <= movingCycleCount)
 		{
+			//baseCoordinate = transform.root.gameObject;
 
-			coordinateAfterMove.x = transform.position.x + Random.Range(-maxMovingDistance, maxMovingDistance);
-			if (maxCoordinateAfterMove < coordinateAfterMove.x) coordinateAfterMove.x = maxCoordinateAfterMove;
-			if (-maxCoordinateAfterMove > coordinateAfterMove.x) coordinateAfterMove.x = -maxCoordinateAfterMove;
+			coordinateAfterMove.x = transform.position.x + Random.Range(baseCoordinate.transform.position.x - maxMovingDistance, baseCoordinate.transform.position.x + maxMovingDistance);
+			if (baseCoordinate.transform.position.x + maxCoordinateAfterMove < coordinateAfterMove.x) coordinateAfterMove.x = baseCoordinate.transform.position.x + maxCoordinateAfterMove;
+			if (baseCoordinate.transform.position.x - maxCoordinateAfterMove > coordinateAfterMove.x) coordinateAfterMove.x = baseCoordinate.transform.position.x - maxCoordinateAfterMove;
 
-			coordinateAfterMove.y = transform.position.y + Random.Range(-maxMovingDistance, maxMovingDistance);
-			if (maxCoordinateAfterMove < coordinateAfterMove.y) coordinateAfterMove.y = maxCoordinateAfterMove;
-			if (-maxCoordinateAfterMove > coordinateAfterMove.y) coordinateAfterMove.y = -maxCoordinateAfterMove;
+			coordinateAfterMove.y = transform.position.y + Random.Range(baseCoordinate.transform.position.y - maxMovingDistance, baseCoordinate.transform.position.y + maxMovingDistance);
+			if (baseCoordinate.transform.position.y + maxCoordinateAfterMove < coordinateAfterMove.y) coordinateAfterMove.y = baseCoordinate.transform.position.y + maxCoordinateAfterMove;
+			if (baseCoordinate.transform.position.y - maxCoordinateAfterMove > coordinateAfterMove.y) coordinateAfterMove.y = baseCoordinate.transform.position.y - maxCoordinateAfterMove;
 
-			coordinateAfterMove.z = transform.position.z + Random.Range(-maxMovingDistance, maxMovingDistance);
-			if (maxCoordinateAfterMove < coordinateAfterMove.z) coordinateAfterMove.z = maxCoordinateAfterMove;
-			if (-maxCoordinateAfterMove > coordinateAfterMove.z) coordinateAfterMove.z = -maxCoordinateAfterMove;
+			coordinateAfterMove.z = transform.position.z + Random.Range(baseCoordinate.transform.position.z - maxMovingDistance, baseCoordinate.transform.position.z + maxMovingDistance);
+			if (baseCoordinate.transform.position.z + maxCoordinateAfterMove < coordinateAfterMove.z) coordinateAfterMove.z = baseCoordinate.transform.position.z + maxCoordinateAfterMove;
+			if (baseCoordinate.transform.position.z - maxCoordinateAfterMove > coordinateAfterMove.z) coordinateAfterMove.z = baseCoordinate.transform.position.z - maxCoordinateAfterMove;
 
 			transform.position = coordinateAfterMove;
 
 			movingCycleCount = 0;
 		}
 
-		if(warpHoleBehaviorCS.reproducingNum ==2)
+		if (warpHoleBehaviorCS.reproducingNum == 2)
 		{
 			elapsedTime += Time.deltaTime;
 
