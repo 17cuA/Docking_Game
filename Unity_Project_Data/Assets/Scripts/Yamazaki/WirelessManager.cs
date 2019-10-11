@@ -120,9 +120,21 @@ public class WirelessManager : MonoBehaviour
 	[SerializeField, NonEditable]
 	private WirelessMode wirelessMode = WirelessMode.NONE;
 
-	// Start is called before the first frame update
-	void Start()
+	private void Awake()
 	{
+		// 音声
+		clearWirelessSE = Resources.Load("Sounds/SE/Docking_ClearSound") as AudioClip;
+		if (!gameObject.GetComponent<AudioSource>())
+		{
+			audioSource = gameObject.AddComponent<AudioSource>();
+		}
+		else
+		{
+			audioSource = GetComponent<AudioSource>();
+			audioSource.clip = clearWirelessSE;
+		}
+		audioSource.playOnAwake = false;
+
 		wirelessJPText.text = "";
 		wirelessENText.text = "";
 		wirelessMode = WirelessMode.NONE;
@@ -131,17 +143,13 @@ public class WirelessManager : MonoBehaviour
 		wirelessJPText.color = Color.white;
 		wirelessENText.color = Color.white;
 
-		// 音声
-		clearWirelessSE = Resources.Load("Sounds/SE/Docking_ClearSound") as AudioClip;
-		if(!audioSource)
-		{
-			audioSource = gameObject.AddComponent<AudioSource>();
-		}
-		else
-		{
-			audioSource = GetComponent<AudioSource>();
-		}
-		audioSource.playOnAwake = false;
+
+	}
+
+	// Start is called before the first frame update
+	void Start()
+	{
+		
 	}
 
 	public void SetWirelessMode(WirelessMode w)
@@ -437,7 +445,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 5.25f)
+				if (displayTime >= 5.0f)
 				{
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_3);
@@ -448,7 +456,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 1.75f)
+				if (displayTime >= 2.0f)
 				{
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_4);
@@ -459,7 +467,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 2.875f)
+				if (displayTime >= 2.725f)
 				{
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_5);
