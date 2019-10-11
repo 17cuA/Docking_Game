@@ -92,6 +92,8 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「ｄｏｃｋｉｎｇ　ｃａｒｅｆｕｌｌｙ」"),
 		new WirelessString("「・・・！？時が止まっただと・・・！？", "「．．．！Ｓｔｏｐｐｅｄ！？」"),
 		new WirelessString("「時間が動いた」", "「ＴＩＭＥＩＳＭＯＶＥ」"),
+
+		// 
 		new WirelessString("「最終作戦軌道への投入準備完了。」", ""),
 		new WirelessString("「了解。相対速度、再計算を開始。異常なし。」"),
 		new WirelessString("「座標高度を再確認。すべて異常なしです。」"),
@@ -99,12 +101,14 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("「現時点ですべてのリモート誘導を切断。」"),
 		new WirelessString("「以後の制御はローカルで行う。」"),
 		new WirelessString("「グッド・ラック」"),
-		new WirelessString("Ｐ「ドッキング成功」"),
-		new WirelessString("ＨＱ（歓声）"),
-		new WirelessString("Ｐ「これよりフェイズ３へ移行する。」"),
+		// ドッキング成功時無線字幕
+		new WirelessString("Ｐｉｌｏｔ「ドッキング成功」"),
+		new WirelessString("ー管制室に響き渡る歓声ー"),
+		new WirelessString("Ｐｉｌｏｔ「これよりフェイズ３へ移行する。」"),
 		new WirelessString("ＨＱ「難しい軌道だったがよくやってくれた。」"),
 		new WirelessString("Ｐｉｌｏｔ「妻の機嫌を取るほうがよっぽど難しいさ。」"),
-		new WirelessString("Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
+		// ドッキング失敗時無線字幕
+		new WirelessString("Ｐｉｌｏｔ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
 		new WirelessString("ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」"),
 		new WirelessString("ＨＱ「こ、このままでは・・・」"),
 	};
@@ -166,6 +170,7 @@ public class WirelessManager : MonoBehaviour
 				break;
 
 			case WirelessMode.FIRST_1:
+				BGM_Manager.BGM_obj.Active_Wireless();
 				wirelessJPText.text = wirelessList[18].sJP;
 				break;
 
