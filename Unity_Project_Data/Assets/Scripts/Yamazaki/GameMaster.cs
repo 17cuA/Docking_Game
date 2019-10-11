@@ -199,7 +199,7 @@ public class GameMaster : MonoBehaviour
 
 			// ステージクリアステータス時
 			case StageState.STAGECLEAR:
-				BGM_Manager.BGM_obj.Sound_Docking();
+				//BGM_Manager.BGM_obj.Sound_Docking();
 				// 無線が無しになった時
 				if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
