@@ -31,6 +31,10 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 	[SerializeField, Tooltip("移動速度")] private float speed;
 	[SerializeField, Tooltip("ブレーキ速度")] private float brakeSpeed;
+	[SerializeField, Tooltip("酸素ゲージのスクリプト")] private UI_Gauge O2UI;
+	[SerializeField, Tooltip("酸素ゲージの減る時間(秒)")] private float timeToReduce;
+
+	private float elapsedTime;
 
 	#region いじるなBy諸岡
 	/// <summary>
@@ -63,7 +67,7 @@ public class Charger_Manager : MonoBehaviour
 		{
 			if (GameMaster.instance.stageState == GameMaster.StageState.PLAYING)
 			{
-				Movement_2();         //移動処理
+				Movement();         //移動処理
 			}
 		}
 		else
@@ -72,102 +76,35 @@ public class Charger_Manager : MonoBehaviour
 			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
 	}
-	#region ムーブ
-	/// <summary>
-	/// 移動処理
-	/// </summary>
-	private void Movement()
-	{
-		Vector2 saveInputNum_Right = new Vector3(Original_Input.StickRight_X, Original_Input.StickRight_Y);
-		Vector2 saveInputNum_Left = new Vector3(Original_Input.StickLeft_X, Original_Input.StickLeft_Y);
-
-		// 操作なしのとき
-		if(saveInputNum_Right.magnitude == 0.0f && 0.0f == saveInputNum_Left.magnitude)
-		{
-			Direction = MOVE_DIRECTION.eSTOP;
-			return;
-		}
-
-		Vector3 saveInputNum = Vector3.zero;
-
-		// 左右開きで下移動
-		if (saveInputNum_Right.x < 0 && saveInputNum_Left.x > 0)
-		{
-			saveInputNum.y -= (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
-		}
-		// 左右綴じで上移動
-		else if (saveInputNum_Right.x > 0 && saveInputNum_Left.x < 0)
-		{
-			saveInputNum.y += (Mathf.Abs(saveInputNum_Right.x) + Mathf.Abs(saveInputNum_Left.x)) / 200.0f;
-		}
-		else
-		{
-			saveInputNum.x += (saveInputNum_Right.x + saveInputNum_Left.x) / 200.0f;
-
-			if(saveInputNum.x < 0)
-			{
-				Direction = MOVE_DIRECTION.eLEFT;
-			}
-			else if(saveInputNum.x > 0)
-			{
-				Direction = MOVE_DIRECTION.eRIGHT;
-			}
-		}
-
-		// スティックの向きに前後移動
-		if (saveInputNum_Right.y != 0.0f || saveInputNum_Left.y != 0)
-		{
-			saveInputNum.z += (saveInputNum_Right.y + saveInputNum_Left.y) / 200.0f;
-			if ((saveInputNum_Right.y > 0 && saveInputNum_Left.y < 0)
-				|| (saveInputNum_Right.y < 0 && saveInputNum_Left.y > 0 ))
-			{
-				saveInputNum.z = 0.0f;
-				// 音を入れるかも
-			}
-
-			if(saveInputNum.z > 0.0f)
-			{
-				Direction = MOVE_DIRECTION.eFRONT;
-			}
-			else if(saveInputNum.z < 0.0f)
-			{
-				Direction = MOVE_DIRECTION.eBACK;
-			}
-		}
-
-		//	加速後の Velocity 値の仮保存
-		Vector3 tempVelocity = MyRigidbody.velocity + saveInputNum;
-
-		// スピード制限(絶対値より)--------------------
-		if (Mathf.Abs(tempVelocity.x) > add_Max) tempVelocity.x = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.x);
-		if (Mathf.Abs(tempVelocity.y) > add_Max) tempVelocity.y = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.y);
-		if (Mathf.Abs(tempVelocity.z) > add_Max) tempVelocity.z = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.z);
-		//----------------------------------------------
-
-		// 速度適応
-		MyRigidbody.velocity = tempVelocity; 
-	}
-	#endregion
 	#region ムーブ2
-	private void Movement_2()
+	private void Movement()
 	{
 
 		Vector3 saveInputNum = new Vector3((Original_Input.StickLeft_X / 100.0f) * speed, (Original_Input.StickLeft_Y / 100.0f)*speed, 0.0f);
-		if(Original_Input.ButtomFront_Hold || Input.GetKey(KeyCode.Space))
+		if (Original_Input.ButtomFront_Hold || Input.GetKey(KeyCode.Space))
 		{
 			saveInputNum.z -= (1 / 100.0f) * brakeSpeed;
-			if(MyRigidbody.velocity.z < 0.1f)
+			if (MyRigidbody.velocity.z < 0.1f)
 			{
 				saveInputNum.z = 0.0f;
+			}
+
+			elapsedTime += Time.deltaTime;
+			if (elapsedTime > timeToReduce)
+			{
+				O2UI.Calc_nowVolue();
+				elapsedTime = 0.0f;
 			}
 		}
 		else
 		{
+			elapsedTime = timeToReduce;
 			saveInputNum.z += (1 / 100.0f) * speed;
 			Direction = MOVE_DIRECTION.eFRONT;
 		}
 
-		if(Input.GetKey(KeyCode.LeftArrow))
+		#region デバッグキー
+		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			saveInputNum.x -= (1 / 100.0f) * speed;
 		}
@@ -183,7 +120,7 @@ public class Charger_Manager : MonoBehaviour
 		{
 			saveInputNum.y -= (1 / 100.0f) * speed;
 		}
-
+		#endregion
 		if (saveInputNum.x < 0)
 		{
 			Direction = MOVE_DIRECTION.eLEFT;
