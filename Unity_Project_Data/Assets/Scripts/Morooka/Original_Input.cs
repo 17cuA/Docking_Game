@@ -159,6 +159,7 @@ namespace DockingGame_Input
 		static public bool ButtomFront_Hold { get { return Input.GetButton(instance.inputManager.Button["Front"]); } }
 		static public bool ButtomBack_Hold { get { return Input.GetButton(instance.inputManager.Button["Back"]); } }
 		static public float StickRight_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_Y"]; } }
+		static public float StickRight_X { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_X"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_X"]; } }
 		static public float StickLeft_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_Y"]; } }
 		static public float StickLeft_X { get{ return Input.GetAxis(instance.axisManager.Axis["StickLeft_X"]) * instance.axisManager.PositiveAndOppositeDirection["StickLeft_X"]; } }
 
@@ -169,8 +170,11 @@ namespace DockingGame_Input
 			inputManager.Init();
 			axisManager.Init();
 
-			instance.axisManager.ControllerChange();
-			instance.inputManager.ControllerChange();
+			//instance.axisManager.ControllerChange();
+			//instance.inputManager.ControllerChange();
+
+			instance.axisManager.ControllerStart();
+			instance.inputManager.ControllerStart();
 
 			DontDestroyOnLoad(this);
 		}
@@ -188,15 +192,21 @@ namespace DockingGame_Input
 			{
 				instance.axisManager.ControllerChange();
 				instance.inputManager.ControllerChange();
-				Debug.Log("chenge");
 			}
 		}
 
-		public bool SetStickLeft()
+		public bool SetStick()
 		{
-
-
-			return true;
+			foreach(var _input_ in instance.inputManager.DefaultButton)
+			{
+				if(Input.GetButton(_input_))
+				{
+					instance.axisManager.LeftRightSet(_input_);
+					instance.inputManager.LeftRightSet(_input_);
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }
