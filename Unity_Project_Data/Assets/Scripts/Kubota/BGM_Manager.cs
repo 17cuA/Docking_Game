@@ -24,7 +24,7 @@ public class BGM_Manager : MonoBehaviour
 	void Start()
     {
 		Is_Active_Docking_Sound = true;
-		Breathing.Play();
+		//Breathing.Play();
     }
 	/// <summary>
 	/// 無線を鳴らす際に使用する
