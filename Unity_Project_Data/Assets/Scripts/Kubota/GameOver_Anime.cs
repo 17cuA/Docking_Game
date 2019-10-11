@@ -82,4 +82,15 @@ public class GameOver_Anime : MonoBehaviour
 		sprite_Frame.color = sprite_Frame_color;
 
 	}
+	public bool Is_Finshed()
+	{
+		if(alpha_value <= 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

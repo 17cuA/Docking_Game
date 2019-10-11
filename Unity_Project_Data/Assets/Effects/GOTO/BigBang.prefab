@@ -9555,9 +9555,9 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7145960207041574278}
   serializedVersion: 6
-  lengthInSec: 5
+  lengthInSec: 10
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -43061,11 +43061,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7145960207041574283}
     m_Modifications:
-    - target: {fileID: 8279551049884539706, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
-        type: 3}
-      propertyPath: m_Name
-      value: ShockWavcw_Bigger
-      objectReference: {fileID: 0}
     - target: {fileID: 6699898765344883598, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -43121,30 +43116,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8279551049884539706, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
+        type: 3}
+      propertyPath: m_Name
+      value: ShockWavcw_Bigger
+      objectReference: {fileID: 0}
     - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}
       propertyPath: startDelay.scalar
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
-        type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
-        type: 3}
-      propertyPath: SizeModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
-        type: 3}
-      propertyPath: ColorModule.enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}
@@ -43158,13 +43138,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
+      propertyPath: InitialModule.startSize.scalar
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010906747095751403, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414288043584459341, guid: a2fa6c5aa62d0494eb1f6bd4446cabb4,
         type: 3}

@@ -5,16 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameOver_Manager : MonoBehaviour
 {
-
+	public GameObject hal;
 	public Planet_Explosion_Slow explosion;
-
-	private int frame;
+	public GameObject Bicban;
+	public GameOver_Anime GOA;
+	public int frame;
 	private int frame_Max;
 	public int cnt;
 
 	public Text wireless;
 	private string[] wirelessList = new string[4];
 	public int wirelesscnt;
+	private int num;
+	private bool one;
 	void Start()
     {
 		wirelessList[0] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
@@ -22,6 +25,8 @@ public class GameOver_Manager : MonoBehaviour
 		wirelessList[2] = "ＨＱ「こ、このままでは・・・」";
 		wirelessList[3] = "";
 		cnt = 0;
+		num = 0;
+		one = false;
 		//frame = 
 		//Serifu
     }
@@ -30,6 +35,17 @@ public class GameOver_Manager : MonoBehaviour
     void Update()
     {
 		Wireless_Active();
+		if (num > 420 && one == false)
+		{
+
+			Instantiate(Bicban,hal.transform.position,Quaternion.identity);
+			Instantiate(Bicban, hal.transform.position, Quaternion.identity);
+
+			Instantiate(Bicban, hal.transform.position, Quaternion.identity);
+
+			one = true;
+		}
+		
         if(frame > 60 && cnt == 0 && wirelesscnt == 4)
 		{
 			  explosion.StartCoroutine("ExplodePlanet");
@@ -41,7 +57,7 @@ public class GameOver_Manager : MonoBehaviour
 		{
 			SceneManager.LoadScene("Title");
 		}
-
+		num++;
 	}
 	void Wireless_Display(int i)
 	{
@@ -74,6 +90,7 @@ public class GameOver_Manager : MonoBehaviour
 				break;
 			case 3:
 				frame_Max = 120;
+				
 				break;
 
 		}
