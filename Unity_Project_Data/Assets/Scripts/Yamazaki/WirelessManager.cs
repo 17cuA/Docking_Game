@@ -170,6 +170,7 @@ public class WirelessManager : MonoBehaviour
 				break;
 
 			case WirelessMode.FIRST_1:
+				BGM_Manager.BGM_obj.Active_Wireless();
 				wirelessJPText.text = wirelessList[18].sJP;
 				break;
 
