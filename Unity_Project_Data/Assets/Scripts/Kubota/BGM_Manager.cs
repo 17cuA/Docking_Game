@@ -29,7 +29,7 @@ public class BGM_Manager : MonoBehaviour
 	/// <summary>
 	/// 無線を鳴らす際に使用する
 	/// </summary>
-	void Active_Wireless()
+	public void Active_Wireless()
 	{
 		Wireless.PlayOneShot(Wireless_AudioClip);
 	}
