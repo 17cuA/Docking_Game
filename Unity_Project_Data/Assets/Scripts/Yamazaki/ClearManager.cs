@@ -18,7 +18,7 @@ public class ClearManager : MonoBehaviour
 	public WirelessManager wirelessManagerScr;
 
 	public float movieTime;
-	private float movieTimeMax = 25.0f;
+	public float movieTimeMax = 25.0f;
 
     // Start is called before the first frame update
     void Start()
