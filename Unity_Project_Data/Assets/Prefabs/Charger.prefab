@@ -283,9 +283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapTargetPos: {fileID: 0}
-  add_Max: 5
+  add_Max: 0.25
   GM: {fileID: 0}
-  speed: 1
+  speed: 0.1
+  brakeSpeed: 0
 --- !u!65 &7747811384486361195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -405,9 +406,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6054606719523152990, guid: efeb6271f7d5c7b46a2242e8d7f295d3, type: 3}
-    - {fileID: 831895648813685692, guid: efeb6271f7d5c7b46a2242e8d7f295d3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efeb6271f7d5c7b46a2242e8d7f295d3, type: 3}
 --- !u!1 &5588995685528713292 stripped
 GameObject:
@@ -538,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[4]
       value: 
       objectReference: {fileID: 7400000, guid: 10d9a585f82ba78438f0e1c56ebb853d, type: 2}
+    - target: {fileID: 3593897888090488493, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8163a4f5ecc9e61489ac45e7579cac95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a742bbf4cc8c9c648aaed7f58da0fd96, type: 3}
 --- !u!4 &7030978636272030777 stripped
@@ -749,6 +753,11 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[4]
       value: 
       objectReference: {fileID: 7400000, guid: baaee68052dec504bb9151e61cecd5ec, type: 2}
+    - target: {fileID: 3593897888090488493, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8163a4f5ecc9e61489ac45e7579cac95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a742bbf4cc8c9c648aaed7f58da0fd96, type: 3}
 --- !u!4 &4961473878558090759 stripped
@@ -783,12 +792,12 @@ PrefabInstance:
     - target: {fileID: 4252339182924378871, guid: 18119647fd128914c9d78b2d860e6bad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4252339182924378871, guid: 18119647fd128914c9d78b2d860e6bad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.086
+      value: -0.029
       objectReference: {fileID: 0}
     - target: {fileID: 4252339182924378871, guid: 18119647fd128914c9d78b2d860e6bad,
         type: 3}
