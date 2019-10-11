@@ -321,10 +321,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.STAGECLEAR:
 				// 状況成功
 				isGameClear = true;
-				// クリアの無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
+				//// クリアの無線
+				//wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
+				SetStageState(StageState.FADEOUT);
 				break;
 
 			// タイトル移動前用テキスト
@@ -335,10 +336,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.STAGEFAILURE:
 				// 状況失敗
 				isGameClear = false;
-				// 失敗の無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
+				//// 失敗の無線
+				//wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
+				SetStageState(StageState.FADEOUT);
 				break;
 
 			// 失敗後タイトル移動前用テキスト
