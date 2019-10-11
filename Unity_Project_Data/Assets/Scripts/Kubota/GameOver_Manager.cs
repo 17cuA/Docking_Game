@@ -38,15 +38,14 @@ public class GameOver_Manager : MonoBehaviour
 		if (num > 420 && one == false)
 		{
 
-			Instantiate(Bicban,hal.transform.position,Quaternion.identity);
-			Instantiate(Bicban, hal.transform.position, Quaternion.identity);
-
-			Instantiate(Bicban, hal.transform.position, Quaternion.identity);
+			Instantiate(Bicban,new Vector3(-13,-1,-1.8f),new Quaternion(90,0,0,0));
+			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
+			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
 
 			one = true;
 		}
 		
-        if(frame > 60 && cnt == 0 && wirelesscnt == 4)
+        if(frame > 180 && cnt == 0 && wirelesscnt == 4)
 		{
 			  explosion.StartCoroutine("ExplodePlanet");
 			cnt++;
@@ -91,6 +90,9 @@ public class GameOver_Manager : MonoBehaviour
 			case 3:
 				frame_Max = 120;
 				
+				break;
+			default:
+				frame_Max = 180;
 				break;
 
 		}
