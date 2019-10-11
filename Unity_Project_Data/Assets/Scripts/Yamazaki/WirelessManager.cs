@@ -97,7 +97,7 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("「・・・！？時が止まっただと・・・！？", "「．．．！Ｓｔｏｐｐｅｄ！？」"),
 		new WirelessString("「時間が動いた」", "「ＴＩＭＥＩＳＭＯＶＥ」"),
 
-		// 
+		// ゲームスタート時無線字幕
 		new WirelessString("「最終作戦軌道への投入準備完了。」", ""),
 		new WirelessString("「了解。相対速度、再計算を開始。異常なし。」"),
 		new WirelessString("「座標高度を再確認。すべて異常なしです。」"),
@@ -146,6 +146,8 @@ public class WirelessManager : MonoBehaviour
 
 	public void SetWirelessMode(WirelessMode w)
 	{
+		displayTime = 0.0f;
+
 		switch (w)
 		{
 			case WirelessMode.NONE:
@@ -338,8 +340,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= displayTimeMax)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.NONE);
 				}
@@ -351,8 +351,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 4.75f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_2);
 				}
@@ -364,8 +362,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 4.75f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_3);
 				}
@@ -377,8 +373,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 4.75f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_4);
 				}
@@ -390,8 +384,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 4.5f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_5);
 				}
@@ -403,8 +395,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 2.0f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_6);
 				}
@@ -416,8 +406,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 1.15f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.FIRST_7);
 				}
@@ -429,8 +417,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= 1.0f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.NONE);
 				}
@@ -440,10 +426,8 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 3.0f)
+				if (displayTime >= 2.5f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_2);
 				}
@@ -453,10 +437,8 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 4.25f)
+				if (displayTime >= 5.25f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_3);
 				}
@@ -466,10 +448,8 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 1.25f)
+				if (displayTime >= 1.75f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_4);
 				}
@@ -479,10 +459,8 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 2.5f)
+				if (displayTime >= 2.875f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGECLEAR_5);
 				}
@@ -492,10 +470,8 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= 3.0f)
+				if (displayTime >= 2.5f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.NONE);
 				}
@@ -507,8 +483,6 @@ public class WirelessManager : MonoBehaviour
 				// 待ち時間を達した時
 				if (displayTime >= displayTimeMax / 3.0f)
 				{
-					displayTime = 0.0f;
-
 					// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGEFAILURE_2);
 				}
@@ -519,10 +493,7 @@ public class WirelessManager : MonoBehaviour
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
 				if (displayTime >= displayTimeMax / 3.0f)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
+				{// 無線なしに変更
 					SetWirelessMode(WirelessMode.STAGEFAILURE_3);
 				}
 				break;
@@ -532,10 +503,7 @@ public class WirelessManager : MonoBehaviour
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
 				if (displayTime >= displayTimeMax / 3.0f)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
+				{// 無線なしに変更
 					SetWirelessMode(WirelessMode.NONE);
 				}
 				break;
