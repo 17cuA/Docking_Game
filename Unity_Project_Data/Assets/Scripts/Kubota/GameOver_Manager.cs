@@ -41,8 +41,6 @@ public class GameOver_Manager : MonoBehaviour
 		if (num > 420 && one == false)
 		{
 
-			Instantiate(Bicban,new Vector3(-13,-1,-1.8f),new Quaternion(90,0,0,0));
-			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
 			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
 
 			one = true;
