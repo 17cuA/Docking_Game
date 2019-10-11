@@ -34,10 +34,15 @@ public class TimeDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		oxygenOneMinusTimeMax = 0.125f;
+		oxygenOneMinusTimeMax = 1.0f;
 
 		stageTimeText.text = stagePlayDelay.ToString("00.000");
     }
+
+	public void SetOxygenOneMinusTimeMax(float f)
+	{
+		oxygenOneMinusTimeMax = f;
+	}
 
     // Update is called once per frame
     void Update()
@@ -48,7 +53,8 @@ public class TimeDisplay : MonoBehaviour
                 stageTimeText.text = stagePlayDelay.ToString("00.000");
 
 				oxygenOneMinusTime += Time.deltaTime;
-				if(oxygenOneMinusTime >= oxygenOneMinusTimeMax)
+
+				while(oxygenOneMinusTime >= oxygenOneMinusTimeMax)
 				{
 					oxygenOneMinusTime -= oxygenOneMinusTimeMax;
 					// 酸素1減る

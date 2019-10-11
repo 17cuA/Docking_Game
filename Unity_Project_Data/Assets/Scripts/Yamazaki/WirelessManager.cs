@@ -30,6 +30,10 @@ public class WirelessManager : MonoBehaviour
 	[SerializeField, Tooltip("ステージ上イングリシュテキスト")]
 	public Text wirelessENText;
 
+	// クリア音声
+	public AudioClip clearWirelessSE;
+	public AudioSource audioSource;
+
 	public enum WirelessMode
 	{
 		NONE,
@@ -126,6 +130,18 @@ public class WirelessManager : MonoBehaviour
 		wirelessJPText.enabled = true;
 		wirelessJPText.color = Color.white;
 		wirelessENText.color = Color.white;
+
+		// 音声
+		clearWirelessSE = Resources.Load("Sounds/SE/Docking_ClearSound") as AudioClip;
+		if(!audioSource)
+		{
+			audioSource = gameObject.AddComponent<AudioSource>();
+		}
+		else
+		{
+			audioSource = GetComponent<AudioSource>();
+		}
+		audioSource.playOnAwake = false;
 	}
 
 	public void SetWirelessMode(WirelessMode w)
@@ -199,6 +215,9 @@ public class WirelessManager : MonoBehaviour
 				break;
 
 			case WirelessMode.STAGECLEAR_1:
+				// クリア音声再生
+				audioSource.clip = clearWirelessSE;
+				audioSource.Play();
 				wirelessJPText.text = wirelessList[25].sJP;
 				break;
 
@@ -421,7 +440,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 3.0f)
 				{
 					displayTime = 0.0f;
 
@@ -434,7 +453,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 4.25f)
 				{
 					displayTime = 0.0f;
 
@@ -447,7 +466,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 1.25f)
 				{
 					displayTime = 0.0f;
 
@@ -460,7 +479,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 2.5f)
 				{
 					displayTime = 0.0f;
 
@@ -473,7 +492,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 3.0f)
 				{
 					displayTime = 0.0f;
 
