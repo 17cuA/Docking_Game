@@ -38,9 +38,9 @@ public class UI_Gauge : MonoBehaviour
 
 	 private float guageWidth;
 
-	[SerializeField] private int initValue = 0;     //初期値
-	[SerializeField] private int maxValue = 0;      //最大値
-	[SerializeField] private int currentValue = 0;  //現在値
+	private int initValue = 5400;     //初期値
+	private int maxValue = 5400;      //最大値
+	private int currentValue = 0;  //現在値
 	[Header("減速入力時に酸素の減る量")]
 	public int value;
 	/// <summary>

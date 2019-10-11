@@ -34,7 +34,7 @@ public class TimeDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		oxygenOneMinusTimeMax = 1.0f;
+		oxygenOneMinusTimeMax = 1.0f / 60.0f;
 
 		stageTimeText.text = stagePlayDelay.ToString("00.000");
     }
