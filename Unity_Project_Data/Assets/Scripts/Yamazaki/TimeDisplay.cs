@@ -61,7 +61,7 @@ public class TimeDisplay : MonoBehaviour
                 //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
                 stageTimeText.text = stagePlayDelay.ToString("00.000");
 				//追加------------------------------------
-				ui_gauge.Calc_nowVolue((int)Time.deltaTime) ;
+				//ui_gauge.Calc_nowVolue((int)Time.deltaTime) ;
                 //stagePlayDelay -= Time.deltaTime;
                 //if (stagePlayDelay <= 0.0f)
 				if(ui_gauge.Get_nowValue() <= 0.0f)

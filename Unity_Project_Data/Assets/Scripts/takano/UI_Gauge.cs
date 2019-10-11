@@ -41,7 +41,8 @@ public class UI_Gauge : MonoBehaviour
 	[SerializeField] private int initValue = 0;     //初期値
 	[SerializeField] private int maxValue = 0;      //最大値
 	[SerializeField] private int currentValue = 0;  //現在値
-
+	[Header("減速入力時に酸素の減る量")]
+	public int value;
 	/// <summary>
 	/// ゲージの更新をするときに呼ぶ
 	/// </summary>
@@ -69,7 +70,7 @@ public class UI_Gauge : MonoBehaviour
 		return currentValue;
 	}
 
-	public void Calc_nowVolue(int value)
+	public void Calc_nowVolue()
 	{
 		currentValue -= value;
 	}

@@ -17,8 +17,8 @@ public class GameOver_Anime : MonoBehaviour
 	public int frame_Max;
 	int change_cnt;
 	//public int 
-	[Header("フェードアウトするまでの時間")]
-	public float FadeOut_Time;
+	//[Header("フェードアウトするまでの時間")]
+	//public float FadeOut_Time;
 	private float currentRemainTime;
 	//private SpriteRenderer spRenderer;
 
