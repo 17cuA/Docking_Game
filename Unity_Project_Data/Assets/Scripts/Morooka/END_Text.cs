@@ -7,17 +7,30 @@ public class END_Text : MonoBehaviour
 	public string[] Sentence;
 	public int Index;
 
+	public float displayTime;
+	private float elapsedTime;
+
 	private Text text;
 	private void Start()
 	{
 		text = GetComponent<Text>();
+		elapsedTime = 0.0f;
+		Index = 0;
 	}
 
 	void Update()
     {
-        if(Index < Sentence.Length)
+		elapsedTime += Time.deltaTime;
+		if (elapsedTime > displayTime)
 		{
-			text.text = Sentence[Index];
+			if (Index < Sentence.Length - 1)
+			{
+				Index++;
+			}
+
+			elapsedTime = 0.0f;
 		}
-    }
+
+		text.text = Sentence[Index];
+	}
 }
