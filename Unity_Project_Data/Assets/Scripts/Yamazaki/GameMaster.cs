@@ -62,8 +62,6 @@ public class GameMaster : MonoBehaviour
 	[SerializeField, NonEditable]
 	private bool isGameClear;
 
-	private string masterKey = "P1H0Pilot2Q9";
-
 	// 本来使用できませんので削除予定
 	public static GameMaster instance;
 
@@ -111,13 +109,13 @@ public class GameMaster : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F5))
 		{
 			// ステージステータスをゲームクリアに変更
-			SetStageState(StageState.STAGECLEAR);
+			SetStageStateInTheMaster(StageState.STAGECLEAR);
 		}
 		// F6キーを押したらゲーム失敗とする
 		else if (Input.GetKeyDown(KeyCode.F6))
 		{
 			// ステージステータスをゲームクリアに変更
-			SetStageState(StageState.STAGEFAILURE);
+			SetStageStateInTheMaster(StageState.STAGEFAILURE);
 		}
 		//// 1キーを押したらプレイ中の無線が出る
 		//if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -155,7 +153,7 @@ public class GameMaster : MonoBehaviour
 				{
 					if(fadeTimeScr.IsFadeInFinished())
 					{
-						SetStageState(StageState.READY);
+						SetStageStateInTheMaster(StageState.READY);
 						break;
 					}
 					if(fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEIN)
@@ -165,7 +163,7 @@ public class GameMaster : MonoBehaviour
 				}
 				else
 				{
-					SetStageState(StageState.READY);
+					SetStageStateInTheMaster(StageState.READY);
 				}
 				break;
 
@@ -176,7 +174,7 @@ public class GameMaster : MonoBehaviour
 				if (stageReadyDelay >= stageReadyDelayMax)
 				{
 					// ステージステータスをプレイに変更
-					SetStageState(StageState.PLAYING);
+					SetStageStateInTheMaster(StageState.PLAYING);
 					// タイム開始
 					timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
 				}
@@ -186,7 +184,7 @@ public class GameMaster : MonoBehaviour
 			case StageState.PLAYING:
 				if(timeDisplayScr.GetTimeMode() == TimeDisplay.TimeMode.END)
 				{
-					SetStageState(StageState.STAGEFAILURE);
+					SetStageStateInTheMaster(StageState.STAGEFAILURE);
 				}
 				break;
 
@@ -196,7 +194,7 @@ public class GameMaster : MonoBehaviour
 				if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
 					// ステージステータスをプレイに変更
-					SetStageState(StageState.FADEOUT);
+					SetStageStateInTheMaster(StageState.FADEOUT);
 				}
 				break;
 
@@ -206,12 +204,12 @@ public class GameMaster : MonoBehaviour
 				{
 					if(fadeTimeScr)
 					{
-						SetStageState(StageState.FADEOUT);
+						SetStageStateInTheMaster(StageState.FADEOUT);
 						fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEOUT);
 					}
 					else
 					{
-						SetStageState(StageState.JUMPCLEARSCENE);
+						SetStageStateInTheMaster(StageState.JUMPCLEARSCENE);
 					}
 				}
 				break;
@@ -222,8 +220,8 @@ public class GameMaster : MonoBehaviour
 				{
 					if (fadeTimeScr.IsFadeOutFinished())
 					{
-						if (isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
-						else SetStageState(StageState.JUMPFAILURESCENE);
+						if (isGameClear) SetStageStateInTheMaster(StageState.JUMPCLEARSCENE);
+						else SetStageStateInTheMaster(StageState.JUMPFAILURESCENE);
 						break;
 					}
 					if (fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEOUT)
@@ -233,8 +231,8 @@ public class GameMaster : MonoBehaviour
 				}
 				else
 				{
-					if(isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
-					else SetStageState(StageState.JUMPFAILURESCENE);
+					if(isGameClear) SetStageStateInTheMaster(StageState.JUMPCLEARSCENE);
+					else SetStageStateInTheMaster(StageState.JUMPFAILURESCENE);
 
 				}
 				break;
@@ -245,14 +243,14 @@ public class GameMaster : MonoBehaviour
 				if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
 				{
 					// ステージステータスをプレイに変更
-					SetStageState(StageState.FADEOUT);
+					SetStageStateInTheMaster(StageState.FADEOUT);
 				}
 				break;
 
 			case StageState.FAILURENEXT:
 				if (IsOkeyKeyDown())
 				{
-					SetStageState(StageState.JUMPFAILURESCENE);
+					SetStageStateInTheMaster(StageState.JUMPFAILURESCENE);
 				}
 				break;
 
@@ -292,7 +290,6 @@ public class GameMaster : MonoBehaviour
 			case StageState.PLAYING:
 			case StageState.FAILURENEXT:
 			case StageState.CLEARNEXT:
-				if(key == "") SetStageStateInTheMaster(s);
 				break;
 		}
 	}
@@ -371,6 +368,6 @@ public class GameMaster : MonoBehaviour
 
 	public void StageClear()
 	{
-		SetStageState(StageState.STAGECLEAR);
+		SetStageStateInTheMaster(StageState.STAGECLEAR);
 	}
 }
