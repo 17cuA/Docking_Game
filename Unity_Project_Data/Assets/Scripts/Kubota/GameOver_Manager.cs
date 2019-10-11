@@ -12,15 +12,13 @@ public class GameOver_Manager : MonoBehaviour
 	public int cnt;
 
 	private Text wierless;
-	//private string[] wirelessList = new string[3]
-	//{
-	//	new string("Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
-	//	new string("ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」"),
-	//	new string("ＨＱ「こ、このままでは・・・」"),
-	//};
+	private string[] wirelessList = new string[3];
 
 	void Start()
     {
+		wirelessList[0] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
+		wirelessList[1] = "ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」";
+		wirelessList[2] = "ＨＱ「こ、このままでは・・・」";
 		cnt = 0;
 		//Serifu
     }
