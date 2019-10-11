@@ -23,6 +23,8 @@ public class TimeDisplay : MonoBehaviour
     [SerializeField, NonEditable]
     private TimeMode timeMode;
 
+	public UI_Gauge ui_gauge;
+
     public void SetTimeMode(TimeMode t)
     {
         timeMode = t;
@@ -58,11 +60,14 @@ public class TimeDisplay : MonoBehaviour
             case TimeMode.PLAY:
                 //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
                 stageTimeText.text = stagePlayDelay.ToString("00.000");
-
-                stagePlayDelay -= Time.deltaTime;
-                if (stagePlayDelay <= 0.0f)
+				//追加------------------------------------
+				//ui_gauge.Calc_nowVolue((int)Time.deltaTime) ;
+                //stagePlayDelay -= Time.deltaTime;
+                //if (stagePlayDelay <= 0.0f)
+				if(ui_gauge.Get_nowValue() <= 0.0f)
                 {
-                    stagePlayDelay = 0.0f;
+					//stagePlayDelay = 0.0f;
+					//o2manager.nowO2 = 0;
                     SetTimeMode(TimeMode.END);
                 }
                 break;
