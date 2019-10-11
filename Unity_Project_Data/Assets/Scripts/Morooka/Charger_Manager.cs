@@ -35,7 +35,7 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("酸素ゲージの減る時間(秒)")] private float timeToReduce;
 
 	private float elapsedTime;
-
+	public bool aaaaaaaaaaaaaaaaaaaaaaa = false;
 	#region いじるなBy諸岡
 	/// <summary>
 	/// 最大速度を渡す
@@ -75,6 +75,18 @@ public class Charger_Manager : MonoBehaviour
 			MyRigidbody.velocity = Vector3.zero;
 			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
+
+		if (transform.position.z > -3.53f)
+		{
+			GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+			aaaaaaaaaaaaaaaaaaaaaaa = true;
+		}
+		else if(Input.GetKeyDown(KeyCode.E))
+		{
+			GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+
+		}
+
 	}
 	#region ムーブ2
 	private void Movement()
@@ -150,6 +162,12 @@ public class Charger_Manager : MonoBehaviour
 		if (col.tag =="Slot")
 		{
 			IsEnteredTheSlot = true;
+		}
+
+		if (col.gameObject.name == "Body_SmallLeft" || col.gameObject.name == "Body_SmallRight" || col.gameObject.name == "Body_SmallUp" || col.gameObject.name == "Body_SmallDown")
+		{
+			GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+			aaaaaaaaaaaaaaaaaaaaaaa = true;
 		}
 	}
 }
