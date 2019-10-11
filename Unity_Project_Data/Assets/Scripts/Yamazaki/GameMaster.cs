@@ -21,36 +21,41 @@ public class GameMaster : MonoBehaviour
 	}
 
 	// 現在のゲームステージ上の進行ステータス
-	[SerializeField, NonEditable]
-	private StageState stageState = StageState.NONE;
+	[SerializeField, NonEditable, Tooltip("現在のゲーム状況")]
+	// 本来 private の状態で関数呼び出しで使用するので変更予定
+	public StageState stageState = StageState.NONE;
 
 	// ゲームが開始するまでの時間経過
-	[SerializeField, NonEditable]
-	private float stageReadyDelay;		// 現在の経過時間
+	[SerializeField, NonEditable, Tooltip("ゲーム開始するまでの時間経過")]
+	private float stageReadyDelay;      // 現在の経過時間
+	[SerializeField, Tooltip("ゲームが開始するまでの時間")]
 	private float stageReadyDelayMax = 5.25f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
-	public float stagePlayDelayMax;		// 最大の残り時間
-	
+	[SerializeField, Tooltip("ゲームプレイ時間")]
+	public float stagePlayDelayMax;     // 最大の残り時間
+
 	// フェード用スクリプト
+	[SerializeField, Tooltip("フェード用スクリプト")]
 	public FadeTime fadeTimeScr;
 
 	// 無線スクリプト
+	[SerializeField, Tooltip("無線スクリプト")]
 	public WirelessManager wirelessManagerScr;
 
 	// 時間表示スクリプト
+	[SerializeField, Tooltip("時間表示スクリプト")]
 	public TimeDisplay timeDisplayScr;
-
-	// 自身
-	public static GameMaster instance;
 
 	// ゲームデータプレハブ
 	private GameObject gameDataPrefab;
 
-	// ゲームクリアシーン
+	// ゲームクリアシーン名
+	[SerializeField, Tooltip("ゲームクリアシーン名")]
 	public string gameFailureSceneName = "Title";
 
-	// ゲーム失敗シーン
+	// ゲーム失敗シーン名
+	[SerializeField, Tooltip("ゲーム失敗シーン名")]
 	public string gameClearSceneName = "Title";
 
 	// ゲームクリア状態
@@ -59,10 +64,14 @@ public class GameMaster : MonoBehaviour
 
 	private string masterKey = "P1H0Pilot2Q9";
 
+	// 本来使用できませんので削除予定
+	public static GameMaster instance;
+
 	// 開幕前
 	private void Awake()
 	{
-		instance = gameObject.GetComponent<GameMaster>();
+		// 本来使用できませんので削除予定
+		instance = GetComponent<GameMaster>();
 
 		if (!GameObject.Find("GameData"))
 		{

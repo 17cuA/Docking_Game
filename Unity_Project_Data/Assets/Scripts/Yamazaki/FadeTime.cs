@@ -8,18 +8,23 @@ public class FadeTime : MonoBehaviour
 	// フェードイン情報
 	public Image displayFadeInPlane;
 	// フェードイン時間
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("フェードイン時間経過")]
 	private float fadeInTime = 0.0f;      // 経過時間
+	[SerializeField, Tooltip("フェードイン最大時間")]
 	public float fadeInTimeMax = 2.0f;    // 最大待機時間
 
 	// フェードアウト情報
+	[SerializeField, Tooltip("フェードアウト情報")]
 	public Image displayFadeOutPlane;
 	// フェードアウト時間
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("フェードアウト時間経過")]
 	private float fadeOutTime = 0.0f;      // 経過時間
+	[SerializeField, Tooltip("フェードアウト最大時間")]
 	public float fadeOutTimeMax = 2.98f;    // 最大時間
+	[SerializeField, Tooltip("黒になっている時間")]
 	public float blackTimeMax = 0.02f;      // 黒時間
 
+	// フェードタイプ
 	public enum FadeType
 	{
 		NONE,
@@ -27,12 +32,13 @@ public class FadeTime : MonoBehaviour
 		FADEOUT,
 	}
 
+	[SerializeField, Tooltip("フェードタイプ")]
 	//[SerializeField, NonEditable]
 	//private FadeType fadeType;
 	public FadeType fadeType;
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("フェードイン確認")]
 	private bool isFadeInFinished = false;
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("フェードアウト確認")]
 	private bool isFadeOutFinished = false;
 
 	// Start is called before the first frame update
