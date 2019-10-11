@@ -338,10 +338,21 @@ public class CameraWork : MonoBehaviour
                 break;
 
             case 3:
-                transform.position = cameraPosObjects[cameraPosNum].transform.position;
-                transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
-                //cameraState = CameraState.Left;
-                break;
+                //transform.position = cameraPosObjects[cameraPosNum].transform.position;
+                //transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
+				if (chargerObj.transform.position.z < -3.608)
+				{
+					transform.position = FPS_CameraPosObj.transform.position;
+					transform.rotation = FPS_CameraPosObj.transform.rotation;
+				}
+				else
+				{
+					transform.position = backwardCameraPos;
+					transform.rotation = Quaternion.Euler(15f, -20f, 0);
+				}
+
+				//cameraState = CameraState.Left;
+				break;
             case 4:
                 transform.position = cameraPosObjects[cameraPosNum].transform.position;
                 transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
