@@ -38,7 +38,7 @@ public class CameraShaker : MonoBehaviour
 	private Camera cam;
 	private Vector3 addForward;
 	private Vector3 deltaTarget;
-	private Vector3 nowPos;
+	public Vector3 nowPos;
 	private float nowfov;
 
 	private float nowRotAngle;

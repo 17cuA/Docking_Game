@@ -55,6 +55,7 @@ public class FadeEditor : MonoBehaviour
 
 	public IEnumerator FadeinCol()
 	{
+		StopCoroutine(FadeoutCol());
 		IsFading = true;
 		float time = searchValueTime(easing.Anims[0],panel.color.a);
 		while (time < FadeinTimeMax)
@@ -69,6 +70,7 @@ public class FadeEditor : MonoBehaviour
 
 	public IEnumerator FadeoutCol()
 	{
+		StopCoroutine(FadeinCol());
 		IsFading = true;
 		float time = searchValueTime(easing.Anims[1], panel.color.a);
 		while (time < FadeoutTimeMax)

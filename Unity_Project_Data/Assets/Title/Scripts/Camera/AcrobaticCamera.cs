@@ -37,6 +37,7 @@ public class AcrobaticCamera : MonoBehaviour
 	[Header("フェードは最初のみ行うかのフラグ")]
 	[SerializeField] private bool startOnryFade;
 	[SerializeField] private FadeEditor fadeEditor;
+	[SerializeField] private CameraShaker cameraShaker;
 	[Header("線番号")]
 	[SerializeField] private int lineNum;
 	float elapsedTime;						// 経過時間
@@ -48,11 +49,13 @@ public class AcrobaticCamera : MonoBehaviour
 	public int LineCount { get { return lineCreaters.Length; } }
 	public Vector3 Target { get { return targets[lineNum].transform.position; } }
 	//初期化─────────────────────────────────────────
-	private void Start()
+	private void Awake()
 	{
 		mainCamera = GetComponent<Camera>();
 		easingEditor = GetComponent<EasingEditor>();
 		SetAnkers(lineCreaters);
+		transform.position = ankers[lineNum][0].anker;
+		transform.LookAt(targets[lineNum].transform);
 	}
 	//更新処理────────────────────────────────────────
 	public void CameraUpdate(bool unFade)
@@ -135,6 +138,8 @@ public class AcrobaticCamera : MonoBehaviour
 			++lineNum;
 			if (lineNum == lineCreaters.Length)
 				lineNum = 0;
+			transform.position = ankers[lineNum][0].anker;
+			transform.LookAt(targets[lineNum].transform);
 		}
 	}
 	//時間遷移処理────────────────────────────────────────
