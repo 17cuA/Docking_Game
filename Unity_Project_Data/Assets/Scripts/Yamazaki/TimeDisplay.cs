@@ -25,32 +25,24 @@ public class TimeDisplay : MonoBehaviour
 
 	public UI_Gauge ui_gauge;
 
-    public void SetTimeMode(TimeMode t)
-    {
-        timeMode = t;
-    }
-
-    public TimeMode GetTimeMode()
-    {
-        return timeMode;
-    }
-
-    public void SetTime(float t)
-    {
-        if (t > 0.0f) stagePlayDelay = stagePlayDelayMax = t;
-        else stagePlayDelay = stagePlayDelayMax;
-
-        //10/04　時間表示を1:30から90表示に変えました(そのほかの場所も)＠川村
-        //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
-        stageTimeText.text = stagePlayDelay.ToString("00.000");
-    }
+	// 酸素が減らすのに用いる時間
+	[SerializeField, NonEditable, Tooltip("酸素が減らすのに用いる時間最大の時間")]
+	private float oxygenOneMinusTimeMax = 1.0f;
+	[SerializeField, Tooltip("酸素が減らすのに用いる時間経過")]
+	public float oxygenOneMinusTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
-        stageTimeText.text = stagePlayDelay.ToString("00.000");
+		oxygenOneMinusTimeMax = 1.0f;
+
+		stageTimeText.text = stagePlayDelay.ToString("00.000");
     }
+
+	public void SetOxygenOneMinusTimeMax(float f)
+	{
+		oxygenOneMinusTimeMax = f;
+	}
 
     // Update is called once per frame
     void Update()
@@ -58,13 +50,21 @@ public class TimeDisplay : MonoBehaviour
         switch (timeMode)
         {
             case TimeMode.PLAY:
-                //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
                 stageTimeText.text = stagePlayDelay.ToString("00.000");
-				//追加------------------------------------
-				//ui_gauge.Calc_nowVolue((int)Time.deltaTime) ;
-                //stagePlayDelay -= Time.deltaTime;
-                //if (stagePlayDelay <= 0.0f)
-				if(ui_gauge.Get_nowValue() <= 0.0f)
+
+				oxygenOneMinusTime += Time.deltaTime;
+
+				while(oxygenOneMinusTime >= oxygenOneMinusTimeMax)
+				{
+					oxygenOneMinusTime -= oxygenOneMinusTimeMax;
+					// 酸素1減る
+					ui_gauge.Calc_value();
+				}
+
+				//stagePlayDelay -= Time.deltaTime;
+
+				//if (stagePlayDelay <= 0.0f)
+				if (ui_gauge.Get_nowValue() <= 0.0f)
                 {
 					//stagePlayDelay = 0.0f;
 					//o2manager.nowO2 = 0;
@@ -73,12 +73,10 @@ public class TimeDisplay : MonoBehaviour
                 break;
 
             case TimeMode.END:
-                //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
 　              stageTimeText.text = stagePlayDelay.ToString("00.000");
                 break;
 
             case TimeMode.STOP:
-                //stageTimeText.text = ((int)stagePlayDelay / 60).ToString("0") + "'" + (stagePlayDelay % 60.0f).ToString("00.000");
                 stageTimeText.text = stagePlayDelay.ToString("00.000");
                 break;
 
@@ -86,6 +84,25 @@ public class TimeDisplay : MonoBehaviour
                 break;
         }
     }
+
+	public void SetTimeMode(TimeMode t)
+	{
+		timeMode = t;
+	}
+
+	public TimeMode GetTimeMode()
+	{
+		return timeMode;
+	}
+
+	public void SetTime(float t)
+	{
+		if (t > 0.0f) stagePlayDelay = stagePlayDelayMax = t;
+		else stagePlayDelay = stagePlayDelayMax;
+
+		//10/04　時間表示を1:30から90表示に変えました(そのほかの場所も)＠川村
+		stageTimeText.text = stagePlayDelay.ToString("00.000");
+	}
 
 	public void Subtract_Value()
 	{

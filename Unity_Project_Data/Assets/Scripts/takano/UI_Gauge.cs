@@ -70,6 +70,10 @@ public class UI_Gauge : MonoBehaviour
 		return currentValue;
 	}
 
+	public void Calc_value()
+	{
+		currentValue -= 1;
+	}
 	public void Calc_nowVolue()
 	{
 		currentValue -= value;
