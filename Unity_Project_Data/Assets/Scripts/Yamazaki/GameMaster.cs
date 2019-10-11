@@ -65,6 +65,8 @@ public class GameMaster : MonoBehaviour
 	// 本来使用できませんので削除予定
 	public static GameMaster instance;
 
+
+
 	// 開幕前
 	private void Awake()
 	{
@@ -104,6 +106,8 @@ public class GameMaster : MonoBehaviour
 	// 毎フレーム
 	private void Update()
 	{
+		
+
 		// Debug
 		// F5キーを押したらゲームクリアとする
 		if (Input.GetKeyDown(KeyCode.F5))
@@ -129,7 +133,7 @@ public class GameMaster : MonoBehaviour
 			// プレイ中の無線
 			wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.MESSAGE_2);
 		}
-		// 2キーを押したらプレイ中の無線2が出る
+		// 3キーを押したら時間経過が停止・再生
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
 			// TIMEの変更
@@ -143,6 +147,11 @@ public class GameMaster : MonoBehaviour
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.DEBUG_2);
 			}
+		}
+		// 4キーを押したら酸素減少量が増加
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			timeDisplayScr.SetOxygenOneMinusTimeMax(0.0975f / 3.75f);
 		}
 
 		// 現在のステージステータスで処理を変える
@@ -312,10 +321,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.STAGECLEAR:
 				// 状況成功
 				isGameClear = true;
-				// クリアの無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
+				//// クリアの無線
+				//wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
+				SetStageState(StageState.FADEOUT);
 				break;
 
 			// タイトル移動前用テキスト
@@ -326,10 +336,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.STAGEFAILURE:
 				// 状況失敗
 				isGameClear = false;
-				// 失敗の無線
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
+				//// 失敗の無線
+				//wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
 				// タイムストップ
 				timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.STOP);
+				SetStageState(StageState.FADEOUT);
 				break;
 
 			// 失敗後タイトル移動前用テキスト
