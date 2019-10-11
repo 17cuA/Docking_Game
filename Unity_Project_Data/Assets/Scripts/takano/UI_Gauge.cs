@@ -38,8 +38,8 @@ public class UI_Gauge : MonoBehaviour
 
 	 private float guageWidth;
 
-	private int initValue = 5400;     //初期値
-	private int maxValue = 5400;      //最大値
+	private int initValue = (int)(5400.0f * 1.5f);     //初期値
+	private int maxValue = (int)(5400.0f * 1.5f);      //最大値
 	private int currentValue = 0;  //現在値
 	[Header("減速入力時に酸素の減る量")]
 	public int value;
