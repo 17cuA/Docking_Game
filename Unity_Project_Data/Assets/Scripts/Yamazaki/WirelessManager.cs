@@ -7,22 +7,27 @@ using UnityEngine.UI;
 public class WirelessManager : MonoBehaviour
 {
 	// ゲームが開始するまでの時間経過
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("ゲームが開始するまでの時間経過")]
 	private float stageReadyDelay = 0.0f;      // 現在の経過時間
+	[SerializeField, Tooltip("ゲームが開始するまでの最大の待ち時間")]
 	private float stageReadyDelayMax = 8.0f;    // 最大の待ち時間
 
 	// シーンが切り替わる時間経過
-	[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("シーンが切り替わる時間経過")]
 	private float nextStageDelay;       // 現在の経過時間
+	[SerializeField, Tooltip("シーンが切り替わる最大の待ち時間")]
 	public float nextStageDelayMax = 3.0f;    // 最大の待ち時間
 
 	// 通常メッセージ無線の時間経過
-	[SerializeField, NonEditable]
-	private float displayTime;				// 現在の経過時間
-	public float displayTimeMax = 3.0f;		// 最大の待ち時間
+	[SerializeField, NonEditable, Tooltip("通常メッセージ無線の時間経過")]
+	private float displayTime;              // 現在の経過時間
+	[SerializeField, Tooltip("通常メッセージ無線の最大の待ち時間")]
+	public float displayTimeMax = 3.0f;     // 最大の待ち時間
 
 	// ステージ上テキスト
+	[SerializeField, Tooltip("ステージ上ジャパニーズテキスト")]
 	public Text wirelessJPText;
+	[SerializeField, Tooltip("ステージ上イングリシュテキスト")]
 	public Text wirelessENText;
 
 	public enum WirelessMode

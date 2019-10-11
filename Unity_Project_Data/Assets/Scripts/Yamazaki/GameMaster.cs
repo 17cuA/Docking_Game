@@ -16,39 +16,62 @@ public class GameMaster : MonoBehaviour
 		CLEARNEXT,		// 次のキーでタイトル移動
 		JUMPTITLE,		// 直接タイトル移動
 		JUMPRESULT,		// 直接リザルト移動
+		JUMPCLEARSCENE,			// 直接クリアシーン移動
+		JUMPFAILURESCENE,		// 直接失敗シーン移動
 	}
-	
+
 	// 現在のゲームステージ上の進行ステータス
-	//[SerializeField, NonEditable]
+	[SerializeField, NonEditable, Tooltip("現在のゲーム状況")]
+	// 本来 private の状態で関数呼び出しで使用するので変更予定
 	public StageState stageState = StageState.NONE;
 
 	// ゲームが開始するまでの時間経過
-	[SerializeField, NonEditable]
-	private float stageReadyDelay;		// 現在の経過時間
+	[SerializeField, NonEditable, Tooltip("ゲーム開始するまでの時間経過")]
+	private float stageReadyDelay;      // 現在の経過時間
+	[SerializeField, Tooltip("ゲームが開始するまでの時間")]
 	private float stageReadyDelayMax = 5.25f;    // 最大の待ち時間
 
 	// ゲームプレイ時間
-	public float stagePlayDelayMax;		// 最大の残り時間
-	
+	[SerializeField, Tooltip("ゲームプレイ時間")]
+	public float stagePlayDelayMax;     // 最大の残り時間
+
 	// フェード用スクリプト
+	[SerializeField, Tooltip("フェード用スクリプト")]
 	public FadeTime fadeTimeScr;
 
 	// 無線スクリプト
+	[SerializeField, Tooltip("無線スクリプト")]
 	public WirelessManager wirelessManagerScr;
 
 	// 時間表示スクリプト
+	[SerializeField, Tooltip("時間表示スクリプト")]
 	public TimeDisplay timeDisplayScr;
-
-	// 自身
-	public static GameMaster instance;
 
 	// ゲームデータプレハブ
 	private GameObject gameDataPrefab;
 
+	// ゲームクリアシーン名
+	[SerializeField, Tooltip("ゲームクリアシーン名")]
+	public string gameFailureSceneName = "Title";
+
+	// ゲーム失敗シーン名
+	[SerializeField, Tooltip("ゲーム失敗シーン名")]
+	public string gameClearSceneName = "Title";
+
+	// ゲームクリア状態
+	[SerializeField, NonEditable]
+	private bool isGameClear;
+
+	private string masterKey = "P1H0Pilot2Q9";
+
+	// 本来使用できませんので削除予定
+	public static GameMaster instance;
+
 	// 開幕前
 	private void Awake()
 	{
-		instance = gameObject.GetComponent<GameMaster>();
+		// 本来使用できませんので削除予定
+		instance = GetComponent<GameMaster>();
 
 		if (!GameObject.Find("GameData"))
 		{
@@ -74,6 +97,10 @@ public class GameMaster : MonoBehaviour
 
 		timeDisplayScr.SetTime(stagePlayDelayMax);
         wirelessManagerScr.SetTime(stageReadyDelayMax, 4.5f, 3.0f);
+		isGameClear = false;
+
+		if (gameClearSceneName == "") gameClearSceneName = "Title";
+		if (gameFailureSceneName == "") gameFailureSceneName = "Title";
 	}
 	
 	// 毎フレーム
@@ -185,7 +212,7 @@ public class GameMaster : MonoBehaviour
 					}
 					else
 					{
-						SetStageState(StageState.JUMPTITLE);
+						SetStageState(StageState.JUMPCLEARSCENE);
 					}
 				}
 				break;
@@ -196,7 +223,8 @@ public class GameMaster : MonoBehaviour
 				{
 					if (fadeTimeScr.IsFadeOutFinished())
 					{
-						SetStageState(StageState.JUMPTITLE);
+						if (isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
+						else SetStageState(StageState.JUMPFAILURESCENE);
 						break;
 					}
 					if (fadeTimeScr.GetFadeType() != FadeTime.FadeType.FADEOUT)
@@ -206,7 +234,9 @@ public class GameMaster : MonoBehaviour
 				}
 				else
 				{
-					SetStageState(StageState.JUMPTITLE);
+					if(isGameClear) SetStageState(StageState.JUMPCLEARSCENE);
+					else SetStageState(StageState.JUMPFAILURESCENE);
+
 				}
 				break;
 
@@ -223,7 +253,7 @@ public class GameMaster : MonoBehaviour
 			case StageState.FAILURENEXT:
 				if (IsOkeyKeyDown())
 				{
-					SetStageState(StageState.JUMPTITLE);
+					SetStageState(StageState.JUMPFAILURESCENE);
 				}
 				break;
 
@@ -240,7 +270,35 @@ public class GameMaster : MonoBehaviour
 
 	// ステージステータス変更専用関数
 	// 受け取ったステータスに応じて処理を変えます
-	public void SetStageState(StageState s)
+	public void SetStageState(StageState s, string key = "")
+	{
+		switch (s)
+		{
+			// 受け入れるもの
+			case StageState.STAGEFAILURE:
+			case StageState.STAGECLEAR:
+			case StageState.JUMPTITLE:
+			case StageState.JUMPRESULT:
+			case StageState.JUMPCLEARSCENE:
+			case StageState.JUMPFAILURESCENE:
+				SetStageStateInTheMaster(s);
+				break;
+
+			// 受け入れないもの
+			default:
+			case StageState.FADEIN:
+			case StageState.FADEOUT:
+			case StageState.READY:
+			case StageState.NONE:
+			case StageState.PLAYING:
+			case StageState.FAILURENEXT:
+			case StageState.CLEARNEXT:
+				if(key == "") SetStageStateInTheMaster(s);
+				break;
+		}
+	}
+
+	private void SetStageStateInTheMaster(StageState s)
 	{
 		switch (s)
 		{
@@ -252,9 +310,11 @@ public class GameMaster : MonoBehaviour
 			case StageState.FADEOUT:
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.NONE);
 				break;
-				
+
 			// ステージクリア用テキスト
 			case StageState.STAGECLEAR:
+				// 状況成功
+				isGameClear = true;
 				// クリアの無線
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				// タイムストップ
@@ -267,6 +327,8 @@ public class GameMaster : MonoBehaviour
 
 			// ステージ失敗用テキスト
 			case StageState.STAGEFAILURE:
+				// 状況失敗
+				isGameClear = false;
 				// 失敗の無線
 				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGEFAILURE_1);
 				// タイムストップ
@@ -280,6 +342,16 @@ public class GameMaster : MonoBehaviour
 			// 直接タイトルにジャンプ
 			case StageState.JUMPTITLE:
 				SceneManager.LoadScene("Title");
+				break;
+
+			// 直接ゲームクリアシーンにジャンプ
+			case StageState.JUMPCLEARSCENE:
+				SceneManager.LoadScene(gameClearSceneName);
+				break;
+
+			// 直接ゲーム失敗シーンにジャンプ
+			case StageState.JUMPFAILURESCENE:
+				SceneManager.LoadScene(gameFailureSceneName);
 				break;
 
 			// その他テキスト削除

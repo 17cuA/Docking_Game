@@ -30,6 +30,7 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
 	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 	[SerializeField, Tooltip("移動速度")] private float speed;
+	[SerializeField, Tooltip("ブレーキ速度")] private float brakeSpeed;
 
 	#region いじるなBy諸岡
 	/// <summary>
@@ -152,9 +153,9 @@ public class Charger_Manager : MonoBehaviour
 	{
 
 		Vector3 saveInputNum = new Vector3((Original_Input.StickLeft_X / 100.0f) * speed, (Original_Input.StickLeft_Y / 100.0f)*speed, 0.0f);
-		if(Original_Input.ButtomFront_Hold)
+		if(Original_Input.ButtomFront_Hold || Input.GetKey(KeyCode.Space))
 		{
-			saveInputNum.z -= (1 / 100.0f) * speed;
+			saveInputNum.z -= (1 / 100.0f) * brakeSpeed;
 			if(MyRigidbody.velocity.z < 0.1f)
 			{
 				saveInputNum.z = 0.0f;
@@ -164,6 +165,23 @@ public class Charger_Manager : MonoBehaviour
 		{
 			saveInputNum.z += (1 / 100.0f) * speed;
 			Direction = MOVE_DIRECTION.eFRONT;
+		}
+
+		if(Input.GetKey(KeyCode.LeftArrow))
+		{
+			saveInputNum.x -= (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.RightArrow))
+		{
+			saveInputNum.x += (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.UpArrow))
+		{
+			saveInputNum.y += (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.DownArrow))
+		{
+			saveInputNum.y -= (1 / 100.0f) * speed;
 		}
 
 		if (saveInputNum.x < 0)
