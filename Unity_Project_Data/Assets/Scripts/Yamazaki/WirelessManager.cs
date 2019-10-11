@@ -101,7 +101,7 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("「グッド・ラック」"),
 		// ドッキング成功時無線字幕
 		new WirelessString("Ｐ「ドッキング成功」"),
-		new WirelessString("ＨＱ「いえぇーい！！」"),
+		new WirelessString("ＨＱ（歓声）"),
 		new WirelessString("Ｐ「これよりフェイズ３へ移行する。」"),
 		new WirelessString("ＨＱ「難しい軌道だったがよくやってくれた。」"),
 		new WirelessString("Ｐｉｌｏｔ「妻の機嫌を取るほうがよっぽど難しいさ。」"),
