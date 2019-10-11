@@ -29,6 +29,8 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;		// スナップターゲット位置
 	[SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
 	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
+	[SerializeField, Tooltip("移動速度")] private float speed;
+	[SerializeField, Tooltip("ブレーキ速度")] private float brakeSpeed;
 
 	#region いじるなBy諸岡
 	/// <summary>
@@ -59,7 +61,10 @@ public class Charger_Manager : MonoBehaviour
 	{
 		if (!IsEnteredTheSlot)
 		{
-			Movement();         //移動処理
+			if (GameMaster.instance.stageState == GameMaster.StageState.PLAYING)
+			{
+				Movement_2();         //移動処理
+			}
 		}
 		else
 		{
@@ -67,6 +72,7 @@ public class Charger_Manager : MonoBehaviour
 			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
 	}
+	#region ムーブ
 	/// <summary>
 	/// 移動処理
 	/// </summary>
@@ -141,6 +147,65 @@ public class Charger_Manager : MonoBehaviour
 		// 速度適応
 		MyRigidbody.velocity = tempVelocity; 
 	}
+	#endregion
+	#region ムーブ2
+	private void Movement_2()
+	{
+
+		Vector3 saveInputNum = new Vector3((Original_Input.StickLeft_X / 100.0f) * speed, (Original_Input.StickLeft_Y / 100.0f)*speed, 0.0f);
+		if(Original_Input.ButtomFront_Hold || Input.GetKey(KeyCode.Space))
+		{
+			saveInputNum.z -= (1 / 100.0f) * brakeSpeed;
+			if(MyRigidbody.velocity.z < 0.1f)
+			{
+				saveInputNum.z = 0.0f;
+			}
+		}
+		else
+		{
+			saveInputNum.z += (1 / 100.0f) * speed;
+			Direction = MOVE_DIRECTION.eFRONT;
+		}
+
+		if(Input.GetKey(KeyCode.LeftArrow))
+		{
+			saveInputNum.x -= (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.RightArrow))
+		{
+			saveInputNum.x += (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.UpArrow))
+		{
+			saveInputNum.y += (1 / 100.0f) * speed;
+		}
+		if(Input.GetKey(KeyCode.DownArrow))
+		{
+			saveInputNum.y -= (1 / 100.0f) * speed;
+		}
+
+		if (saveInputNum.x < 0)
+		{
+			Direction = MOVE_DIRECTION.eLEFT;
+		}
+		else if (saveInputNum.x > 0)
+		{
+			Direction = MOVE_DIRECTION.eRIGHT;
+		}
+
+		//	加速後の Velocity 値の仮保存
+		Vector3 tempVelocity = MyRigidbody.velocity + saveInputNum;
+
+		// スピード制限(絶対値より)--------------------
+		if (Mathf.Abs(tempVelocity.x) > add_Max) tempVelocity.x = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.x);
+		if (Mathf.Abs(tempVelocity.y) > add_Max) tempVelocity.y = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.y);
+		if (Mathf.Abs(tempVelocity.z) > add_Max) tempVelocity.z = Mathf.Abs(add_Max) * Mathf.Sign(tempVelocity.z);
+		//----------------------------------------------
+
+		// 速度適応
+		MyRigidbody.velocity = tempVelocity;
+	}
+	#endregion
 
 	private void OnTriggerEnter(Collider col)
 	{
