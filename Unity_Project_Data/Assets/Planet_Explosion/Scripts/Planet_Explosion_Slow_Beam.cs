@@ -44,7 +44,7 @@ public class Planet_Explosion_Slow_Beam : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.A))
         {
 
             StartCoroutine("ExplodePlanet");
