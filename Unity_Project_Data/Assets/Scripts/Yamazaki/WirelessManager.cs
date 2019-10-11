@@ -30,6 +30,10 @@ public class WirelessManager : MonoBehaviour
 	[SerializeField, Tooltip("ステージ上イングリシュテキスト")]
 	public Text wirelessENText;
 
+	// クリア音声
+	public AudioClip clearWirelessSE;
+	public AudioSource audioSource;
+
 	public enum WirelessMode
 	{
 		NONE,
@@ -59,11 +63,11 @@ public class WirelessManager : MonoBehaviour
 
 	private struct WirelessString
 	{
-		public string sJP;	// 日本語
-		public string sUS;	// 英語
+		public string sJP;  // 日本語
+		public string sUS;  // 英語
 		public string sES;    // スペイン語
 		public string sCN;    // 中国語
-		public string sKR;	// 韓国語
+		public string sKR;  // 韓国語
 
 		public WirelessString(string _sJP = "", string _sUS = "", string _sES = "", string _sCN = "", string sKR = "") : this()
 		{
@@ -92,6 +96,8 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("コンロールセンター「慎重にドッキングを開始せよ」", "ＣｏｎｔｒｏｌＣｅｎｔｅｒ「ｄｏｃｋｉｎｇ　ｃａｒｅｆｕｌｌｙ」"),
 		new WirelessString("「・・・！？時が止まっただと・・・！？", "「．．．！Ｓｔｏｐｐｅｄ！？」"),
 		new WirelessString("「時間が動いた」", "「ＴＩＭＥＩＳＭＯＶＥ」"),
+
+		// 
 		new WirelessString("「最終作戦軌道への投入準備完了。」", ""),
 		new WirelessString("「了解。相対速度、再計算を開始。異常なし。」"),
 		new WirelessString("「座標高度を再確認。すべて異常なしです。」"),
@@ -99,12 +105,14 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("「現時点ですべてのリモート誘導を切断。」"),
 		new WirelessString("「以後の制御はローカルで行う。」"),
 		new WirelessString("「グッド・ラック」"),
-		new WirelessString("Ｐ「ドッキング成功」"),
-		new WirelessString("ＨＱ「いえぇーい！！」"),
-		new WirelessString("Ｐ「これよりフェイズ３へ移行する。」"),
+		// ドッキング成功時無線字幕
+		new WirelessString("Ｐｉｌｏｔ「ドッキング成功」"),
+		new WirelessString("ー管制室に響き渡る歓声ー"),
+		new WirelessString("Ｐｉｌｏｔ「これよりフェイズ３へ移行する。」"),
 		new WirelessString("ＨＱ「難しい軌道だったがよくやってくれた。」"),
 		new WirelessString("Ｐｉｌｏｔ「妻の機嫌を取るほうがよっぽど難しいさ。」"),
-		new WirelessString("Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
+		// ドッキング失敗時無線字幕
+		new WirelessString("Ｐｉｌｏｔ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
 		new WirelessString("ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」"),
 		new WirelessString("ＨＱ「こ、このままでは・・・」"),
 	};
@@ -114,7 +122,7 @@ public class WirelessManager : MonoBehaviour
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		wirelessJPText.text = "";
 		wirelessENText.text = "";
 		wirelessMode = WirelessMode.NONE;
@@ -122,11 +130,23 @@ public class WirelessManager : MonoBehaviour
 		wirelessJPText.enabled = true;
 		wirelessJPText.color = Color.white;
 		wirelessENText.color = Color.white;
+
+		// 音声
+		clearWirelessSE = Resources.Load("Sounds/SE/Docking_ClearSound") as AudioClip;
+		if(!audioSource)
+		{
+			audioSource = gameObject.AddComponent<AudioSource>();
+		}
+		else
+		{
+			audioSource = GetComponent<AudioSource>();
+		}
+		audioSource.playOnAwake = false;
 	}
 
 	public void SetWirelessMode(WirelessMode w)
 	{
-		switch(w)
+		switch (w)
 		{
 			case WirelessMode.NONE:
 				wirelessJPText.text = "";
@@ -166,6 +186,7 @@ public class WirelessManager : MonoBehaviour
 				break;
 
 			case WirelessMode.FIRST_1:
+				BGM_Manager.BGM_obj.Active_Wireless();
 				wirelessJPText.text = wirelessList[18].sJP;
 				break;
 
@@ -194,6 +215,9 @@ public class WirelessManager : MonoBehaviour
 				break;
 
 			case WirelessMode.STAGECLEAR_1:
+				// クリア音声再生
+				audioSource.clip = clearWirelessSE;
+				audioSource.Play();
 				wirelessJPText.text = wirelessList[25].sJP;
 				break;
 
@@ -231,12 +255,12 @@ public class WirelessManager : MonoBehaviour
 		wirelessMode = w;
 	}
 
-    public void SetTime(float readyT, float nextStageT, float displayT)
-    {
-        stageReadyDelayMax = readyT;
-        nextStageDelayMax = nextStageT;
-        displayTimeMax = displayT;
-    }
+	public void SetTime(float readyT, float nextStageT, float displayT)
+	{
+		stageReadyDelayMax = readyT;
+		nextStageDelayMax = nextStageT;
+		displayTimeMax = displayT;
+	}
 
 	public WirelessMode GetWirelessMode()
 	{
@@ -246,7 +270,7 @@ public class WirelessManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		switch(wirelessMode)
+		switch (wirelessMode)
 		{
 			case WirelessMode.FIRST:
 				// 時間を経過
@@ -309,85 +333,6 @@ public class WirelessManager : MonoBehaviour
 			case WirelessMode.MESSAGE_2:
 			case WirelessMode.DEBUG_1:
 			case WirelessMode.DEBUG_2:
-			case WirelessMode.FIRST_1:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_2);
-				}
-				break;
-
-			case WirelessMode.FIRST_2:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_3);
-				}
-				break;
-
-			case WirelessMode.FIRST_3:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_4);
-				}
-				break;
-
-			case WirelessMode.FIRST_4:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_5);
-				}
-				break;
-
-			case WirelessMode.FIRST_5:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_6);
-				}
-				break;
-
-			case WirelessMode.FIRST_6:
-				// 時間を経過
-				displayTime += Time.deltaTime;
-				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
-				{
-					displayTime = 0.0f;
-
-					// 無線なしに変更
-					SetWirelessMode(WirelessMode.FIRST_7);
-				}
-				break;
-
-			case WirelessMode.FIRST_7:
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
@@ -400,11 +345,102 @@ public class WirelessManager : MonoBehaviour
 				}
 				break;
 
+			case WirelessMode.FIRST_1:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 4.75f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_2);
+				}
+				break;
+
+			case WirelessMode.FIRST_2:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 4.75f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_3);
+				}
+				break;
+
+			case WirelessMode.FIRST_3:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 4.75f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_4);
+				}
+				break;
+
+			case WirelessMode.FIRST_4:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 4.5f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_5);
+				}
+				break;
+
+			case WirelessMode.FIRST_5:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 2.0f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_6);
+				}
+				break;
+
+			case WirelessMode.FIRST_6:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 1.15f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.FIRST_7);
+				}
+				break;
+
+			case WirelessMode.FIRST_7:
+				// 時間を経過
+				displayTime += Time.deltaTime;
+				// 待ち時間を達した時
+				if (displayTime >= 1.0f)
+				{
+					displayTime = 0.0f;
+
+					// 無線なしに変更
+					SetWirelessMode(WirelessMode.NONE);
+				}
+				break;
+
 			case WirelessMode.STAGECLEAR_1:
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 3.0f)
 				{
 					displayTime = 0.0f;
 
@@ -417,7 +453,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 4.25f)
 				{
 					displayTime = 0.0f;
 
@@ -430,7 +466,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 1.25f)
 				{
 					displayTime = 0.0f;
 
@@ -443,7 +479,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 2.5f)
 				{
 					displayTime = 0.0f;
 
@@ -456,7 +492,7 @@ public class WirelessManager : MonoBehaviour
 				// 時間を経過
 				displayTime += Time.deltaTime;
 				// 待ち時間を達した時
-				if (displayTime >= displayTimeMax)
+				if (displayTime >= 3.0f)
 				{
 					displayTime = 0.0f;
 
