@@ -5,11 +5,24 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameOver_Manager : MonoBehaviour
 {
+	public enum SceneMode
+	{
+		eNONE,
+		eFADEIN,
+		eFADEOUT,
+	}
+
+	public SceneMode sceneMode;
+
+	public float movieTime;
+	public float movieTimeMax ;
+
 	public GameObject hal;
 	public Planet_Explosion_Slow explosion;
 	public GameObject Bicban;
 	public GameObject Wave;
 	public GameOver_Anime GOA;
+	public FadeTime fadeTimeScr;
 	public int frame;
 	private int frame_Max;
 	public int cnt;
@@ -32,11 +45,53 @@ public class GameOver_Manager : MonoBehaviour
 		two = false;
 		//frame = 
 		//Serifu
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+		SetSceneMode(SceneMode.eFADEIN);
+
+	}
+
+	public void SetSceneMode(SceneMode s)
+	{
+		switch (s)
+		{
+			case SceneMode.eFADEIN:
+				fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEIN);
+				break;
+
+			case SceneMode.eFADEOUT:
+				fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEOUT);
+				break;
+
+			default:
+				break;
+		}
+
+		sceneMode = s;
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		switch (sceneMode)
+		{
+			case SceneMode.eFADEIN:
+				movieTime += Time.deltaTime;
+				if (movieTime >= movieTimeMax)
+				{
+					SetSceneMode(SceneMode.eFADEOUT);
+				}
+				break;
+
+			case SceneMode.eFADEOUT:
+				if (fadeTimeScr.IsFadeOutFinished())
+				{
+					SceneManager.LoadScene("Title");
+				}
+				break;
+
+			default:
+				break;
+		}
 		Wireless_Active();
 		if (num > 420 && one == false)
 		{
@@ -53,7 +108,7 @@ public class GameOver_Manager : MonoBehaviour
 		
 		if(num > 1060)
 		{
-			SceneManager.LoadScene("Title");
+			//SceneManager.LoadScene("Title");
 		}
         if(frame > 240 && cnt == 0 && wirelesscnt == 4)
 		{
@@ -62,10 +117,10 @@ public class GameOver_Manager : MonoBehaviour
 		}
 
 		//if
-		if(Input.anyKey)
-		{
-			SceneManager.LoadScene("Title");
-		}
+		//if(Input.anyKey)
+		//{
+		//	SceneManager.LoadScene("Title");
+		//}
 		num++;
 	}
 	void Wireless_Display(int i)
