@@ -171,16 +171,20 @@ public class Charger_Manager : MonoBehaviour
 			IsEnteredTheSlot = true;
 		}
 
-        //穴以外のスマホ部分に触れたらゲームオーバー
-        if (col.tag == "Wall" && isGameOverCheck)
-        {
-            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
-            isGameOverCheck = false;
-        }
         //見るリングを次のリングにする
         else if (col.tag == "Circle")
         {
             circleCnt++;
         }
 	}
+    private void OnCollisionEnter(Collision col)
+    {
+        //穴以外のスマホ部分に触れたらゲームオーバー
+        if (col.gameObject.tag == "Wall" && isGameOverCheck)
+        {
+            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+            isGameOverCheck = false;
+        }
+
+    }
 }
