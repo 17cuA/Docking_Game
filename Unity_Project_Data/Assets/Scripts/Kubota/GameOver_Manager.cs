@@ -28,21 +28,30 @@ public class GameOver_Manager : MonoBehaviour
 	public int cnt;
 
 	public Text wireless;
-	private string[] wirelessList = new string[4];
+	private string[] wirelessList = new string[5];
 	public int wirelesscnt;
+
+	[Header("Wirelessに使うもの")]
+	public AudioSource Wireless;
+	public AudioClip Wireless_AudioClip;
+	private bool Is_Active_Wireless_Sound;
+
 	private int num;
 	private bool one;
 	private bool two;
 	void Start()
     {
-		wirelessList[0] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
-		wirelessList[1] = "ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」";
-		wirelessList[2] = "ＨＱ「こ、このままでは・・・」";
-		wirelessList[3] = "";
+		wirelessList[0] = "";
+		wirelessList[1] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
+		wirelessList[2] = "ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」";
+		wirelessList[3] = "ＨＱ「こ、このままでは・・・」";
+		wirelessList[4] = "";
 		cnt = 0;
 		num = 0;
 		one = false;
 		two = false;
+		Is_Active_Wireless_Sound = true;
+
 		//frame = 
 		//Serifu
 
@@ -110,7 +119,7 @@ public class GameOver_Manager : MonoBehaviour
 		{
 			//SceneManager.LoadScene("Title");
 		}
-        if(frame > 240 && cnt == 0 && wirelesscnt == 4)
+        if(frame > 240 && cnt == 0 && wirelesscnt == 5)
 		{
 			  explosion.StartCoroutine("ExplodePlanet");
 			cnt++;
@@ -133,10 +142,15 @@ public class GameOver_Manager : MonoBehaviour
 	}
 	void Wireless_Active()
 	{
-		if(frame > frame_Max)
+		if (wirelesscnt == 1 && frame > 60)
+		{
+			Sound_Docking();
+		}
+		if (frame > frame_Max)
 		{
 			if (wirelesscnt < wirelessList.Length)
 			{
+
 				Wireless_Display(wirelesscnt);
 			}
 			frame = 0;
@@ -147,14 +161,17 @@ public class GameOver_Manager : MonoBehaviour
 				frame_Max = 0;
 				break;
 			case 1:
-				frame_Max = 180;
+
+				frame_Max = 120;
 				break;
 			case 2:
 				frame_Max = 120;
 				break;
 			case 3:
 				frame_Max = 120;
-				
+				break;
+			case 4:
+				frame_Max = 120;
 				break;
 			default:
 				frame_Max = 240;
@@ -163,5 +180,16 @@ public class GameOver_Manager : MonoBehaviour
 		}
 		frame++;
 
+	}
+	/// <summary>
+	/// 無線の時にならすもの
+	/// </summary>
+	public void Sound_Docking()
+	{
+		if (Is_Active_Wireless_Sound)
+		{
+			Wireless.PlayOneShot(Wireless_AudioClip);
+			Is_Active_Wireless_Sound = false;
+		}
 	}
 }
