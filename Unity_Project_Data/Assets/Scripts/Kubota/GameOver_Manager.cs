@@ -8,6 +8,7 @@ public class GameOver_Manager : MonoBehaviour
 	public GameObject hal;
 	public Planet_Explosion_Slow explosion;
 	public GameObject Bicban;
+	public GameObject Wave;
 	public GameOver_Anime GOA;
 	public int frame;
 	private int frame_Max;
@@ -18,6 +19,7 @@ public class GameOver_Manager : MonoBehaviour
 	public int wirelesscnt;
 	private int num;
 	private bool one;
+	private bool two;
 	void Start()
     {
 		wirelessList[0] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
@@ -27,6 +29,7 @@ public class GameOver_Manager : MonoBehaviour
 		cnt = 0;
 		num = 0;
 		one = false;
+		two = false;
 		//frame = 
 		//Serifu
     }
@@ -38,14 +41,21 @@ public class GameOver_Manager : MonoBehaviour
 		if (num > 420 && one == false)
 		{
 
-			Instantiate(Bicban,new Vector3(-13,-1,-1.8f),new Quaternion(90,0,0,0));
-			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
 			Instantiate(Bicban, new Vector3(-13, -1, -1.8f), new Quaternion(90, 0, 0, 0));
 
 			one = true;
 		}
+		if (num > 720 && two == false)
+		{
+			Instantiate(Wave, new Vector3(-13, -1, -1.8f), new Quaternion(0, 0, 0, 0));
+			two = true;
+		}
 		
-        if(frame > 180 && cnt == 0 && wirelesscnt == 4)
+		if(num > 1060)
+		{
+			SceneManager.LoadScene("Title");
+		}
+        if(frame > 240 && cnt == 0 && wirelesscnt == 4)
 		{
 			  explosion.StartCoroutine("ExplodePlanet");
 			cnt++;
@@ -92,7 +102,7 @@ public class GameOver_Manager : MonoBehaviour
 				
 				break;
 			default:
-				frame_Max = 180;
+				frame_Max = 240;
 				break;
 
 		}
