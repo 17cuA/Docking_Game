@@ -9,6 +9,7 @@ public class ClearManager : MonoBehaviour
 	{
 		eNONE,
 		eFADEIN,
+		eWIRELESS,
 		eFADEOUT,
 	}
 
@@ -20,19 +21,24 @@ public class ClearManager : MonoBehaviour
 	public float movieTime;
 	public float movieTimeMax = 25.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	private float startDelayTimeMax = 3.0f;
+
+	// Start is called before the first frame update
+	void Start()
+	{
 		SetSceneMode(SceneMode.eFADEIN);
-    }
+	}
 
 	public void SetSceneMode(SceneMode s)
 	{
-		switch(s)
+		switch (s)
 		{
 			case SceneMode.eFADEIN:
-				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				fadeTimeScr.SetFadeType(FadeTime.FadeType.FADEIN);
+				break;
+
+			case SceneMode.eWIRELESS:
+				wirelessManagerScr.SetWirelessMode(WirelessManager.WirelessMode.STAGECLEAR_1);
 				break;
 
 			case SceneMode.eFADEOUT:
@@ -46,12 +52,20 @@ public class ClearManager : MonoBehaviour
 		sceneMode = s;
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        switch(sceneMode)
+	// Update is called once per frame
+	void Update()
+	{
+		switch (sceneMode)
 		{
 			case SceneMode.eFADEIN:
+				movieTime += Time.deltaTime;
+				if (movieTime >= startDelayTimeMax)
+				{
+					SetSceneMode(SceneMode.eWIRELESS);
+				}
+				break;
+
+			case SceneMode.eWIRELESS:
 				movieTime += Time.deltaTime;
 				if (movieTime >= movieTimeMax)
 				{
@@ -60,7 +74,7 @@ public class ClearManager : MonoBehaviour
 				break;
 
 			case SceneMode.eFADEOUT:
-				if(fadeTimeScr.IsFadeOutFinished())
+				if (fadeTimeScr.IsFadeOutFinished())
 				{
 					SceneManager.LoadScene("Title");
 				}
@@ -69,5 +83,5 @@ public class ClearManager : MonoBehaviour
 			default:
 				break;
 		}
-    }
+	}
 }
