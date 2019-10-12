@@ -23,17 +23,20 @@ public class Charger_Manager : MonoBehaviour
 		eSTOP,		// とまれ
 	}
 
-	private Rigidbody MyRigidbody { get; set; }    // 自身のRigidbody
-	private bool IsEnteredTheSlot { get; set; }      // スマホの差込口に入ったか
-	public MOVE_DIRECTION Direction { private set; get; } //現在の移動向き
-	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;		// スナップターゲット位置
-	[SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
+	private Rigidbody MyRigidbody { get; set; }     // 自身のRigidbody
+	private bool IsEnteredTheSlot { get; set; }     // スマホの差込口に入ったか
+    private bool isGameOverCheck  { get; set; }     // ゲームオーバーに変更できるか
+    public MOVE_DIRECTION Direction { private set; get; } //現在の移動向き
+	[SerializeField, Tooltip("スナップtarget")]private GameObject snapTargetPos;        // スナップターゲット位置
+    [SerializeField, Tooltip("スナップtarget")]public GameObject[] circleObjcts;       // リングオブジェクト                                                  //
+    [SerializeField, Tooltip("加速時の最大の値")]private float add_Max;
 	[SerializeField, Tooltip("ゲームマスター")] private GameMaster GM;           //ゲームマスター（ゲームクリアかどうかの判定をしたりするよう）
 	[SerializeField, Tooltip("移動速度")] private float speed;
 	[SerializeField, Tooltip("ブレーキ速度")] private float brakeSpeed;
 	[SerializeField, Tooltip("酸素ゲージのスクリプト")] private UI_Gauge O2UI;
 	[SerializeField, Tooltip("酸素ゲージの減る時間(秒)")] private float timeToReduce;
 
+    public int circleCnt;       //順番にリングを見るためのカウント
 	private float elapsedTime;
 
 	#region いじるなBy諸岡
@@ -60,6 +63,8 @@ public class Charger_Manager : MonoBehaviour
 	{
 		MyRigidbody = GetComponent<Rigidbody>();
 		IsEnteredTheSlot = false;
+        isGameOverCheck = true;
+        circleCnt = 0;
 	}
 	private void Update()
 	{
@@ -75,9 +80,23 @@ public class Charger_Manager : MonoBehaviour
 			MyRigidbody.velocity = Vector3.zero;
 			transform.position = Vector3.MoveTowards(transform.position, snapTargetPos.transform.position, 0.01f);
 		}
-	}
-	#region ムーブ2
-	private void Movement()
+
+        //スマホを越えてしまったらゲームオーバー
+        if (transform.position.z > -3.53f && isGameOverCheck)
+        {
+            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+            isGameOverCheck = false;
+        }
+        //リングを越えてしまったらゲームオーバー
+        else if (transform.position.z > circleObjcts[circleCnt].transform.position.z && isGameOverCheck)
+        {
+            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+            isGameOverCheck = false;
+        }
+
+    }
+    #region ムーブ2
+    private void Movement()
 	{
 
 		Vector3 saveInputNum = new Vector3((Original_Input.StickLeft_X / 100.0f) * speed, (Original_Input.StickLeft_Y / 100.0f)*speed, 0.0f);
@@ -151,5 +170,21 @@ public class Charger_Manager : MonoBehaviour
 		{
 			IsEnteredTheSlot = true;
 		}
+
+        //見るリングを次のリングにする
+        else if (col.tag == "Circle")
+        {
+            circleCnt++;
+        }
 	}
+    private void OnCollisionEnter(Collision col)
+    {
+        //穴以外のスマホ部分に触れたらゲームオーバー
+        if (col.gameObject.tag == "Wall" && isGameOverCheck)
+        {
+            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+            isGameOverCheck = false;
+        }
+
+    }
 }
