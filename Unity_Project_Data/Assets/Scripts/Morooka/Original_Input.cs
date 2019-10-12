@@ -156,7 +156,7 @@ namespace DockingGame_Input
 		bool isSetUpButton = false;
 		bool isSetAxis = false;
 		public static Original_Input instance;
-		static public bool ButtomFront_Hold { get { return Input.GetButton(instance.inputManager.Button["Front"]); } }
+		static public bool ButtomFront_Hold { get { return Input.GetButton(instance.inputManager.Button["Front"]) || Input.GetKey(KeyCode.Space); } }
 		static public bool ButtomBack_Hold { get { return Input.GetButton(instance.inputManager.Button["Back"]); } }
 		static public float StickRight_Y { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_Y"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_Y"]; } }
 		static public float StickRight_X { get{ return Input.GetAxis(instance.axisManager.Axis["StickRight_X"]) * instance.axisManager.PositiveAndOppositeDirection["StickRight_X"]; } }
