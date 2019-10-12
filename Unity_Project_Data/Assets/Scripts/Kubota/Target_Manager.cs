@@ -35,11 +35,11 @@ public class Target_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Charger.transform.position.z > Target[Target_cnt].transform.position.z + distance && onceCheck)
-		{
-			onceCheck = false;
-			gameMAster_Script.SetStageState(GameMaster.StageState.STAGEFAILURE);
-		}
+		//if (Charger.transform.position.z > Target[Target_cnt].transform.position.z + distance && onceCheck)
+		//{
+		//	onceCheck = false;
+		//	gameMAster_Script.SetStageState(GameMaster.StageState.STAGEFAILURE);
+		//}
 
 		if (Target_cnt < Target.Length && Vector3.Distance(Target_Pos[Target_cnt], Charger.transform.position) < distance )
 		{
