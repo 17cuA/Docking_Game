@@ -35,6 +35,8 @@ public class Charger_Manager : MonoBehaviour
 	[SerializeField, Tooltip("ブレーキ速度")] private float brakeSpeed;
 	[SerializeField, Tooltip("酸素ゲージのスクリプト")] private UI_Gauge O2UI;
 	[SerializeField, Tooltip("酸素ゲージの減る時間(秒)")] private float timeToReduce;
+    [SerializeField, Tooltip("コーナープレハブ")] private GameObject cornerPrefab;
+    [SerializeField, Tooltip("cornerを置く場所")] private GameObject cornerpoint;
 
     public int circleCnt;       //順番にリングを見るためのカウント
 	private float elapsedTime;
@@ -174,6 +176,7 @@ public class Charger_Manager : MonoBehaviour
         //見るリングを次のリングにする
         else if (col.tag == "Circle")
         {
+            Instantiate(cornerPrefab, cornerpoint.transform.position, Quaternion.identity);
             circleCnt++;
         }
 	}

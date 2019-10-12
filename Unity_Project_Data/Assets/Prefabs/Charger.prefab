@@ -225,8 +225,6 @@ GameObject:
   - component: {fileID: 1538303765}
   - component: {fileID: 7747811384486361195}
   - component: {fileID: 9017088731098355881}
-  - component: {fileID: 8396800300066189785}
-  - component: {fileID: 2017580206921046336}
   m_Layer: 0
   m_Name: Charger
   m_TagString: Charger
@@ -285,12 +283,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapTargetPos: {fileID: 0}
+  circleObjcts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   add_Max: 0.5
   GM: {fileID: 0}
   speed: 0.2
   brakeSpeed: 0.75
   O2UI: {fileID: 0}
   timeToReduce: 2
+  cornerPrefab: {fileID: 2059748334428741128, guid: 1ce6c6954eae3b2408f3f3453cfd61c5,
+    type: 3}
+  cornerpoint: {fileID: 1944703342944095757}
+  circleCnt: 0
 --- !u!65 &7747811384486361195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -317,32 +327,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.001, z: 0.03}
   m_Center: {x: 0, y: 0, z: 0.06}
---- !u!65 &8396800300066189785
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9038333164545580776}
-  m_Material: {fileID: 13400000, guid: 0dcabdaef22aee04383c076067c933af, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.19, z: 0.08}
-  m_Center: {x: 0.08, y: -0.03, z: -0.02}
---- !u!65 &2017580206921046336
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9038333164545580776}
-  m_Material: {fileID: 13400000, guid: 0dcabdaef22aee04383c076067c933af, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.19, z: 0.08}
-  m_Center: {x: -0.08, y: -0.03, z: -0.02}
 --- !u!1001 &4490937520318416544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,11 +334,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9038333164545580777}
     m_Modifications:
-    - target: {fileID: 8341539623594147564, guid: efeb6271f7d5c7b46a2242e8d7f295d3,
-        type: 3}
-      propertyPath: m_Name
-      value: Pointer
-      objectReference: {fileID: 0}
     - target: {fileID: 4132295541861008445, guid: efeb6271f7d5c7b46a2242e8d7f295d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,6 +388,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341539623594147564, guid: efeb6271f7d5c7b46a2242e8d7f295d3,
+        type: 3}
+      propertyPath: m_Name
+      value: Pointer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efeb6271f7d5c7b46a2242e8d7f295d3, type: 3}
@@ -783,11 +767,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9038333164545580777}
     m_Modifications:
-    - target: {fileID: 4252339182924378868, guid: 18119647fd128914c9d78b2d860e6bad,
-        type: 3}
-      propertyPath: m_Name
-      value: FPS_CameraPos
-      objectReference: {fileID: 0}
     - target: {fileID: 4252339182924378871, guid: 18119647fd128914c9d78b2d860e6bad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,6 +821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252339182924378868, guid: 18119647fd128914c9d78b2d860e6bad,
+        type: 3}
+      propertyPath: m_Name
+      value: FPS_CameraPos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18119647fd128914c9d78b2d860e6bad, type: 3}
