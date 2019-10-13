@@ -300,6 +300,7 @@ MonoBehaviour:
   cornerPrefab: {fileID: 2059748334428741128, guid: 1ce6c6954eae3b2408f3f3453cfd61c5,
     type: 3}
   cornerpoint: {fileID: 1944703342944095757}
+  Corners: []
   circleCnt: 0
 --- !u!65 &7747811384486361195
 BoxCollider:
@@ -347,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 4132295541861008445, guid: efeb6271f7d5c7b46a2242e8d7f295d3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0725
+      value: 0.077
       objectReference: {fileID: 0}
     - target: {fileID: 4132295541861008445, guid: efeb6271f7d5c7b46a2242e8d7f295d3,
         type: 3}
@@ -415,11 +416,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 501412996240150479}
     m_Modifications:
-    - target: {fileID: 2062080793389848226, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
-      propertyPath: m_Name
-      value: Astronaut_Floating_Right
+      propertyPath: m_Animations.Array.size
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: e6d5a0bd58266ba4d8b829d0ead9373a, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 5c9f04c5dcc73fa49ba9b7e402adf08d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[3]
+      value: 
+      objectReference: {fileID: 7400000, guid: baaee68052dec504bb9151e61cecd5ec, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[4]
+      value: 
+      objectReference: {fileID: 7400000, guid: 10d9a585f82ba78438f0e1c56ebb853d, type: 2}
     - target: {fileID: 3082329487577097393, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -490,41 +521,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.10000001
       objectReference: {fileID: 0}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+    - target: {fileID: 2062080793389848226, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
-      propertyPath: m_Animations.Array.size
-      value: 5
+      propertyPath: m_Name
+      value: Astronaut_Floating_Right
       objectReference: {fileID: 0}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animation
-      value: 
-      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[0]
-      value: 
-      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[1]
-      value: 
-      objectReference: {fileID: 7400000, guid: e6d5a0bd58266ba4d8b829d0ead9373a, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[2]
-      value: 
-      objectReference: {fileID: 7400000, guid: 5c9f04c5dcc73fa49ba9b7e402adf08d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[3]
-      value: 
-      objectReference: {fileID: 7400000, guid: baaee68052dec504bb9151e61cecd5ec, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[4]
-      value: 
-      objectReference: {fileID: 7400000, guid: 10d9a585f82ba78438f0e1c56ebb853d, type: 2}
     - target: {fileID: 3593897888090488493, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -551,11 +552,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9038333164545580777}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: cc3798d445e3efe45b94625367415870,
-        type: 3}
-      propertyPath: m_Name
-      value: charger
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cc3798d445e3efe45b94625367415870,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -611,6 +607,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: cc3798d445e3efe45b94625367415870,
+        type: 3}
+      propertyPath: m_Name
+      value: charger
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: cc3798d445e3efe45b94625367415870,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -631,11 +632,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 501412996240150479}
     m_Modifications:
-    - target: {fileID: 2062080793389848226, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
-      propertyPath: m_Name
-      value: Astronaut_Floating_Left
+      propertyPath: m_Animations.Array.size
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: e6d5a0bd58266ba4d8b829d0ead9373a, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 5c9f04c5dcc73fa49ba9b7e402adf08d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[3]
+      value: 
+      objectReference: {fileID: 7400000, guid: 10d9a585f82ba78438f0e1c56ebb853d, type: 2}
+    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+        type: 3}
+      propertyPath: m_Animations.Array.data[4]
+      value: 
+      objectReference: {fileID: 7400000, guid: baaee68052dec504bb9151e61cecd5ec, type: 2}
     - target: {fileID: 3082329487577097393, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -706,41 +737,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.10000001
       objectReference: {fileID: 0}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
+    - target: {fileID: 2062080793389848226, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
-      propertyPath: m_Animations.Array.size
-      value: 5
+      propertyPath: m_Name
+      value: Astronaut_Floating_Left
       objectReference: {fileID: 0}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animation
-      value: 
-      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[0]
-      value: 
-      objectReference: {fileID: 7400000, guid: 991479029245b9640acd1434c6bc6d6d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[1]
-      value: 
-      objectReference: {fileID: 7400000, guid: e6d5a0bd58266ba4d8b829d0ead9373a, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[2]
-      value: 
-      objectReference: {fileID: 7400000, guid: 5c9f04c5dcc73fa49ba9b7e402adf08d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[3]
-      value: 
-      objectReference: {fileID: 7400000, guid: 10d9a585f82ba78438f0e1c56ebb853d, type: 2}
-    - target: {fileID: 3318738292482289981, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
-        type: 3}
-      propertyPath: m_Animations.Array.data[4]
-      value: 
-      objectReference: {fileID: 7400000, guid: baaee68052dec504bb9151e61cecd5ec, type: 2}
     - target: {fileID: 3593897888090488493, guid: a742bbf4cc8c9c648aaed7f58da0fd96,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
