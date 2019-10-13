@@ -37,6 +37,8 @@ public class Charger_Manager : MonoBehaviour
     [SerializeField, Tooltip("酸素ゲージの減る時間(秒)")] private float timeToReduce;
     [SerializeField, Tooltip("コーナープレハブ")] private GameObject cornerPrefab;
     [SerializeField, Tooltip("cornerを置く場所")] private GameObject cornerpoint;
+    private Target_Manager target;
+    private int nowNum;
 
     public GameObject[] Corners;
     public int circleCnt;       //順番にリングを見るためのカウント
@@ -80,6 +82,7 @@ public class Charger_Manager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        target = GameObject.Find("GameMaster").GetComponent<Target_Manager>();
     }
     private void Update()
     {
@@ -109,6 +112,11 @@ public class Charger_Manager : MonoBehaviour
             isGameOverCheck = false;
         }
 
+        if (target.Get_InRadius() != nowNum)
+        {
+            Instantiate(cornerPrefab, cornerpoint.transform.position, Quaternion.identity);
+            nowNum = target.Get_InRadius();
+        }
     }
     #region ムーブ2
     private void Movement()

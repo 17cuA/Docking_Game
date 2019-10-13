@@ -10,6 +10,7 @@ public class Corner_Manager : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("GameMaster").GetComponent<Target_Manager>();
+        if (target != null) nowNum = target.Get_InRadius();
     }
 
     void Update()
