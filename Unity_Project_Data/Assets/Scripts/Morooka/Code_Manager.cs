@@ -21,6 +21,9 @@ public class Code_Manager : MonoBehaviour
         {
             Vector3 temp = transform.position;
             temp.z += Charger.transform.position.z;
+            transform.position = temp;
+
+            nowNum = target.Get_InRadius();
         }
     }
 }
