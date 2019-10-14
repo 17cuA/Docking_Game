@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &8835306800168426483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +29,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!1 &2607684127825284514
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &5765956047895271578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &4039094773019560260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &2042523665912977571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &940314596712293498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +294,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!114 &1535470048466320070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleCol_Script: {fileID: 0}
-  speed: 3
+  speed: 0
+  speedMax: 3
+  addSpeed_Value: 0.1
 --- !u!1001 &157716186285100189
 PrefabInstance:
   m_ObjectHideFlags: 0

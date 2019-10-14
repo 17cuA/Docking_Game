@@ -20,7 +20,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BGM
+  m_Name: Breathing
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: d6459dba8f8bd6344816e4add843c685
   m_Children: []
@@ -128,8 +128,8 @@ AudioMixerSnapshotController:
   m_FloatValues:
     0f0a62725b0de9047a594179510cfe23: -0.16685188
     63b488b2ecf340044bc23c7edf6378b0: -19.928473
-    47d9d719a9ef2784986e58bf1360105e: -14.816613
-    00bb960d7b408a24d809494f5e936092: -36.171307
+    47d9d719a9ef2784986e58bf1360105e: -9.833291
+    00bb960d7b408a24d809494f5e936092: -19.928473
   m_TransitionOverrides: {}
 --- !u!243 &51762917591838467
 AudioMixerGroupController:
