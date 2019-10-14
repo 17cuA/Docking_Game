@@ -119,7 +119,7 @@ public class GameOver_Manager : MonoBehaviour
 		{
 			//SceneManager.LoadScene("Title");
 		}
-        if(frame > 240 && cnt == 0 && wirelesscnt == 5)
+        if(frame > 280 && cnt == 0 && wirelesscnt == 5)
 		{
 			  explosion.StartCoroutine("ExplodePlanet");
 			cnt++;
@@ -174,7 +174,7 @@ public class GameOver_Manager : MonoBehaviour
 				frame_Max = 120;
 				break;
 			default:
-				frame_Max = 240;
+				frame_Max = 280;
 				break;
 
 		}
