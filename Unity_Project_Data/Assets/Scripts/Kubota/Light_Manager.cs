@@ -17,6 +17,7 @@ public class Light_Manager : MonoBehaviour
     Charger_Manager charger_Script;
     public string myName;
     bool isColor = false;
+    public bool isCheck = false;
 
 	private int Color_Cnt;
 	private bool Is_Down_color;
@@ -86,6 +87,14 @@ public class Light_Manager : MonoBehaviour
                 break;
         }
 
+        if (!isColor && isCheck)
+        {
+            for (int i = 0; i < r.Length; i++)
+            {
+                r[i].material.SetColor("_EmissionColor", color1[Color_Cnt]);
+            }
+
+        }
         if (isColor)
         {
             frame++;
