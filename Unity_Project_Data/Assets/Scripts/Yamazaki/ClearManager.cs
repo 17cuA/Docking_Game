@@ -11,6 +11,7 @@ public class ClearManager : MonoBehaviour
 		eFADEIN,
 		eWIRELESS,
 		eFADEOUT,
+        eJUMPTITLE,
 	}
 
 	public SceneMode sceneMode;
@@ -19,12 +20,19 @@ public class ClearManager : MonoBehaviour
 	public WirelessManager wirelessManagerScr;
 
 	public float movieTime;
-	public float movieTimeMax = 25.0f;
+	public float movieTimeMax = 23.0f;
 
-	private float startDelayTimeMax = 3.0f;
+	public float startDelayTimeMax = 3.0f;
 
-	// Start is called before the first frame update
-	void Start()
+    public bool isFadeOut;
+
+    private void Awake()
+    {
+        isFadeOut = false;
+    }
+
+    // Start is called before the first frame update
+    void Start()
 	{
 		SetSceneMode(SceneMode.eFADEIN);
 	}
@@ -66,12 +74,12 @@ public class ClearManager : MonoBehaviour
 				break;
 
 			case SceneMode.eWIRELESS:
-				movieTime += Time.deltaTime;
-				if (movieTime >= movieTimeMax)
-				{
-					SetSceneMode(SceneMode.eFADEOUT);
-				}
-				break;
+                movieTime += Time.deltaTime;
+                if (movieTime >= movieTimeMax)
+                {
+                    SetSceneMode(SceneMode.eFADEOUT);
+                }
+                break;
 
 			case SceneMode.eFADEOUT:
 				if (fadeTimeScr.IsFadeOutFinished())
@@ -80,8 +88,17 @@ public class ClearManager : MonoBehaviour
 				}
 				break;
 
+            case SceneMode.eJUMPTITLE:
+                SceneManager.LoadScene("Title");
+                break;
+
 			default:
 				break;
 		}
+
+        if(isFadeOut)
+        {
+            SetSceneMode(SceneMode.eFADEOUT);
+        }
 	}
 }
