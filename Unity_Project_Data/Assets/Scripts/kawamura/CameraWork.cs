@@ -33,6 +33,9 @@ public class CameraWork : MonoBehaviour
     public GameObject gameMatherObj;
     Target_Manager targetMnager_Script;
 
+    GameObject circeGroupObj;
+    public CircleGroupManager circleGroup_Script;
+
 
     [Header("カメラの移動位置を入れる配列")]
     public GameObject[] cameraPosObjects;
@@ -63,13 +66,17 @@ public class CameraWork : MonoBehaviour
     [Header("入力用　Z距離がこれより近くなるとFPSになる")]
     public float FPS_Distance_Z;
 
+
     public bool once = true;					//一回だけやる処理用
     public bool isMove = false;             //動いているかのチェック
     public bool isBackRotaSet = false;  //
     public bool isReset = false;				//
+    public bool isFPS = false;  //FPS視点かどうかのフラグ
 
     void Start()
     {
+        circeGroupObj = GameObject.Find("prismsetCircle_Group");
+        circleGroup_Script = circeGroupObj.GetComponent<CircleGroupManager>();
         cameraPosNum = 0;
         targetMnager_Script = gameMatherObj.GetComponent<Target_Manager>();
         //回転限界を設定
@@ -102,7 +109,12 @@ public class CameraWork : MonoBehaviour
         //    once = false;
         //}
 
-        cameraPosNum = targetMnager_Script.Get_InRadius();
+        //cameraPosNum = targetMnager_Script.Get_InRadius();
+        cameraPosNum = circleGroup_Script.cnt - 1;
+        if (cameraPosNum <= 0)
+        {
+            cameraPosNum = 0;
+        }
 
         //チャージャーが動いているかの判定関数
         //ChargerMoveCheck();
@@ -365,11 +377,13 @@ public class CameraWork : MonoBehaviour
             case 6:
                 if (chargerObj.transform.position.z < -7.608)
                 {
+                    isFPS = true;
                     transform.position = FPS_CameraPosObj.transform.position;
                     transform.rotation = FPS_CameraPosObj.transform.rotation;
                 }
                 else
                 {
+                    isFPS = false;
                     transform.position = backwardCameraPos;
                     transform.rotation = Quaternion.Euler(15f, -20f, 0);
                 }
