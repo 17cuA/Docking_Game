@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CircleColliderOff : MonoBehaviour
 {
-    Collider myCollider;
+   public  Collider[] myCollider;
     void Start()
     {
-        myCollider = gameObject.GetComponent<CapsuleCollider>();
+       // myCollider = gameObject.GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -19,7 +19,11 @@ public class CircleColliderOff : MonoBehaviour
     {
         if(col.gameObject.tag=="Charger")
         {
-            myCollider.enabled = false;
+            for (int i = 0; i < myCollider.Length; i++)
+            {
+                myCollider[i].enabled = false;
+            }
+            //myCollider.enabled = false;
         }
     }
 }

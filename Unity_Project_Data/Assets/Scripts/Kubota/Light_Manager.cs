@@ -8,10 +8,13 @@ public class Light_Manager : MonoBehaviour
 	[ColorUsage(false, true)]
 	public Color[] color1;
 
-	//[ColorUsage(false, true)]
-	//public Color color2;
+    //[ColorUsage(false, true)]
+    //public Color color2;
 
-
+    public GameObject chargerObj;
+    Charger_Manager charger_Script;
+    public string myName;
+    
 	private int Color_Cnt;
 	private bool Is_Down_color;
 	public GameObject[] prism;
@@ -34,6 +37,9 @@ public class Light_Manager : MonoBehaviour
 		}
 		Color_Cnt = Color_Number;
 		Is_Down_color = true;
+
+        charger_Script = chargerObj.GetComponent<Charger_Manager>();
+        myName = gameObject.name;
 	}
 
     // Update is called once per frame
@@ -44,7 +50,55 @@ public class Light_Manager : MonoBehaviour
 	
 	void Light_Change()
 	{
-		frame++;
+        switch(charger_Script.circleCnt)
+        {
+            case 0:
+                if(myName== "prismsetCircle")
+                {
+
+                }
+                break;
+            case 1:
+                if (myName == "prismsetCircle (1)")
+                {
+
+                }
+                break;
+            case 2:
+                if (myName == "prismsetCircle")
+                {
+
+                }
+                break;
+            case 3:
+                if (myName == "prismsetCircle")
+                {
+
+                }
+                break;
+            case 4:
+                if (myName == "prismsetCircle")
+                {
+
+                }
+                break;
+            case 5:
+                if (myName == "prismsetCircle")
+                {
+
+                }
+                break;
+            case 6:
+                if (myName == "prismsetCircle")
+                {
+
+                }
+                break;
+
+        }
+
+
+        frame++;
 
 		//child_Material.color = color1[Color_Cnt];
 		for (int i = 0; i < r.Length; i++)

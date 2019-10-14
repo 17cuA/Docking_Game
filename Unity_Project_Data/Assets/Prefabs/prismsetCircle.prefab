@@ -54,6 +54,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b53e4649ccd5474d85f48e5b56f067c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCollider:
+  - {fileID: 747770992316978306}
+  - {fileID: 434407673061653647}
+  - {fileID: 4683462196521006945}
+  - {fileID: 5637809473668260932}
+  - {fileID: 6098647535831948026}
 --- !u!114 &8402758567072359299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +92,7 @@ MonoBehaviour:
   - {fileID: 3465753099962733189}
   - {fileID: 8147503341909644692}
   - {fileID: 6016937685945487518}
+  r: []
   frame_Max: 5
   Color_Number: 0
   Min_Decrease: 0
