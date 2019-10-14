@@ -9575,13 +9575,14 @@ GameObject:
   - component: {fileID: 773979326502534605}
   - component: {fileID: 773979325693401638}
   - component: {fileID: 773979325693401637}
+  - component: {fileID: 1148986334}
   m_Layer: 0
   m_Name: Warp_Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &773979326502534605
 Transform:
   m_ObjectHideFlags: 0
@@ -9612,7 +9613,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773979325693401636}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 12.5
   simulationSpeed: 1
   stopAction: 2
   cullingMode: 0
@@ -14383,6 +14384,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &1148986334
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773979325693401636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &773979325846212108
 GameObject:
   m_ObjectHideFlags: 0
