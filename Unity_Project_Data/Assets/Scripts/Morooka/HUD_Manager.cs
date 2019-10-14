@@ -29,29 +29,36 @@ public class HUD_Manager : MonoBehaviour
 	private GameObject Smartphone;
 
 	private float HUDMax = 202.0f;
-	private float targetMax = 34.0f;
-	private float posMax = 5.0f;
-	private float posMin;
+	private const float StandardValue = -1.6f;
+	private float posMax_Y = StandardValue;
+	private float posMin_Y = -(((StandardValue + 1.978f)*2)- StandardValue);
+	private float posMax_X = StandardValue + 1.978f;
+	private float posMin_X = -1.978f - StandardValue;
 
-	private float senter;
-	private float valume_Pos;
+	private float valume_PosY;
+	private float valume_PosX;
 	private float valume_HUD;
 
 	private Vector3 DistanceNum;
 	private Vector3 InitHUDPos;
 
+	private Image TargetImage;
+	private Color OriginalRed = new Color(1.0f, 0.0f, 0.0f, 180.0f / 255.0f);
+	private Color OriginalRWhite = new Color(1.0f, 1.0f, 1.0f, 180.0f / 255.0f);
+
 	void Start()
     {
 		Charger = GameObject.Find("Charger");
 		Smartphone = GameObject.Find("HaL9000");
-		senter = Smartphone.transform.position.y;
-		posMin = -1.978f - posMax;
 
-		valume_Pos = posMax - posMin;
+		valume_PosY = posMax_Y - posMin_Y;
+		valume_PosX = posMax_X - posMin_X;
 		valume_HUD = HUDMax * 2.0f;
 
 		InitHUDPos = new Vector3(-HUDMax, -HUDMax, 0.0f);
 		TargetPointer.localPosition = InitHUDPos;
+
+		TargetImage = TargetPointer.GetComponent<Image>();
 	}
 
 	void Update()
@@ -64,13 +71,32 @@ public class HUD_Manager : MonoBehaviour
 		ZAxis.text = "Z : " + OrganizeText(DistanceNum.z);
 		// 距離-------------------------------------------------------------------
 
-		Temperature.text = "TEMPERATURE : -000." + Random.Range(0, 99).ToString("D2");
+		Temperature.text = "TEMPERATURE : -270." + Random.Range(0, 99).ToString("D2");
 
 		//　位置のパーセント
-		var percent_X = (posMin - DistanceNum.x) / valume_Pos;
-		var percent_Y = (posMin - DistanceNum.y) / valume_Pos;
+		var percent_X = Mathf.Abs(posMin_X - Charger.transform.position.x) / valume_PosX;
+		var percent_Y = Mathf.Abs(posMin_Y - Charger.transform.position.y) / valume_PosY;
 
-		TargetPointer.localPosition = InitHUDPos + new Vector3(valume_HUD * percent_X, valume_HUD * percent_Y, 0.0f);
+		if (percent_X > 1.0f || percent_Y > 1.0f)
+		{
+			var temp = Charger.transform.position - Smartphone.transform.position;
+			temp.z = 0.0f;
+			TargetPointer.localPosition = (temp.normalized * HUDMax);
+		}
+		else
+		{
+			TargetPointer.localPosition = InitHUDPos + new Vector3(valume_HUD * percent_X, valume_HUD * percent_Y, 0.0f);
+		}
+		if(percent_X < 0.54f && percent_X > 0.46f
+			&& percent_Y < 0.54f && percent_Y > 0.46f)
+		{
+			TargetImage.color = OriginalRed;
+		}
+		else
+		{
+			TargetImage.color = OriginalRWhite;
+		}
+
 	}
 
 	/// <summary>
