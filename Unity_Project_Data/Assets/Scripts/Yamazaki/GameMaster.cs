@@ -65,8 +65,6 @@ public class GameMaster : MonoBehaviour
 	// 本来使用できませんので削除予定
 	public static GameMaster instance;
 
-
-
 	// 開幕前
 	private void Awake()
 	{
@@ -178,16 +176,23 @@ public class GameMaster : MonoBehaviour
 
 			// ステージ開始前時
 			case StageState.READY:
-				stageReadyDelay += Time.deltaTime;
-				// 無線が無しになった時
-				if (stageReadyDelay >= stageReadyDelayMax)
-				{
-					// ステージステータスをプレイに変更
-					SetStageStateInTheMaster(StageState.PLAYING);
-					// タイム開始
-					timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
-				}
-				break;
+                //stageReadyDelay += Time.deltaTime;
+                //// 無線が無しになった時
+                //if (stageReadyDelay >= stageReadyDelayMax)
+                //{
+                //	// ステージステータスをプレイに変更
+                //	SetStageStateInTheMaster(StageState.PLAYING);
+                //	// タイム開始
+                //	timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
+                //}
+                if (wirelessManagerScr.GetWirelessMode() == WirelessManager.WirelessMode.NONE)
+                {
+                    // ステージステータスをプレイに変更
+                    SetStageStateInTheMaster(StageState.PLAYING);
+                    // タイム開始
+                    timeDisplayScr.SetTimeMode(TimeDisplay.TimeMode.PLAY);
+                }
+                break;
 
 			// ステージプレイ中
 			case StageState.PLAYING:
