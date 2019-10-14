@@ -5,11 +5,14 @@ using UnityEngine;
 public class Clear_Animation : MonoBehaviour
 {
 	public RectTransform Maskpos;
-
+	public GameObject mask;
 	public float speed;
 	public float speed_Max;
 	public float add_speed;
 
+	private float nowtime;
+	public float activetime;
+	public float OffTime;
 	//色
 	public bool nowColorA;
 	public Color colorA;
@@ -28,8 +31,8 @@ public class Clear_Animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		move_obj();
 		elapsedTime += Time.deltaTime;
+		nowtime += Time.deltaTime;
 		if (elapsedTime >= cycleTime)
 		{
 			if (nowColorA) spriteRenderer.color = colorA;
@@ -38,7 +41,16 @@ public class Clear_Animation : MonoBehaviour
 			nowColorA = !nowColorA;
 		}
 
-		Add_Speed();
+		if(nowtime > activetime)
+		{
+			move_obj();
+			Add_Speed();
+		}
+
+		if(nowtime > OffTime)
+		{
+			mask.SetActive(false);
+		}
 	}
 
 	void move_obj()
