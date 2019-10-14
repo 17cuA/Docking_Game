@@ -233,6 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2816976274387936423}
   - component: {fileID: 4720661153963111805}
+  - component: {fileID: 2887912144021366250}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -288,6 +289,20 @@ MonoBehaviour:
   ZAxis: {fileID: 4645368287775618566}
   Temperature: {fileID: 8557716361098739835}
   TargetPointer: {fileID: 7559980855270607261}
+--- !u!114 &2887912144021366250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170328175646194572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b987b0c73ec8a945ad4ca6b7d6742c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  hUD_Manager: {fileID: 0}
 --- !u!1 &1215930334712280548
 GameObject:
   m_ObjectHideFlags: 0
