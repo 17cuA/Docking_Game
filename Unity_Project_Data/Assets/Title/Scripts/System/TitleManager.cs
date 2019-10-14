@@ -22,6 +22,8 @@ public class TitleManager : StateBaseScriptMonoBehaviour
 	public void TransitionNextScene()		{ SceneManager.LoadScene(nextSceneName); }
 	public void Fadein()					{ StartCoroutine(fadeEditor.FadeinCol()); }
 	public void Fadeout()					{ StartCoroutine(fadeEditor.FadeoutCol()); }
+	public void PlayAudio(AudioSource audio){ audio.Play(); }
+	public void AudioVolumeChange(AudioSource audio,AnimationCurve_One curve)	{ StartCoroutine(AudioVolumeChanging(audio, curve)); }
 	public void TextColourChange(TextColourChanger colourChanger)	{ StartCoroutine(colourChanger.ChangeTextColour()); }
 	public bool IsTimeFlow(float time)		{ return timeFlow.IsTimeFlow(time); }
 	public bool IsTimeCurveFlow(AnimationCurve_One anim)	{ return timeFlow.IsTimeFlow(anim.TimeMax); }
@@ -34,5 +36,16 @@ public class TitleManager : StateBaseScriptMonoBehaviour
 		glitch.active = true;
 		yield return new WaitForSeconds(time);
 		glitch.active = false;
+	}
+	IEnumerator AudioVolumeChanging(AudioSource audio, AnimationCurve_One curve)
+	{
+		float time = 0;
+		while(time < curve.TimeMax)
+		{
+			audio.volume = curve.Evaluate(time);
+			time += Time.deltaTime;
+			yield return null;
+		}
+		audio.volume = curve.EndValue;
 	}
 }
