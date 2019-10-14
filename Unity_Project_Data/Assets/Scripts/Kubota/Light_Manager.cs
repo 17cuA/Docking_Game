@@ -41,6 +41,7 @@ public class Light_Manager : MonoBehaviour
 		Color_Cnt = Color_Number;
 		Is_Down_color = true;
 
+        chargerObj = GameObject.Find("Charger");
         charger_Script = chargerObj.GetComponent<Charger_Manager>();
         myName = gameObject.name;
 	}
