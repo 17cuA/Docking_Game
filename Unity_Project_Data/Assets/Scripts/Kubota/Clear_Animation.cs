@@ -14,40 +14,42 @@ public class Clear_Animation : MonoBehaviour
 	public float activetime;
 	public float OffTime;
 	//色
-	public bool nowColorA;
 	public Color colorA;
 	public Color colorB;
-	public float elapsedTime;         //経過時間
-	public float cycleTime;         //周期時間
 	public SpriteRenderer spriteRenderer;
 
+	[Range(0.0f,1.0f)]
+	public float addcolortime;
+	public float add_time;
 	// Start is called before the first frame update
 	void Start()
     {
-		nowColorA = true;
-		elapsedTime = 0.0f;
+		spriteRenderer.color = colorA;
 	}
 
     // Update is called once per frame
     void Update()
     {
-		elapsedTime += Time.deltaTime;
+		//Change_Color();
+
 		nowtime += Time.deltaTime;
-		if (elapsedTime >= cycleTime)
-		{
-			if (nowColorA) spriteRenderer.color = colorA;
-			else spriteRenderer.color = colorB;
-			elapsedTime = 0.0f;
-			nowColorA = !nowColorA;
-		}
+		//if (elapsedTime >= cycleTime)
+		//{
+		//	if (nowColorA) spriteRenderer.color = colorA;
+		//	else spriteRenderer.color = colorB;
+		//	elapsedTime = 0.0f;
+		//	nowColorA = !nowColorA;
+		//}
 
 		if(nowtime > activetime)
 		{
 			move_obj();
 			Add_Speed();
+			Change_Color();
+
 		}
 
-		if(nowtime > OffTime)
+		if (nowtime > OffTime)
 		{
 			mask.SetActive(false);
 		}
@@ -62,6 +64,15 @@ public class Clear_Animation : MonoBehaviour
 		if(speed < speed_Max)
 		{
 			speed += add_speed;
+		}
+	}
+
+	void Change_Color()
+	{
+		addcolortime += add_time;
+		if(addcolortime < 1.0f)
+		{
+			spriteRenderer.color = Color.Lerp(colorA, colorB, addcolortime);
 		}
 	}
 }
