@@ -1890,7 +1890,8 @@ AudioSource:
   m_GameObject: {fileID: 1268024316}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2447103729015909812, guid: d212ecc43ae4de3428e76e6deaf13a35,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 98985a426175d6e4988b56f0ea87762c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.619
@@ -7308,21 +7309,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Globe (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -8126270054984529431, guid: 7d462a4bb4da8a548abd16b29448c746,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8f4c7072f7a84b140b13f777888e4388, type: 2}
-    - target: {fileID: -7338555648558775244, guid: 7d462a4bb4da8a548abd16b29448c746,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c12790543e0772d46a90330d06b5c3ec, type: 2}
-    - target: {fileID: -6851952321478977217, guid: 7d462a4bb4da8a548abd16b29448c746,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9b1e1c3571759c7429ad09b2e83e626a, type: 2}
     - target: {fileID: -4216859302048453862, guid: 7d462a4bb4da8a548abd16b29448c746,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7393,6 +7379,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: -8126270054984529431, guid: 7d462a4bb4da8a548abd16b29448c746,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f4c7072f7a84b140b13f777888e4388, type: 2}
+    - target: {fileID: -7338555648558775244, guid: 7d462a4bb4da8a548abd16b29448c746,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c12790543e0772d46a90330d06b5c3ec, type: 2}
+    - target: {fileID: -6851952321478977217, guid: 7d462a4bb4da8a548abd16b29448c746,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b1e1c3571759c7429ad09b2e83e626a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d462a4bb4da8a548abd16b29448c746, type: 3}
 --- !u!23 &7527085609262768958
