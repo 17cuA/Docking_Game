@@ -363,7 +363,7 @@ public class CameraWork : MonoBehaviour
                 transform.rotation = cameraPosObjects[cameraPosNum].transform.rotation;
                 break;
             case 6:
-                if (chargerObj.transform.position.z < -3.608)
+                if (chargerObj.transform.position.z < -7.608)
                 {
                     transform.position = FPS_CameraPosObj.transform.position;
                     transform.rotation = FPS_CameraPosObj.transform.rotation;
