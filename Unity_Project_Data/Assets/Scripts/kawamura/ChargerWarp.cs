@@ -39,6 +39,11 @@ public class ChargerWarp : MonoBehaviour
             chargerObj.transform.position = warpPos[4].transform.position;
 
         }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            chargerObj.transform.position = warpPos[5].transform.position;
+
+        }
 
     }
 }

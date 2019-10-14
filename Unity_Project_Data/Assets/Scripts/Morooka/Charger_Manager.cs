@@ -106,10 +106,13 @@ public class Charger_Manager : MonoBehaviour
             isGameOverCheck = false;
         }
         //リングを越えてしまったらゲームオーバー
-        else if (transform.position.z > circleObjcts[circleCnt].transform.position.z && isGameOverCheck)
+        if (circleCnt < 7)
         {
-            GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
-            isGameOverCheck = false;
+            if (transform.position.z > circleObjcts[circleCnt].transform.position.z && isGameOverCheck)
+            {
+                GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
+                isGameOverCheck = false;
+            }
         }
 
         if (target.Get_InRadius() != nowNum)
