@@ -45,7 +45,7 @@ public class HUD_Manager : MonoBehaviour
 		Charger = GameObject.Find("Charger");
 		Smartphone = GameObject.Find("HaL9000");
 		senter = Smartphone.transform.position.y;
-		posMin = senter * 2 + -posMax;
+		posMin = -1.978f - posMax;
 
 		valume_Pos = posMax - posMin;
 		valume_HUD = HUDMax * 2.0f;
@@ -58,17 +58,17 @@ public class HUD_Manager : MonoBehaviour
     {
 		DistanceNum = Smartphone.transform.position - Charger.transform.position;
 		// 距離-------------------------------------------------------------------
-		Distance.text = OrganizeText(Vector3.Magnitude(DistanceNum));
-		XAxis.text = OrganizeText(DistanceNum.x);
-		YAxis.text = OrganizeText(DistanceNum.y);
-		ZAxis.text = OrganizeText(DistanceNum.z);
+		Distance.text = "DISTANCE : " + OrganizeText(Vector3.Magnitude(DistanceNum));
+		XAxis.text = "X : " + OrganizeText(DistanceNum.x);
+		YAxis.text = "Y : " +OrganizeText(DistanceNum.y);
+		ZAxis.text = "Z : " + OrganizeText(DistanceNum.z);
 		// 距離-------------------------------------------------------------------
 
 		Temperature.text = "TEMPERATURE : -000." + Random.Range(0, 99).ToString("D2");
 
 		//　位置のパーセント
-		var percent_X = DistanceNum.x / valume_Pos;
-		var percent_Y = DistanceNum.y / valume_Pos;
+		var percent_X = (posMin - DistanceNum.x) / valume_Pos;
+		var percent_Y = (posMin - DistanceNum.y) / valume_Pos;
 
 		TargetPointer.localPosition = InitHUDPos + new Vector3(valume_HUD * percent_X, valume_HUD * percent_Y, 0.0f);
 	}
@@ -80,8 +80,9 @@ public class HUD_Manager : MonoBehaviour
 	/// <returns> テキスト </returns>
 	private string OrganizeText(float num)
 	{
-		string rString = ((int)num).ToString("000");
-		rString += (num - ((int)num)).ToString("F2"/*小数点以下2桁*/).TrimStart('0'/*先頭のゼロ削除*/);
+		float absolute = Mathf.Abs(num); 
+		string rString = ((int)absolute).ToString("000");
+		rString += (absolute - ((int)absolute)).ToString("F2"/*小数点以下2桁*/).TrimStart('0'/*先頭のゼロ削除*/);
 		return rString;
 	}
 }
