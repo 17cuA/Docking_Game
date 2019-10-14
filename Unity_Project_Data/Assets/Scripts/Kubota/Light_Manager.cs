@@ -15,7 +15,7 @@ public class Light_Manager : MonoBehaviour
 	private int Color_Cnt;
 	private bool Is_Down_color;
 	public GameObject[] prism;
-	private MeshRenderer[] r;
+	public MeshRenderer[] r;
 	int frame;
 	public int frame_Max;
 	[Header("何番目の明るさを使用するのか")]
@@ -25,9 +25,9 @@ public class Light_Manager : MonoBehaviour
 	void Start()
 	{
 		r = new MeshRenderer[prism.Length];
-		for (int i = 0; i < transform.childCount; i++)
+		for (int i = 0; i < prism.Length; i++)
 		{
-			prism[i] = gameObject.transform.GetChild(i).gameObject;		//
+			//prism[i] = gameObject.transform.GetChild(i).gameObject;		//
 			r[i] = prism[i].GetComponent<MeshRenderer>();
 			r[i].material.EnableKeyword("_EMISSION");		//Emissionを変更する際に必要なもの
 			//color1[i].in
