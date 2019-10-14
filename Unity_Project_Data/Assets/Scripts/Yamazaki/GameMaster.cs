@@ -55,7 +55,7 @@ public class GameMaster : MonoBehaviour
 	public string gameFailureSceneName = "Title";
 
 	// ゲーム失敗シーン名
-	[SerializeField, Tooltip("ゲーム失敗シーン名")]
+	[SerializeField, Header("ゲーム失敗シーン名")]
 	public string gameClearSceneName = "Title";
 
 	// ゲームクリア状態
