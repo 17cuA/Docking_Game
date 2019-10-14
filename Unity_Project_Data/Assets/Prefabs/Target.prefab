@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2532191543557022630}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f52a27379332c3a4db89afec13ada8bc, type: 3}
   m_Name: 
@@ -55,8 +55,12 @@ MonoBehaviour:
   - {r: 0.26481843, g: 0.26481843, b: 0.26481843, a: 0}
   - {r: 0.26481843, g: 0.26481843, b: 0.26481843, a: 0}
   - {r: 0.26481843, g: 0.26481843, b: 0.26481843, a: 0}
+  offColor: {r: 0, g: 0, b: 0, a: 0}
+  chargerObj: {fileID: 0}
+  myName: 
   prism:
   - {fileID: 3589218961062189907}
+  r: []
   frame_Max: 5
   Color_Number: 0
   Min_Decrease: 0
@@ -71,6 +75,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prism
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: feda0c66a15e6bf44b3b855846d4e951,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: feda0c66a15e6bf44b3b855846d4e951,
         type: 3}
