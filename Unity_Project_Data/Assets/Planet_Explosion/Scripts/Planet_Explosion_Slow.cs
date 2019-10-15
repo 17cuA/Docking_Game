@@ -26,12 +26,12 @@ public class Planet_Explosion_Slow : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Fire1"))
-        {
+        //if (Input.GetButtonDown("Fire1"))
+        //{
 
-            StartCoroutine("ExplodePlanet");
+        //    StartCoroutine("ExplodePlanet");
 
-        } 
+        //} 
 
     }
 

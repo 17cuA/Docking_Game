@@ -42,7 +42,7 @@ public class GameOver_Manager : MonoBehaviour
 	void Start()
     {
 		wirelessList[0] = "";
-		wirelessList[1] = "Ｐ「ドッキング失敗、スマフォから高エネルギー反応を感知」";
+		wirelessList[1] = "Ｐ「ドッキング失敗、未確認物体から高エネルギー反応を感知」";
 		wirelessList[2] = "ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」";
 		wirelessList[3] = "ＨＱ「こ、このままでは・・・」";
 		wirelessList[4] = "";

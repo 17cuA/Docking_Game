@@ -100,7 +100,7 @@ public class Charger_Manager : MonoBehaviour
         }
 
         //スマホを越えてしまったらゲームオーバー
-        if (transform.position.z > -3.53f && isGameOverCheck)
+        if (transform.position.z > -7.53f && isGameOverCheck)
         {
             GM.SetStageState(GameMaster.StageState.STAGEFAILURE);
             isGameOverCheck = false;

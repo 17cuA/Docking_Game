@@ -77,16 +77,17 @@ public class HUD_Manager : MonoBehaviour
 		var percent_X = Mathf.Abs(posMin_X - Charger.transform.position.x) / valume_PosX;
 		var percent_Y = Mathf.Abs(posMin_Y - Charger.transform.position.y) / valume_PosY;
 
-		if (percent_X > 1.0f || percent_Y > 1.0f)
+		if (percent_X > 0.99f || percent_Y > 0.99f　|| percent_X < 0.01f || percent_Y < 0.01f)
 		{
 			var temp = Charger.transform.position - Smartphone.transform.position;
 			temp.z = 0.0f;
-			TargetPointer.localPosition = (temp.normalized * HUDMax);
+			TargetPointer.localPosition = temp.normalized * HUDMax;
 		}
 		else
 		{
 			TargetPointer.localPosition = InitHUDPos + new Vector3(valume_HUD * percent_X, valume_HUD * percent_Y, 0.0f);
 		}
+
 		if(percent_X < 0.54f && percent_X > 0.46f
 			&& percent_Y < 0.54f && percent_Y > 0.46f)
 		{

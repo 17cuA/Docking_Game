@@ -106,13 +106,13 @@ public class WirelessManager : MonoBehaviour
 		new WirelessString("「以後の制御はローカルで行う」"),
 		new WirelessString("「グッド・ラック」"),
 		// ドッキング成功時無線字幕
-		new WirelessString("Ｐｉｌｏｔ「ドッキング成功」"),
+		new WirelessString("パイロット「ドッキング成功」"),
 		new WirelessString("ー管制室に響き渡る歓声ー"),
-		new WirelessString("Ｐｉｌｏｔ「これよりフェイズ３へ移行する」"),
+		new WirelessString("パイロット「これよりフェイズ３へ移行する」"),
 		new WirelessString("ＨＱ「難しい軌道だったがよくやってくれた」"),
-		new WirelessString("Ｐｉｌｏｔ「妻の機嫌を取るほうがよっぽど難しいさ」"),
+		new WirelessString("パイロット「妻の機嫌を取るほうがよっぽど難しいさ」"),
 		// ドッキング失敗時無線字幕
-		new WirelessString("Ｐｉｌｏｔ「ドッキング失敗、スマフォから高エネルギー反応を感知」"),
+		new WirelessString("パイロット「ドッキング失敗、未確認物体から高エネルギー反応を感知」"),
 		new WirelessString("ＨＱ「未知の元素を検出、コアの温度が２０００万度を突破！」"),
 		new WirelessString("ＨＱ「こ、このままでは・・・」"),
 	};
