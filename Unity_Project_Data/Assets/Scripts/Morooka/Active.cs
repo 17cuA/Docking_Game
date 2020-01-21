@@ -35,5 +35,16 @@ public class Active : MonoBehaviour
 				flag = true;
 			}
 		}
+		else if(flag)
+		{
+			if(GameMaster.instance.stageState == GameMaster.StageState.FADEOUT)
+			{
+				for (int i = 0; i < transform.childCount; i++)
+				{
+					transform.GetChild(i).gameObject.SetActive(false);
+				}
+				flag = false;
+			}
+		}
 	}
 }
