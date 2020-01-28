@@ -36,7 +36,7 @@ public class GameOver_Manager : MonoBehaviour
 	public AudioClip Wireless_AudioClip;
 	private bool Is_Active_Wireless_Sound;
 
-	private int num;
+	public int num;
 	private bool one;
 	private bool two;
 	void Start()
@@ -130,7 +130,7 @@ public class GameOver_Manager : MonoBehaviour
 		//{
 		//	SceneManager.LoadScene("Title");
 		//}
-		num++;
+		//num++;
 	}
 	void Wireless_Display(int i)
 	{
