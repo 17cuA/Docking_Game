@@ -12,11 +12,6 @@ using UnityEngine.UI;
 
 public class HUD_Manager : MonoBehaviour
 {
-    //[SerializeField,Tooltip("上")]private RectTransform Up;
-    //[SerializeField,Tooltip("下")]private RectTransform Up;
-    //[SerializeField,Tooltip("右")]private RectTransform Up;
-    //[SerializeField,Tooltip("左")]private RectTransform Up;
-
     [Header("変更オブジェクト")]
     [SerializeField, Tooltip("直線距離テキスト")]					private Text Distance;
     [SerializeField, Tooltip("X軸テキスト")]						private Text XAxis;
@@ -73,23 +68,27 @@ public class HUD_Manager : MonoBehaviour
 
 		Temperature.text = "TEMPERATURE : -270." + Random.Range(0, 99).ToString("D2");
 
-		//　位置のパーセント
-		var percent_X = Mathf.Abs(posMin_X - Charger.transform.position.x) / valume_PosX;
-		var percent_Y = Mathf.Abs(posMin_Y - Charger.transform.position.y) / valume_PosY;
-
-		if (percent_X > 0.99f || percent_Y > 0.99f　|| percent_X < 0.01f || percent_Y < 0.01f)
+		// 充電器とスマホの距離を計算
+		Vector2 temp = Charger.transform.position - Smartphone.transform.position;
+		// 大円の半径
+		float greatRadius = 1.0f;
+		// ベクトルの長さを計算
+		float targetDistance = RadiusCalculation(temp);
+		// 大円の半径とベクトルの長さの割合を計算
+		float percent = (targetDistance * 10) / (greatRadius * 10);
+		// 100％以上のとき
+		if (percent > 1.0f)
 		{
-			var temp = Charger.transform.position - Smartphone.transform.position;
-			temp.z = 0.0f;
+			// 大円のふちを移動
 			TargetPointer.localPosition = temp.normalized * HUDMax;
 		}
 		else
 		{
-			TargetPointer.localPosition = InitHUDPos + new Vector3(valume_HUD * percent_X, valume_HUD * percent_Y, 0.0f);
+			// 大円の中を移動
+			TargetPointer.localPosition = temp.normalized * HUDMax * percent;
 		}
 
-		if(percent_X < 0.54f && percent_X > 0.46f
-			&& percent_Y < 0.54f && percent_Y > 0.46f)
+		if (percent < 0.1f)
 		{
 			TargetImage.color = OriginalRed;
 		}
@@ -97,7 +96,6 @@ public class HUD_Manager : MonoBehaviour
 		{
 			TargetImage.color = OriginalRWhite;
 		}
-
 	}
 
 	/// <summary>
@@ -111,5 +109,15 @@ public class HUD_Manager : MonoBehaviour
 		string rString = ((int)absolute).ToString("000");
 		rString += (absolute - ((int)absolute)).ToString("F2"/*小数点以下2桁*/).TrimStart('0'/*先頭のゼロ削除*/);
 		return rString;
+	}
+
+	/// <summary>
+	/// 半径計算
+	/// </summary>
+	/// <param name="vector"> 円周のXY座標 </param>
+	/// <returns> 半径 </returns>
+	private float RadiusCalculation(Vector2 vector)
+	{
+		return Mathf.Sqrt(vector.x * vector.x + vector.y * vector.y);
 	}
 }
